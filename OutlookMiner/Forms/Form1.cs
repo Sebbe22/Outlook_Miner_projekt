@@ -26,7 +26,6 @@ namespace OutlookMiner
         //    List<string> mails = _load.ImportPST(path);
         //    string labelText = string.Join(Environment.NewLine, mails);
         //    lOutput.Text = labelText;
-
         //}
 
         private void chooseFile_Click(object sender, EventArgs e)
