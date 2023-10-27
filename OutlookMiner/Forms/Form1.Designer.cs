@@ -28,50 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.chooseFile = new System.Windows.Forms.Button();
-            this.lOutput = new System.Windows.Forms.Label();
-            this.lbFileChosen = new System.Windows.Forms.Label();
-            this.ConvertToPDF = new System.Windows.Forms.Button();
             this.lbSaveLocation = new System.Windows.Forms.Label();
+            this.lbHeader = new System.Windows.Forms.Label();
+            this.lbFileChosen = new System.Windows.Forms.Label();
+            this.chooseFile = new System.Windows.Forms.Button();
+            this.btNext = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // chooseFile
-            // 
-            this.chooseFile.Location = new System.Drawing.Point(12, 50);
-            this.chooseFile.Name = "chooseFile";
-            this.chooseFile.Size = new System.Drawing.Size(94, 29);
-            this.chooseFile.TabIndex = 2;
-            this.chooseFile.Text = "Choose file";
-            this.chooseFile.UseVisualStyleBackColor = true;
-            this.chooseFile.Click += new System.EventHandler(this.chooseFile_Click);
-            // 
-            // lOutput
-            // 
-            this.lOutput.AutoSize = true;
-            this.lOutput.Location = new System.Drawing.Point(12, 98);
-            this.lOutput.Name = "lOutput";
-            this.lOutput.Size = new System.Drawing.Size(51, 20);
-            this.lOutput.TabIndex = 3;
-            this.lOutput.Text = "empty";
-            // 
-            // lbFileChosen
-            // 
-            this.lbFileChosen.AutoSize = true;
-            this.lbFileChosen.Location = new System.Drawing.Point(15, 17);
-            this.lbFileChosen.Name = "lbFileChosen";
-            this.lbFileChosen.Size = new System.Drawing.Size(91, 20);
-            this.lbFileChosen.TabIndex = 4;
-            this.lbFileChosen.Text = "File Chosen: ";
-            // 
-            // ConvertToPDF
-            // 
-            this.ConvertToPDF.Location = new System.Drawing.Point(22, 135);
-            this.ConvertToPDF.Name = "ConvertToPDF";
-            this.ConvertToPDF.Size = new System.Drawing.Size(135, 29);
-            this.ConvertToPDF.TabIndex = 5;
-            this.ConvertToPDF.Text = "ConvertToPDF";
-            this.ConvertToPDF.UseVisualStyleBackColor = true;
-            this.ConvertToPDF.Click += new System.EventHandler(this.ConvertToPDF_Click);
             // 
             // lbSaveLocation
             // 
@@ -81,28 +43,82 @@
             this.lbSaveLocation.Size = new System.Drawing.Size(0, 20);
             this.lbSaveLocation.TabIndex = 6;
             // 
+            // lbHeader
+            // 
+            this.lbHeader.AutoSize = true;
+            this.lbHeader.Font = new System.Drawing.Font("Arial Rounded MT Bold", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbHeader.Location = new System.Drawing.Point(17, 61);
+            this.lbHeader.Name = "lbHeader";
+            this.lbHeader.Size = new System.Drawing.Size(241, 27);
+            this.lbHeader.TabIndex = 10;
+            this.lbHeader.Text = "Step 1. Choose a file";
+            // 
+            // lbFileChosen
+            // 
+            this.lbFileChosen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbFileChosen.AutoSize = true;
+            this.lbFileChosen.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lbFileChosen.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbFileChosen.Location = new System.Drawing.Point(125, 175);
+            this.lbFileChosen.MaximumSize = new System.Drawing.Size(250, 200);
+            this.lbFileChosen.MinimumSize = new System.Drawing.Size(250, 20);
+            this.lbFileChosen.Name = "lbFileChosen";
+            this.lbFileChosen.Size = new System.Drawing.Size(250, 20);
+            this.lbFileChosen.TabIndex = 11;
+            this.lbFileChosen.Text = "File Name";
+            // 
+            // chooseFile
+            // 
+            this.chooseFile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(1)))));
+            this.chooseFile.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.chooseFile.ForeColor = System.Drawing.Color.Black;
+            this.chooseFile.Location = new System.Drawing.Point(200, 260);
+            this.chooseFile.Name = "chooseFile";
+            this.chooseFile.Size = new System.Drawing.Size(100, 29);
+            this.chooseFile.TabIndex = 12;
+            this.chooseFile.Text = "Choose file";
+            this.chooseFile.UseVisualStyleBackColor = true;
+            this.chooseFile.Click += new System.EventHandler(this.chooseFile_Click_1);
+            // 
+            // btNext
+            // 
+            this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNext.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btNext.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btNext.ForeColor = System.Drawing.Color.DarkOrange;
+            this.btNext.Location = new System.Drawing.Point(360, 406);
+            this.btNext.Name = "btNext";
+            this.btNext.Size = new System.Drawing.Size(105, 36);
+            this.btNext.TabIndex = 13;
+            this.btNext.Text = "Next";
+            this.btNext.UseVisualStyleBackColor = false;
+            this.btNext.Click += new System.EventHandler(this.btNext_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 450);
-            this.Controls.Add(this.lbSaveLocation);
-            this.Controls.Add(this.ConvertToPDF);
-            this.Controls.Add(this.lbFileChosen);
-            this.Controls.Add(this.lOutput);
+            this.ClientSize = new System.Drawing.Size(482, 453);
+            this.Controls.Add(this.btNext);
             this.Controls.Add(this.chooseFile);
+            this.Controls.Add(this.lbFileChosen);
+            this.Controls.Add(this.lbHeader);
+            this.Controls.Add(this.lbSaveLocation);
+            this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "OutLookMiner 1.0";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private Button chooseFile;
-        private Label lOutput;
-        private Label lbFileChosen;
-        private Button ConvertToPDF;
         private Label lbSaveLocation;
+        private Label lbHeader;
+        private Button chooseFile;
+        private Button btNext;
+        public Label lbFileChosen;
     }
 }
