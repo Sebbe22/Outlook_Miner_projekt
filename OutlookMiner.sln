@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookMiner", "OutlookMiner\OutlookMiner.csproj", "{BD790088-00D7-4A60-AE71-D06C80C545DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookMinerCleanService UnitTest", "OutlookMinerCleanService UnitTest\OutlookMinerCleanService UnitTest.csproj", "{DB450991-11A6-464A-96CD-6A269F4705F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BD790088-00D7-4A60-AE71-D06C80C545DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD790088-00D7-4A60-AE71-D06C80C545DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD790088-00D7-4A60-AE71-D06C80C545DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB450991-11A6-464A-96CD-6A269F4705F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB450991-11A6-464A-96CD-6A269F4705F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB450991-11A6-464A-96CD-6A269F4705F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB450991-11A6-464A-96CD-6A269F4705F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
