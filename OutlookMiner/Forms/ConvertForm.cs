@@ -14,17 +14,18 @@ namespace OutlookMiner.Forms
 {
     public partial class ConvertForm : Form
     {
-        CleanUpForm cleanUpForm = new CleanUpForm();
+       
        
         public ConvertForm()
         {
             InitializeComponent();
+
         }
 
         private void lbGoToStart_Click(object sender, EventArgs e)
         {
             this.Close();
-            cleanUpForm.Close();
+            CleanUpForm.instance.Close();
             Form1 back = new Form1();
             back.Show();
         }
@@ -32,7 +33,7 @@ namespace OutlookMiner.Forms
         private void btBack_Click(object sender, EventArgs e)
         {
             this.Close();
-
+            CleanUpForm cleanUpForm = new CleanUpForm();
             cleanUpForm.Show();
         }
 
@@ -56,7 +57,7 @@ namespace OutlookMiner.Forms
                   
                     string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
                     List<Text> mails = load.LoadMail(selectedFilePathInputFile);
-                    if (CleanUpForm.instance.checkBox2.Checked == true)
+                    if (CleanUpForm.instance != null && CleanUpForm.instance.checkBox2.Checked)
                     {
                         mails = clean.RemoveLinksFromEmailString(mails);
                     }

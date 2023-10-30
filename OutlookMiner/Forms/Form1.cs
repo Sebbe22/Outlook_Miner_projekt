@@ -36,11 +36,9 @@ namespace OutlookMiner
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    //LoadOutLookService _load = new LoadOutLookService();
                     selectedFilePathOutputFile = openFileDialog.FileName; // Get the selected file path
                     lbFileChosen.Text = openFileDialog.FileName;
-                    //string labelText = string.Join(Environment.NewLine, _load.ImportPST(selectedFilePath));
-                    //lOutput.Text = labelText;
+                 
                 }
             }
 

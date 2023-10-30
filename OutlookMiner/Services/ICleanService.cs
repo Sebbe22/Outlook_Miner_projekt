@@ -24,9 +24,9 @@ namespace OutlookMiner.Services
 
                 mail.text = Regex.Replace(mail.text, pattern, string.Empty);
 
-                return mails;
+                
             }
-            return null;
+            return mails;
         }
 
         public string RemoveEmailsFromEmailString(string emailString)

@@ -13,9 +13,11 @@ namespace OutlookMiner.Forms
     public partial class CleanUpForm : Form
     {
         public static CleanUpForm instance;
+        
         public CleanUpForm()
         {
             InitializeComponent();
+            instance = this;
         }
 
         private void lbBack_Click(object sender, EventArgs e)
@@ -37,6 +39,13 @@ namespace OutlookMiner.Forms
             ConvertForm convertForm = new ConvertForm();
             convertForm.Show();
             this.Hide();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            CleanUpForm.instance = this;
+            bool hello = CleanUpForm.instance.checkBox2.Checked;
+
         }
     }
 }
