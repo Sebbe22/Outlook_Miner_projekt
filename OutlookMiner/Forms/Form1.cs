@@ -12,11 +12,13 @@ namespace OutlookMiner
     {
         public static Form1 instance;
         private string selectedFilePathOutputFile = "";
-        public Form1()
+        private IPathUtilityService pathUtilityService; 
+        public Form1(IPathUtilityService pathUtilityService)
         {
 
             InitializeComponent();
             instance = this;
+            this.pathUtilityService = pathUtilityService;
         }
 
         private void btNext_Click(object sender, EventArgs e)
@@ -29,18 +31,9 @@ namespace OutlookMiner
 
         private void chooseFile_Click_1(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = "C:\\"; // Set the initial directory
-                openFileDialog.Filter = "All Files (*.*)|*.*"; // Set the file filter
+            string selectedPath = pathUtilityService.LoadPath();
+            lbFileChosen.Text = selectedPath;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    selectedFilePathOutputFile = openFileDialog.FileName; // Get the selected file path
-                    lbFileChosen.Text = openFileDialog.FileName;
-                 
-                }
-            }
 
         }
     }

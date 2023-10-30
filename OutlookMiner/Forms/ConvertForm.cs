@@ -14,20 +14,21 @@ namespace OutlookMiner.Forms
 {
     public partial class ConvertForm : Form
     {
-       
-       
-        public ConvertForm()
+       private IPathUtilityService _pathUtilityService;
+       public static ConvertForm instance;
+        public ConvertForm(IPathUtilityService pathUtilityService)
         {
             InitializeComponent();
-
+            _pathUtilityService = pathUtilityService;
+            instance = this;
         }
 
         private void lbGoToStart_Click(object sender, EventArgs e)
         {
             this.Close();
             CleanUpForm.instance.Close();
-            Form1 back = new Form1();
-            back.Show();
+            //Form1 back = new Form1();
+            Form1.instance.Show();
         }
 
         private void btBack_Click(object sender, EventArgs e)
@@ -39,33 +40,17 @@ namespace OutlookMiner.Forms
 
         private void btConvertFile_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.InitialDirectory = "C:\\"; // Set the initial directory
-                saveFileDialog.Filter = "Text Files (*.pdf)|*.pdf|All Files (*.*)|*.*"; // Set the file filter
-                saveFileDialog.DefaultExt = "pdf"; // Set the default file extension
+            ILoadService load = new LoadService();
+            ICleanService clean = new CleanService();
+            IConvertService convert = new ConvertServicePDF();
+            string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
+            List<Text> mails = load.LoadMail(selectedFilePathInputFile);
+            mails = clean.RemoveLinksFromEmailString(mails);
+            string selectedFilePath = _pathUtilityService.SavePath("pdf");
+            convert.Convert(selectedFilePath, mails);
 
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-
-                    //LoadOutLookService _load = new LoadOutLookService();
-                    ILoadService load = new LoadService();
-                    ICleanService clean = new CleanService();
-                    IConvertService convert = new ConvertServicePDF();
-
-                    string selectedFilePath = saveFileDialog.FileName; // Get the selected file path
-                  
-                    string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
-                    List<Text> mails = load.LoadMail(selectedFilePathInputFile);
-                    if (CleanUpForm.instance != null && CleanUpForm.instance.checkBox2.Checked)
-                    {
-                        mails = clean.RemoveLinksFromEmailString(mails);
-                    }
-
-                    convert.Convert(selectedFilePath, mails);
-
-                }
-            }
+           
+            
         }
     }
 }

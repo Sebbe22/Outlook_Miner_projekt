@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OutlookMiner.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,20 +24,16 @@ namespace OutlookMiner.Forms
         private void lbBack_Click(object sender, EventArgs e)
         {
             this.Close();
-            Form1 back = new Form1();
-            back.Show();
+           // Form1 back = new Form1();
+            Form1.instance.Show();
         }
 
-        private void btNext_Click(object sender, EventArgs e)
-        {
-            ConvertForm convertForm = new ConvertForm();
-            convertForm.Show();
-            this.Hide();
-        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ConvertForm convertForm = new ConvertForm();
+            IPathUtilityService pathUtilityService = new PathUtilityService();
+            ConvertForm convertForm = new ConvertForm(pathUtilityService);
             convertForm.Show();
             this.Hide();
         }
