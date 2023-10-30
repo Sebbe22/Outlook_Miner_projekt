@@ -15,6 +15,7 @@ namespace OutlookMiner.Forms
     public partial class ConvertForm : Form
     {
         CleanUpForm cleanUpForm = new CleanUpForm();
+       
         public ConvertForm()
         {
             InitializeComponent();
@@ -45,14 +46,21 @@ namespace OutlookMiner.Forms
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
+
                     //LoadOutLookService _load = new LoadOutLookService();
                     ILoadService load = new LoadService();
+                    ICleanService clean = new CleanService();
                     IConvertService convert = new ConvertServicePDF();
 
                     string selectedFilePath = saveFileDialog.FileName; // Get the selected file path
+                  
                     string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
-
                     List<Text> mails = load.LoadMail(selectedFilePathInputFile);
+                    if (CleanUpForm.instance.checkBox2.Checked == true)
+                    {
+                        mails = clean.RemoveLinksFromEmailString(mails);
+                    }
+
                     convert.Convert(selectedFilePath, mails);
 
                 }

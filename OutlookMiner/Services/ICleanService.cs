@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OutlookMiner.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +10,23 @@ namespace OutlookMiner.Services
 {
     public interface ICleanService
     {
-        string RemoveLinksFromEmailString(string emailString);
+        List<Text> RemoveLinksFromEmailString(List <Text> mails);
     }
 
     public class CleanService : ICleanService
     {
-        public string RemoveLinksFromEmailString(string emailString)
+        public List<Text> RemoveLinksFromEmailString(List<Text> mails)
         {
-            // (?:<https?|<www|\bhttps?|\bwww)\S*?(?=\s|>)(?:>)?
-            string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
+            foreach(Text mail in mails)
+            {
+                // (?:<https?|<www|\bhttps?|\bwww)\S*?(?=\s|>)(?:>)?
+                string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
 
-            string result = Regex.Replace(emailString, pattern, string.Empty);
+                mail.text = Regex.Replace(mail.text, pattern, string.Empty);
 
-            return result;
+                return mails;
+            }
+            return null;
         }
 
         public string RemoveEmailsFromEmailString(string emailString)

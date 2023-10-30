@@ -12,6 +12,7 @@ namespace OutlookMiner.Forms
 {
     public partial class CleanUpForm : Form
     {
+        public static CleanUpForm instance;
         public CleanUpForm()
         {
             InitializeComponent();

@@ -170,7 +170,6 @@
 
         private Label lbHeader;
         private CheckBox checkBox1;
-        private CheckBox checkBox2;
         private CheckBox checkBox3;
         private CheckBox checkBox4;
         private CheckBox checkBox5;
@@ -178,5 +177,6 @@
         private CheckBox checkBox7;
         private Button button1;
         private Button lbBack;
+        public CheckBox checkBox2;
     }
 }
