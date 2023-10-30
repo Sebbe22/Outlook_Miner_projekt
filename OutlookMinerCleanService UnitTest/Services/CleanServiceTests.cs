@@ -22,17 +22,17 @@ namespace OutlookMiner.Services.Tests
         [DataRow("test test test <https://www.youtube.com/watch?v=dQw4w9WgXcQ> test test test", "test test test  test test test")]
         [DataRow("test<www.test.dk>test", "testtest")]
         [DataRow("https://trello.com/b/sPuVZtVH/hovedprojektet-2023-2024", "")]
-        public void RemoveLinksFromEmailStringTest(string Link, string expectedResult)
+        public void RemoveLinksFromEmailStringTest(string test, string expectedResult)
         {
             // arrange
-            List<Text> testList = new List<Text>() { new Text(Link) };
+            List<Text> emailList = new List<Text>() { new Text(test) };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
             // act
-            testList = cleanService.RemoveLinksFromEmailString(testList);
+            emailList = cleanService.RemoveLinksFromEmailString(emailList);
 
-            foreach (var item in testList)
+            foreach (var item in emailList)
             {
                 actualResult = actualResult + item.text;
             }
@@ -42,9 +42,30 @@ namespace OutlookMiner.Services.Tests
         }
 
         [TestMethod()]
-        public void RemoveEmailsFromEmailStringTest()
+        [DataRow("blahblah@mail.com", "")]
+        [DataRow("denne teks skal blive test@test.dk skal blive", "denne teks skal blive  skal blive")]
+        [DataRow("where to do stuff", "where to do stuff")]
+        [DataRow("", "")]
+        [DataRow("pepepep @mai.com", "pepepep @mai.com")]
+        [DataRow("er@mail dk", "er@mail dk")]
+        [DataRow("keke@mail.dkdddakaldw", "")]
+        [DataRow("seba124m@edu.zealand.dk", "")]
+        public void RemoveEmailsFromEmailStringTest(string test, string expectedResult)
         {
-            Assert.Fail();
+            // arrange 
+            List<Text> emailList = new List<Text> { new Text(test) };
+            ICleanService cleanService = new CleanService();
+            string actualResult = "";
+
+            // act
+            emailList = cleanService.RemoveEmailsFromEmailString(emailList);
+            foreach (var item in emailList)
+            {
+                actualResult = actualResult + item.text;
+            }
+
+            // assert
+            Assert.AreEqual(expectedResult, actualResult);
         }
 
         [TestMethod()]

@@ -11,31 +11,38 @@ namespace OutlookMiner.Services
     public interface ICleanService
     {
         List<Text> RemoveLinksFromEmailString(List <Text> mails);
+
+        List<Text> RemoveEmailsFromEmailString(List<Text> emailString);
     }
 
     public class CleanService : ICleanService
     {
+        /// <summary>
+        /// uses regular expressions to detect and remove links from a string
+        /// </summary>
+        /// <param name="mails">the list of mails/strings from which links will be removed</param>
+        /// <returns>returns the same list but with links removed</returns>
         public List<Text> RemoveLinksFromEmailString(List<Text> mails)
         {
             foreach(Text mail in mails)
             {
-                // (?:<https?|<www|\bhttps?|\bwww)\S*?(?=\s|>)(?:>)?
                 string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
 
                 mail.text = Regex.Replace(mail.text, pattern, string.Empty);
-
-                
             }
             return mails;
         }
 
-        public string RemoveEmailsFromEmailString(string emailString)
+        public List<Text> RemoveEmailsFromEmailString(List<Text> emailString)
         {
-            string pattern = @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}";
+            // [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}
+            string pattern = @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+";
 
-            string result = Regex.Replace(emailString, pattern, string.Empty);
-
-            return result;
+            foreach(Text email in emailString)
+            {
+                email.text = Regex.Replace(email.text, pattern, string.Empty);
+            }
+            return emailString;
         }
 
         public string RemoveSenderNameFromEmail(string senderName, string emailString)
