@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OutlookMiner.Models;
 using OutlookMiner.Services;
 using System;
 using System.Collections.Generic;
@@ -20,14 +21,21 @@ namespace OutlookMiner.Services.Tests
         [DataRow("<where to do stuff>", "<where to do stuff>")]
         [DataRow("test test test <https://www.youtube.com/watch?v=dQw4w9WgXcQ> test test test", "test test test  test test test")]
         [DataRow("test<www.test.dk>test", "testtest")]
+        [DataRow("https://trello.com/b/sPuVZtVH/hovedprojektet-2023-2024", "")]
         public void RemoveLinksFromEmailStringTest(string Link, string expectedResult)
         {
             // arrange
+            List<Text> testList = new List<Text>() { new Text(Link) };
             ICleanService cleanService = new CleanService();
-            string actualResult;
+            string actualResult = "";
 
             // act
-            actualResult = cleanService.RemoveLinksFromEmailString(Link);
+            testList = cleanService.RemoveLinksFromEmailString(testList);
+
+            foreach (var item in testList)
+            {
+                actualResult = actualResult + item.text;
+            }
 
             // assert
             Assert.AreEqual(expectedResult, actualResult);

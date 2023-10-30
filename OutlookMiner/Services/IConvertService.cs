@@ -8,6 +8,9 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Reflection.PortableExecutable;
+using iTextSharp.text.pdf.parser;
+using iTextSharp.text.pdf;
 
 namespace OutlookMiner.Services
 {
@@ -39,6 +42,27 @@ namespace OutlookMiner.Services
             }
 
             document.Draw(saveFilePath);
+        }
+
+        public string ExtractTextFromPdf(string path)
+        {
+            ITextExtractionStrategy its = new iTextSharp.text.pdf.parser.LocationTextExtractionStrategy();
+
+            using (PdfReader reader = new PdfReader(path))
+            {
+                StringBuilder text = new StringBuilder();
+
+                for (int i = 1; i <= reader.NumberOfPages; i++)
+                {
+                    string thePage = PdfTextExtractor.GetTextFromPage(reader, i, its);
+                    string[] theLines = thePage.Split('\n');
+                    foreach (var theLine in theLines)
+                    {
+                        text.AppendLine(theLine);
+                    }
+                }
+                return text.ToString();
+            }
         }
     }
 }
