@@ -33,8 +33,6 @@ namespace OutlookMiner
         {
             string selectedPath = pathUtilityService.LoadPath();
             lbFileChosen.Text = selectedPath;
-
-
         }
     }
 }

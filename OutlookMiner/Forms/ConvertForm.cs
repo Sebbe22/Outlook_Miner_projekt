@@ -47,10 +47,7 @@ namespace OutlookMiner.Forms
             List<Text> mails = load.LoadMail(selectedFilePathInputFile);
             mails = clean.RemoveLinksFromEmailString(mails);
             string selectedFilePath = _pathUtilityService.SavePath("pdf");
-            convert.Convert(selectedFilePath, mails);
-
-           
-            
+            convert.Convert(selectedFilePath, mails);            
         }
     }
 }
