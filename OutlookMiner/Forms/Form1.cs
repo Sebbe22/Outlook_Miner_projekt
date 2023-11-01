@@ -5,6 +5,7 @@ using OutlookMiner.Models;
 using System.Reflection.Metadata;
 using System.Windows.Forms.Design;
 using OutlookMiner.Forms;
+using System.Net.Mail;
 
 namespace OutlookMiner
 {
@@ -12,18 +13,21 @@ namespace OutlookMiner
     {
         public static Form1 instance;
         private string selectedFilePathOutputFile = "";
-        private IPathUtilityService pathUtilityService; 
-        public Form1(IPathUtilityService pathUtilityService)
+        private IPathUtilityService pathUtilityService;
+        private ILoadService loadService;
+        private List<Text> mails;
+        public Form1(IPathUtilityService pathUtilityService,  ILoadService loadService)
         {
 
             InitializeComponent();
             instance = this;
             this.pathUtilityService = pathUtilityService;
+            this.loadService = loadService;
         }
 
         private void btNext_Click(object sender, EventArgs e)
         {
-            var newForm = new CleanUpForm();
+            var newForm = new CleanUpForm(mails);
             newForm.Show();
             this.Hide();
 
@@ -32,7 +36,10 @@ namespace OutlookMiner
         private void chooseFile_Click_1(object sender, EventArgs e)
         {
             string selectedPath = pathUtilityService.LoadPath();
+            mails = loadService.LoadMail(selectedPath);
             lbFileChosen.Text = selectedPath;
+
+
 
 
         }

@@ -1,4 +1,5 @@
-﻿using OutlookMiner.Services;
+﻿using OutlookMiner.Models;
+using OutlookMiner.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +15,14 @@ namespace OutlookMiner.Forms
     public partial class CleanUpForm : Form
     {
         public static CleanUpForm instance;
-        
-        public CleanUpForm()
+        private List<Text> mails;
+
+
+        public CleanUpForm(List<Text> _mails)
         {
             InitializeComponent();
             instance = this;
+            this.mails = _mails;
         }
 
         private void lbBack_Click(object sender, EventArgs e)
@@ -33,7 +37,7 @@ namespace OutlookMiner.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             IPathUtilityService pathUtilityService = new PathUtilityService();
-            ConvertForm convertForm = new ConvertForm(pathUtilityService);
+            ConvertForm convertForm = new ConvertForm(pathUtilityService, mails);
             convertForm.Show();
             this.Hide();
         }

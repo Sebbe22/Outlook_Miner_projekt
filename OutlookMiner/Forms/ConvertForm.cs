@@ -15,11 +15,14 @@ namespace OutlookMiner.Forms
     public partial class ConvertForm : Form
     {
        private IPathUtilityService _pathUtilityService;
-       public static ConvertForm instance;
-        public ConvertForm(IPathUtilityService pathUtilityService)
+        public static ConvertForm instance;
+        private List<Text> mails;
+
+        public ConvertForm(IPathUtilityService pathUtilityService, List<Text> _mails)
         {
             InitializeComponent();
             _pathUtilityService = pathUtilityService;
+            this.mails = _mails;
             instance = this;
         }
 
@@ -34,7 +37,7 @@ namespace OutlookMiner.Forms
         private void btBack_Click(object sender, EventArgs e)
         {
             this.Close();
-            CleanUpForm cleanUpForm = new CleanUpForm();
+            CleanUpForm cleanUpForm = new CleanUpForm(mails);
             cleanUpForm.Show();
         }
 
@@ -43,8 +46,9 @@ namespace OutlookMiner.Forms
             ILoadService load = new LoadService();
             ICleanService clean = new CleanService();
             IConvertService convert = new ConvertServicePDF();
+
+            
             string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
-            List<Text> mails = load.LoadMail(selectedFilePathInputFile);
             mails = clean.RemoveLinksFromEmailString(mails);
             string selectedFilePath = _pathUtilityService.SavePath("pdf");
             convert.Convert(selectedFilePath, mails);
