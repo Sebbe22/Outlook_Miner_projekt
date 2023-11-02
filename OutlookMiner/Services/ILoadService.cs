@@ -52,22 +52,13 @@ namespace OutlookMiner.Services
                     // Get the Items collection in the PST folder.
                     Outlook.Items pstItems = pstFolder.Items;
 
-                    HashSet<string> printedThreads = new HashSet<string>();
-
-                    // Iterate through the email items and print them.
+                    // Iterate through the email items 
                     foreach (object item in pstItems)
                     {
                         if (item is Outlook.MailItem oMsg)
                         {
                             string currentThreadID = oMsg.ConversationID;
-
-                            // Check if the email thread has already been printed.
-                            if (!printedThreads.Contains(currentThreadID))
-                            {
-                                printedThreads.Add(currentThreadID);
-                                Console.WriteLine("New Email Thread (ConversationID): " + currentThreadID);
-                            }
-                            result.Add(new Text(oMsg.Body));
+                            result.Add(new Text(oMsg.Body,currentThreadID));
                         }
                     }
 

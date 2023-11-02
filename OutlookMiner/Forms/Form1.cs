@@ -35,8 +35,10 @@ namespace OutlookMiner
 
         private void chooseFile_Click_1(object sender, EventArgs e)
         {
+            IEmailBasicInfoService emailBasicInfoService = new IEmailBasicInfoService();
             string selectedPath = pathUtilityService.LoadPath();
             mails = loadService.LoadMail(selectedPath);
+            mails = emailBasicInfoService.SeparateThreadsIntoMails(mails);
             lbFileChosen.Text = selectedPath;
 
 
