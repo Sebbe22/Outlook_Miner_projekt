@@ -23,6 +23,7 @@ namespace OutlookMiner
             instance = this;
             this.pathUtilityService = pathUtilityService;
             this.loadService = loadService;
+            pbLoadingGif.Hide();
         }
 
         private void btNext_Click(object sender, EventArgs e)
@@ -33,26 +34,31 @@ namespace OutlookMiner
 
         }
 
-        private void chooseFile_Click_1(object sender, EventArgs e)
+
+
+        private void lbMailCount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbMailCount_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chooseFile_Click(object sender, EventArgs e)
         {
             IEmailBasicInfoService emailBasicInfoService = new EmailBasicInfoService();
             string selectedPath = pathUtilityService.LoadPath();
+            pbLoadingGif.Show();
             mails = loadService.LoadMail(selectedPath);
             int threadCount = emailBasicInfoService.CountThreads(mails);
             List<IndividualMailText> individualMails = emailBasicInfoService.SeparateThreadsIntoMails(mails);
             int mailCount = emailBasicInfoService.CountMessages(individualMails);
             lbFileChosen.Text = selectedPath;
+            pbLoadingGif.Hide();
             lbMailCount.Text = "Threads: " + threadCount + "\nIndividual messages: " + mailCount;
 
-
-
-
-        }
-
-
-
-        private void lbMailCount_Click(object sender, EventArgs e)
-        {
 
         }
     }

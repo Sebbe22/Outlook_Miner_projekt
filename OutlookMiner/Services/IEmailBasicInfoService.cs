@@ -40,41 +40,60 @@ namespace OutlookMiner.Services
             int mailId;
             // Define the pattern that includes the entire block
             string pattern = @"From:.*[\r\n]+Sent:.*[\r\n]+To:.*[\r\n]+Subject:.*";
-            foreach (Text mail in mails)
+            if(mails != null)
             {
-                mailId = 1;
-                // Use regular expressions to split the text based on the pattern
-                string[] parts = Regex.Split(mail.body, pattern);
-
-                // Assign a common ThreadID for all parts
-                string currentThreadID = mail.threadID;
-
-                foreach (string part in parts)
+                foreach (Text mail in mails)
                 {
-                    // Remove empty lines and leading/trailing white spaces
-                    string cleanedPart = string.Join("\n", part.Split('\n', StringSplitOptions.RemoveEmptyEntries)).Trim();
-
-                    if (!string.IsNullOrEmpty(cleanedPart))
+                    mailId = 1;
+                    if (mail.body != null)
                     {
+                        // Use regular expressions to split the text based on the pattern
+                        string[] parts = Regex.Split(mail.body, pattern);
 
-                        IndividualMailText separatedMail = new IndividualMailText(cleanedPart, currentThreadID, mailId);
-                        resultList.Add(separatedMail);
-                        mailId++;
+
+                        // Assign a common ThreadID for all parts
+                        string currentThreadID = mail.threadID;
+
+                        foreach (string part in parts)
+                        {
+                            // Remove empty lines and leading/trailing white spaces
+                            string cleanedPart = string.Join("\n", part.Split('\n', StringSplitOptions.RemoveEmptyEntries)).Trim();
+
+                            if (!string.IsNullOrEmpty(cleanedPart))
+                            {
+
+                                IndividualMailText separatedMail = new IndividualMailText(cleanedPart, currentThreadID, mailId);
+                                resultList.Add(separatedMail);
+                                mailId++;
+                            }
+                        }
                     }
                 }
+
+                return resultList;
+
             }
 
-            return resultList;
+            return null;
         }
         public int CountMessages(List<IndividualMailText> mails)
         {
-            int result = mails.Count;
-            return result;
+            if(mails != null)
+            {
+                int result = mails.Count;
+                return result;
+
+            }
+            return 0;
         }
         public int CountThreads(List<Text> mails)
         {
-            int result = mails.Count;
-            return result;
+            if (mails != null)
+            {
+                int result = mails.Count;
+                return result;
+            }
+            return 0;
         }
 
     }
