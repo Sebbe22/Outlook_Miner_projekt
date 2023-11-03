@@ -8,11 +8,16 @@ namespace OutlookMiner.Models
 {
     public class Text
     {
-        public string text { get; set; }
+        public string body { get; set; }
+        public string threadID { get; set; }
 
-        public Text(string txt)
+    
+
+        public Text(string _body, string _threadID)
         {
-            text = txt;
+            this.body = _body;
+            this.threadID = _threadID;
+
         }
     }
 }

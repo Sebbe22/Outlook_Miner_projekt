@@ -28,7 +28,7 @@ namespace OutlookMiner.Services
             string labelText = "";
             foreach (Text txt in mails)
             {
-                labelText = labelText + $" \n \n {txt.text}";
+                labelText = labelText + $" \n \n {txt.body}";
             }
 
             FormattedTextArea text = new FormattedTextArea(labelText, 0, 0, 504, 600, ceTe.DynamicPDF.FontFamily.Helvetica, 12, true);

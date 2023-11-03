@@ -28,7 +28,7 @@ namespace OutlookMiner.Services
             {
                 string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
 
-                mail.text = Regex.Replace(mail.text, pattern, string.Empty);
+                mail.body = Regex.Replace(mail.body, pattern, string.Empty);
             }
             return mails;
         }
@@ -45,7 +45,7 @@ namespace OutlookMiner.Services
 
             foreach(Text email in emailString)
             {
-                email.text = Regex.Replace(email.text, pattern, string.Empty);
+                email.body = Regex.Replace(email.body, pattern, string.Empty);
             }
             return emailString;
         }
