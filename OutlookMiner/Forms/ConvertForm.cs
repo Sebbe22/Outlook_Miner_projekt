@@ -1,4 +1,5 @@
-﻿using OutlookMiner.Models;
+﻿using ceTe.DynamicPDF.Text;
+using OutlookMiner.Models;
 using OutlookMiner.Services;
 using System;
 using System.Collections.Generic;
@@ -47,9 +48,36 @@ namespace OutlookMiner.Forms
             ICleanService clean = new CleanService();
             IConvertService convert = new ConvertServicePDF();
 
-            
+            Dictionary<string, bool> checkboxes = new Dictionary<string, bool>();
+
+            checkboxes.Add("checkbox2", CleanUpForm.instance.checkBox2.Checked);
+            checkboxes.Add("checkbox4", CleanUpForm.instance.checkBox4.Checked);
+
+            foreach (KeyValuePair<string, bool> checkbox in checkboxes)
+            {
+                switch ((checkbox.Key, checkbox.Value))
+                {
+                    case ("checkbox2", true):
+                        mails = clean.RemoveLinksFromEmailString(mails);
+                        break;
+                    case ("checkbox4", true):
+                        mails = clean.RemoveEmailsFromEmailString(mails);
+                        break;
+                        
+                }
+
+            }
+
+
+            //if (CleanUpForm.instance.checkBox2.Checked)
+            //{
+            //    mails = clean.RemoveLinksFromEmailString(mails);
+            //}
+            //if (CleanUpForm.instance.checkBox4.Checked)
+            //{
+            //    mails = clean.RemoveEmailsFromEmailString(mails);
+            //}
             string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
-            mails = clean.RemoveLinksFromEmailString(mails);
             string selectedFilePath = _pathUtilityService.SavePath("pdf");
             convert.Convert(selectedFilePath, mails);            
         }

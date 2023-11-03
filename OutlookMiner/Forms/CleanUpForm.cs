@@ -28,7 +28,7 @@ namespace OutlookMiner.Forms
         private void lbBack_Click(object sender, EventArgs e)
         {
             this.Close();
-           // Form1 back = new Form1();
+            // Form1 back = new Form1();
             Form1.instance.Show();
         }
 
@@ -47,6 +47,12 @@ namespace OutlookMiner.Forms
             CleanUpForm.instance = this;
             bool hello = CleanUpForm.instance.checkBox2.Checked;
 
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            CleanUpForm.instance = this;
+            bool removeMails = CleanUpForm.instance.checkBox4.Checked;
         }
     }
 }
