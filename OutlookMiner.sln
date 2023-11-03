@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookMiner", "OutlookMiner\OutlookMiner.csproj", "{BD790088-00D7-4A60-AE71-D06C80C545DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutlookMiner", "OutlookMiner\OutlookMiner.csproj", "{BD790088-00D7-4A60-AE71-D06C80C545DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookMinerCleanService UnitTest", "OutlookMinerCleanService UnitTest\OutlookMinerCleanService UnitTest.csproj", "{DB450991-11A6-464A-96CD-6A269F4705F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutlookMinerCleanService UnitTest", "OutlookMinerCleanService UnitTest\OutlookMinerCleanService UnitTest.csproj", "{DB450991-11A6-464A-96CD-6A269F4705F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

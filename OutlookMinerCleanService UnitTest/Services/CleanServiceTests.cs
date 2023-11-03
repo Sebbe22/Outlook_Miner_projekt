@@ -25,7 +25,7 @@ namespace OutlookMiner.Services.Tests
         public void RemoveLinksFromEmailStringTest(string test, string expectedResult)
         {
             // arrange
-            List<Text> emailList = new List<Text>() { new Text(test) };
+            List<Text> emailList = new List<Text>() { new Text(test, "") };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
@@ -34,7 +34,7 @@ namespace OutlookMiner.Services.Tests
 
             foreach (var item in emailList)
             {
-                actualResult = actualResult + item.text;
+                actualResult = actualResult + item.body;
             }
 
             // assert
@@ -53,7 +53,7 @@ namespace OutlookMiner.Services.Tests
         public void RemoveEmailsFromEmailStringTest(string test, string expectedResult)
         {
             // arrange 
-            List<Text> emailList = new List<Text> { new Text(test) };
+            List<Text> emailList = new List<Text> { new Text(test, "1") };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
@@ -61,17 +61,11 @@ namespace OutlookMiner.Services.Tests
             emailList = cleanService.RemoveEmailsFromEmailString(emailList);
             foreach (var item in emailList)
             {
-                actualResult = actualResult + item.text;
+                actualResult = actualResult + item.body;
             }
 
             // assert
             Assert.AreEqual(expectedResult, actualResult);
-        }
-
-        [TestMethod()]
-        public void RemoveSenderNameFromEmailTest()
-        {
-            Assert.Fail();
         }
     }
 }

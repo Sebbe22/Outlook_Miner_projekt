@@ -28,90 +28,106 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbSaveLocation = new System.Windows.Forms.Label();
-            this.lbHeader = new System.Windows.Forms.Label();
-            this.lbFileChosen = new System.Windows.Forms.Label();
-            this.chooseFile = new System.Windows.Forms.Button();
-            this.btNext = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lbSaveLocation = new Label();
+            lbHeader = new Label();
+            lbFileChosen = new Label();
+            chooseFile = new Button();
+            btNext = new Button();
+            lbMailCount = new Label();
+            SuspendLayout();
             // 
             // lbSaveLocation
             // 
-            this.lbSaveLocation.AutoSize = true;
-            this.lbSaveLocation.Location = new System.Drawing.Point(27, 180);
-            this.lbSaveLocation.Name = "lbSaveLocation";
-            this.lbSaveLocation.Size = new System.Drawing.Size(0, 20);
-            this.lbSaveLocation.TabIndex = 6;
+            lbSaveLocation.AutoSize = true;
+            lbSaveLocation.Location = new Point(24, 135);
+            lbSaveLocation.Name = "lbSaveLocation";
+            lbSaveLocation.Size = new Size(0, 15);
+            lbSaveLocation.TabIndex = 6;
             // 
             // lbHeader
             // 
-            this.lbHeader.AutoSize = true;
-            this.lbHeader.Font = new System.Drawing.Font("Arial Rounded MT Bold", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbHeader.Location = new System.Drawing.Point(17, 61);
-            this.lbHeader.Name = "lbHeader";
-            this.lbHeader.Size = new System.Drawing.Size(241, 27);
-            this.lbHeader.TabIndex = 10;
-            this.lbHeader.Text = "Step 1. Choose a file";
+            lbHeader.AutoSize = true;
+            lbHeader.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            lbHeader.Location = new Point(15, 46);
+            lbHeader.Name = "lbHeader";
+            lbHeader.Size = new Size(196, 22);
+            lbHeader.TabIndex = 10;
+            lbHeader.Text = "Step 1. Choose a file";
             // 
             // lbFileChosen
             // 
-            this.lbFileChosen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbFileChosen.AutoSize = true;
-            this.lbFileChosen.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbFileChosen.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbFileChosen.Location = new System.Drawing.Point(125, 175);
-            this.lbFileChosen.MaximumSize = new System.Drawing.Size(250, 200);
-            this.lbFileChosen.MinimumSize = new System.Drawing.Size(250, 20);
-            this.lbFileChosen.Name = "lbFileChosen";
-            this.lbFileChosen.Size = new System.Drawing.Size(250, 20);
-            this.lbFileChosen.TabIndex = 11;
-            this.lbFileChosen.Text = "File Name";
+            lbFileChosen.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lbFileChosen.AutoSize = true;
+            lbFileChosen.BackColor = SystemColors.AppWorkspace;
+            lbFileChosen.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            lbFileChosen.Location = new Point(109, 131);
+            lbFileChosen.MaximumSize = new Size(219, 150);
+            lbFileChosen.MinimumSize = new Size(219, 15);
+            lbFileChosen.Name = "lbFileChosen";
+            lbFileChosen.Size = new Size(219, 16);
+            lbFileChosen.TabIndex = 11;
+            lbFileChosen.Text = "File Name";
             // 
             // chooseFile
             // 
-            this.chooseFile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(1)))));
-            this.chooseFile.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chooseFile.ForeColor = System.Drawing.Color.Black;
-            this.chooseFile.Location = new System.Drawing.Point(200, 260);
-            this.chooseFile.Name = "chooseFile";
-            this.chooseFile.Size = new System.Drawing.Size(100, 29);
-            this.chooseFile.TabIndex = 12;
-            this.chooseFile.Text = "Choose file";
-            this.chooseFile.UseVisualStyleBackColor = true;
-            this.chooseFile.Click += new System.EventHandler(this.chooseFile_Click_1);
+            chooseFile.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 1);
+            chooseFile.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            chooseFile.ForeColor = Color.Black;
+            chooseFile.Location = new Point(175, 195);
+            chooseFile.Margin = new Padding(3, 2, 3, 2);
+            chooseFile.Name = "chooseFile";
+            chooseFile.Size = new Size(88, 22);
+            chooseFile.TabIndex = 12;
+            chooseFile.Text = "Choose file";
+            chooseFile.UseVisualStyleBackColor = true;
+            chooseFile.Click += chooseFile_Click_1;
             // 
             // btNext
             // 
-            this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNext.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btNext.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btNext.ForeColor = System.Drawing.Color.DarkOrange;
-            this.btNext.Location = new System.Drawing.Point(360, 406);
-            this.btNext.Name = "btNext";
-            this.btNext.Size = new System.Drawing.Size(105, 36);
-            this.btNext.TabIndex = 13;
-            this.btNext.Text = "Next";
-            this.btNext.UseVisualStyleBackColor = false;
-            this.btNext.Click += new System.EventHandler(this.btNext_Click);
+            btNext.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btNext.FlatAppearance.BorderColor = Color.White;
+            btNext.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btNext.ForeColor = Color.DarkOrange;
+            btNext.Location = new Point(315, 304);
+            btNext.Margin = new Padding(3, 2, 3, 2);
+            btNext.Name = "btNext";
+            btNext.Size = new Size(92, 27);
+            btNext.TabIndex = 13;
+            btNext.Text = "Next";
+            btNext.UseVisualStyleBackColor = false;
+            btNext.Click += btNext_Click;
+            // 
+            // lbMailCount
+            // 
+            lbMailCount.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lbMailCount.AutoSize = true;
+            lbMailCount.BackColor = Color.Transparent;
+            lbMailCount.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            lbMailCount.Location = new Point(109, 235);
+            lbMailCount.MaximumSize = new Size(219, 150);
+            lbMailCount.MinimumSize = new Size(219, 15);
+            lbMailCount.Name = "lbMailCount";
+            lbMailCount.Size = new Size(219, 16);
+            lbMailCount.TabIndex = 15;
+            lbMailCount.Click += lbMailCount_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 453);
-            this.Controls.Add(this.btNext);
-            this.Controls.Add(this.chooseFile);
-            this.Controls.Add(this.lbFileChosen);
-            this.Controls.Add(this.lbHeader);
-            this.Controls.Add(this.lbSaveLocation);
-            this.MinimumSize = new System.Drawing.Size(500, 500);
-            this.Name = "Form1";
-            this.Text = "OutLookMiner 1.0";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(424, 346);
+            Controls.Add(lbMailCount);
+            Controls.Add(btNext);
+            Controls.Add(chooseFile);
+            Controls.Add(lbFileChosen);
+            Controls.Add(lbHeader);
+            Controls.Add(lbSaveLocation);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(440, 385);
+            Name = "Form1";
+            Text = "OutLookMiner 1.0";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -120,5 +136,6 @@
         private Button chooseFile;
         private Button btNext;
         public Label lbFileChosen;
+        public Label lbMailCount;
     }
 }

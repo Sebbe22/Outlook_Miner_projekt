@@ -16,7 +16,7 @@ namespace OutlookMiner
         private IPathUtilityService pathUtilityService;
         private ILoadService loadService;
         private List<Text> mails;
-        public Form1(IPathUtilityService pathUtilityService,  ILoadService loadService)
+        public Form1(IPathUtilityService pathUtilityService, ILoadService loadService)
         {
 
             InitializeComponent();
@@ -35,14 +35,24 @@ namespace OutlookMiner
 
         private void chooseFile_Click_1(object sender, EventArgs e)
         {
-            IEmailBasicInfoService emailBasicInfoService = new IEmailBasicInfoService();
+            IEmailBasicInfoService emailBasicInfoService = new EmailBasicInfoService();
             string selectedPath = pathUtilityService.LoadPath();
             mails = loadService.LoadMail(selectedPath);
-            mails = emailBasicInfoService.SeparateThreadsIntoMails(mails);
+            int threadCount = emailBasicInfoService.CountThreads(mails);
+            List<IndividualMailText> individualMails = emailBasicInfoService.SeparateThreadsIntoMails(mails);
+            int mailCount = emailBasicInfoService.CountMessages(individualMails);
             lbFileChosen.Text = selectedPath;
+            lbMailCount.Text = "Threads: " + threadCount + "\nIndividual messages: " + mailCount;
 
 
 
+
+        }
+
+
+
+        private void lbMailCount_Click(object sender, EventArgs e)
+        {
 
         }
     }
