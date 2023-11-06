@@ -131,28 +131,26 @@
             // 
             // button1
             // 
-            button1.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = Color.DarkOrange;
-            button1.Location = new Point(450, 508);
-            button1.Margin = new Padding(4, 4, 4, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(118, 36);
-            button1.TabIndex = 11;
-            button1.Text = "Next";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.DarkOrange;
+            this.button1.Location = new System.Drawing.Point(360, 406);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Next";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lbBack
             // 
-            lbBack.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            lbBack.ForeColor = Color.DarkOrange;
-            lbBack.Location = new Point(295, 508);
-            lbBack.Margin = new Padding(4, 4, 4, 4);
-            lbBack.Name = "lbBack";
-            lbBack.Size = new Size(118, 36);
-            lbBack.TabIndex = 12;
-            lbBack.Text = "Back";
-            lbBack.UseVisualStyleBackColor = true;
+            this.lbBack.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbBack.ForeColor = System.Drawing.Color.DarkOrange;
+            this.lbBack.Location = new System.Drawing.Point(236, 406);
+            this.lbBack.Name = "lbBack";
+            this.lbBack.Size = new System.Drawing.Size(94, 29);
+            this.lbBack.TabIndex = 12;
+            this.lbBack.Text = "Back";
+            this.lbBack.UseVisualStyleBackColor = true;
             // 
             // CleanUpForm
             // 

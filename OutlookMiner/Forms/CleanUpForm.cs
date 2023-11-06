@@ -54,5 +54,6 @@ namespace OutlookMiner.Forms
             CleanUpForm.instance = this;
             bool removeMails = CleanUpForm.instance.checkBox4.Checked;
         }
+
     }
 }

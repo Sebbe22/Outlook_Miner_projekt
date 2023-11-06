@@ -91,18 +91,17 @@
             // 
             // btNext
             // 
-            btNext.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btNext.FlatAppearance.BorderColor = Color.White;
-            btNext.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btNext.ForeColor = Color.DarkOrange;
-            btNext.Location = new Point(450, 506);
-            btNext.Margin = new Padding(4, 4, 4, 4);
-            btNext.Name = "btNext";
-            btNext.Size = new Size(131, 45);
-            btNext.TabIndex = 13;
-            btNext.Text = "Next";
-            btNext.UseVisualStyleBackColor = false;
-            btNext.Click += btNext_Click;
+            this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNext.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btNext.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btNext.ForeColor = System.Drawing.Color.DarkOrange;
+            this.btNext.Location = new System.Drawing.Point(360, 405);
+            this.btNext.Name = "btNext";
+            this.btNext.Size = new System.Drawing.Size(105, 36);
+            this.btNext.TabIndex = 13;
+            this.btNext.Text = "Next";
+            this.btNext.UseVisualStyleBackColor = false;
+            this.btNext.Click += new System.EventHandler(this.btNext_Click);
             // 
             // lbMailCount
             // 
