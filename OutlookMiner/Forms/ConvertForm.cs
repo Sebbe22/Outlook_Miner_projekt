@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,40 +49,29 @@ namespace OutlookMiner.Forms
             ICleanService clean = new CleanService();
             IConvertService convert = new ConvertServicePDF();
 
-
-            //Dictionary<CheckBox, Action> checkboxMethodMap = new Dictionary<CheckBox, Action>
-            //{
-            //    { CleanUpForm.instance.checkBox2,  },
-            //    { CleanUpForm.instance.checkBox4,  },
-            //};
-
-
-            //Dictionary<string, bool> checkboxes = new Dictionary<string, bool>();
-            //checkboxes.Add("checkbox2", CleanUpForm.instance.checkBox2.Checked);
-            //checkboxes.Add("checkbox4", CleanUpForm.instance.checkBox4.Checked);
-
-            //foreach (KeyValuePair<string, bool> checkbox in checkboxes)
-            //{
-            //    switch ((checkbox.Key, checkbox.Value))
-            //    { 
-            //        case ("checkbox2", true):
-            //            mails = clean.RemoveLinksFromEmailString(mails);
-            //            break;
-            //        case ("checkbox4", true):
-            //            mails = clean.RemoveEmailsFromEmailString(mails);
-            //            break;
-            //    }
-            //}
-
-
-            if (CleanUpForm.instance.checkBox2.Checked)
+            List<CheckBoxModel> listOfCheckBoxes = new List<CheckBoxModel>()
             {
-                mails = clean.RemoveLinksFromEmailString(mails);
-            }
-            if (CleanUpForm.instance.checkBox4.Checked)
+                new CheckBoxModel("RemoveLinksFromEmailString", CleanUpForm.instance.checkBox2.Checked),
+                new CheckBoxModel("RemoveEmailsFromEmailString", CleanUpForm.instance.checkBox4.Checked),
+            };
+
+
+            foreach (var checkbox in listOfCheckBoxes)
             {
-                mails = clean.RemoveEmailsFromEmailString(mails);
+                Type type = typeof(CleanService);
+                MethodInfo methodInfo = type.GetMethod(checkbox.methodName);
+                if (methodInfo != null)
+                {
+                    object instance = Activator.CreateInstance(type);
+
+                    if (checkbox.isChecked)
+                    {
+                        object[] parameters = new object[] { mails };
+                        mails = (List<Text>?)methodInfo.Invoke(instance, parameters);
+                    }
+                }
             }
+
             string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
             string selectedFilePath = _pathUtilityService.SavePath("pdf");
             convert.Convert(selectedFilePath, mails);            

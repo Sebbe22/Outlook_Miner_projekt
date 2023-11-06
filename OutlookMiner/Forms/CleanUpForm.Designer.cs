@@ -55,7 +55,7 @@
             // 
             checkBox1.AutoSize = true;
             checkBox1.Location = new Point(45, 145);
-            checkBox1.Margin = new Padding(4, 4, 4, 4);
+            checkBox1.Margin = new Padding(4);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(253, 29);
             checkBox1.TabIndex = 4;
@@ -66,7 +66,7 @@
             // 
             checkBox2.AutoSize = true;
             checkBox2.Location = new Point(45, 182);
-            checkBox2.Margin = new Padding(4, 4, 4, 4);
+            checkBox2.Margin = new Padding(4);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(142, 29);
             checkBox2.TabIndex = 5;
@@ -78,7 +78,7 @@
             // 
             checkBox3.AutoSize = true;
             checkBox3.Location = new Point(45, 220);
-            checkBox3.Margin = new Padding(4, 4, 4, 4);
+            checkBox3.Margin = new Padding(4);
             checkBox3.Name = "checkBox3";
             checkBox3.Size = new Size(168, 29);
             checkBox3.TabIndex = 6;
@@ -89,7 +89,7 @@
             // 
             checkBox4.AutoSize = true;
             checkBox4.Location = new Point(45, 258);
-            checkBox4.Margin = new Padding(4, 4, 4, 4);
+            checkBox4.Margin = new Padding(4);
             checkBox4.Name = "checkBox4";
             checkBox4.Size = new Size(217, 29);
             checkBox4.TabIndex = 7;
@@ -100,7 +100,7 @@
             // 
             checkBox5.AutoSize = true;
             checkBox5.Location = new Point(45, 295);
-            checkBox5.Margin = new Padding(4, 4, 4, 4);
+            checkBox5.Margin = new Padding(4);
             checkBox5.Name = "checkBox5";
             checkBox5.Size = new Size(360, 29);
             checkBox5.TabIndex = 8;
@@ -111,7 +111,7 @@
             // 
             checkBox6.AutoSize = true;
             checkBox6.Location = new Point(45, 332);
-            checkBox6.Margin = new Padding(4, 4, 4, 4);
+            checkBox6.Margin = new Padding(4);
             checkBox6.Name = "checkBox6";
             checkBox6.Size = new Size(199, 29);
             checkBox6.TabIndex = 9;
@@ -122,7 +122,7 @@
             // 
             checkBox7.AutoSize = true;
             checkBox7.Location = new Point(45, 370);
-            checkBox7.Margin = new Padding(4, 4, 4, 4);
+            checkBox7.Margin = new Padding(4);
             checkBox7.Name = "checkBox7";
             checkBox7.Size = new Size(202, 29);
             checkBox7.TabIndex = 10;
@@ -131,26 +131,27 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.DarkOrange;
-            this.button1.Location = new System.Drawing.Point(360, 406);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Next";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.ForeColor = Color.DarkOrange;
+            button1.Location = new Point(360, 406);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 11;
+            button1.Text = "Next";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // lbBack
             // 
-            this.lbBack.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbBack.ForeColor = System.Drawing.Color.DarkOrange;
-            this.lbBack.Location = new System.Drawing.Point(236, 406);
-            this.lbBack.Name = "lbBack";
-            this.lbBack.Size = new System.Drawing.Size(94, 29);
-            this.lbBack.TabIndex = 12;
-            this.lbBack.Text = "Back";
-            this.lbBack.UseVisualStyleBackColor = true;
+            lbBack.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            lbBack.ForeColor = Color.DarkOrange;
+            lbBack.Location = new Point(236, 406);
+            lbBack.Name = "lbBack";
+            lbBack.Size = new Size(94, 29);
+            lbBack.TabIndex = 12;
+            lbBack.Text = "Back";
+            lbBack.UseVisualStyleBackColor = true;
+            lbBack.Click += lbBack_Click;
             // 
             // CleanUpForm
             // 
@@ -167,7 +168,7 @@
             Controls.Add(checkBox2);
             Controls.Add(checkBox1);
             Controls.Add(lbHeader);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "CleanUpForm";
             Text = "CleanUpForm";
             ResumeLayout(false);
