@@ -40,7 +40,6 @@ namespace OutlookMiner.Services
         /// <returns>returns the cleaned list where emails are removed.</returns>
         public List<Text> RemoveEmailsFromEmailString(List<Text> emailString)
         {
-            // [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}
             string pattern = @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+";
 
             foreach(Text email in emailString)

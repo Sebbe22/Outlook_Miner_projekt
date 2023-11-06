@@ -48,23 +48,30 @@ namespace OutlookMiner.Forms
             ICleanService clean = new CleanService();
             IConvertService convert = new ConvertServicePDF();
 
-            Dictionary<string, bool> checkboxes = new Dictionary<string, bool>();
 
-            checkboxes.Add("checkbox2", CleanUpForm.instance.checkBox2.Checked);
-            checkboxes.Add("checkbox4", CleanUpForm.instance.checkBox4.Checked);
-
-            foreach (KeyValuePair<string, bool> checkbox in checkboxes)
+            Dictionary<CheckBox, Action> checkboxMethodMap = new Dictionary<CheckBox, Action>
             {
-                switch ((checkbox.Key, checkbox.Value))
-                {
-                    case ("checkbox2", true):
-                        mails = clean.RemoveLinksFromEmailString(mails);
-                        break;
-                    case ("checkbox4", true):
-                        mails = clean.RemoveEmailsFromEmailString(mails);
-                        break;
-                }
-            }
+                { CleanUpForm.instance.checkBox2,  },
+                { CleanUpForm.instance.checkBox4,  },
+            };
+
+
+            //Dictionary<string, bool> checkboxes = new Dictionary<string, bool>();
+            //checkboxes.Add("checkbox2", CleanUpForm.instance.checkBox2.Checked);
+            //checkboxes.Add("checkbox4", CleanUpForm.instance.checkBox4.Checked);
+
+            //foreach (KeyValuePair<string, bool> checkbox in checkboxes)
+            //{
+            //    switch ((checkbox.Key, checkbox.Value))
+            //    { 
+            //        case ("checkbox2", true):
+            //            mails = clean.RemoveLinksFromEmailString(mails);
+            //            break;
+            //        case ("checkbox4", true):
+            //            mails = clean.RemoveEmailsFromEmailString(mails);
+            //            break;
+            //    }
+            //}
 
 
             //if (CleanUpForm.instance.checkBox2.Checked)
