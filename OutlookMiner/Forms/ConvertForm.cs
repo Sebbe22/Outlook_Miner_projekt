@@ -19,13 +19,27 @@ namespace OutlookMiner.Forms
        private IPathUtilityService _pathUtilityService;
         public static ConvertForm instance;
         private List<Text> mails;
+       
+        private ICheckBoxService _checkboxList;
+
+        public ICheckBoxService GetCheckBoxListModelInstance()
+        {
+            return _checkboxList;
+        }
+
 
         public ConvertForm(IPathUtilityService pathUtilityService, List<Text> _mails)
         {
             InitializeComponent();
             _pathUtilityService = pathUtilityService;
             this.mails = _mails;
+            this._checkboxList = CheckBoxService.Instance;
+
             instance = this;
+            lbFeedbackMessage.Hide();
+            pbLoadingGif.Hide();
+            lbShowingStatus.Hide();
+            
         }
 
         private void lbGoToStart_Click(object sender, EventArgs e)
@@ -48,33 +62,64 @@ namespace OutlookMiner.Forms
             ILoadService load = new LoadService();
             ICleanService clean = new CleanService();
             IConvertService convert = new ConvertServicePDF();
-
-            List<CheckBoxModel> listOfCheckBoxes = new List<CheckBoxModel>()
-            {
-                new CheckBoxModel("RemoveLinksFromEmailString", CleanUpForm.instance.checkBox2.Checked),
-                new CheckBoxModel("RemoveEmailsFromEmailString", CleanUpForm.instance.checkBox4.Checked),
-            };
-
-
-            foreach (var checkbox in listOfCheckBoxes)
-            {
-                Type type = typeof(CleanService);
-                MethodInfo methodInfo = type.GetMethod(checkbox.methodName);
-                if (methodInfo != null)
-                {
-                    object instance = Activator.CreateInstance(type);
-
-                    if (checkbox.isChecked)
-                    {
-                        object[] parameters = new object[] { mails };
-                        mails = (List<Text>?)methodInfo.Invoke(instance, parameters);
-                    }
-                }
-            }
-
             string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
             string selectedFilePath = _pathUtilityService.SavePath("pdf");
-            convert.Convert(selectedFilePath, mails);            
+            pbLoadingGif.Visible = true;
+            lbShowingStatus.Visible = true;
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += (sender, eArgs) =>
+            {
+                List<CheckBoxModel> checkBoxes = _checkboxList.GetCheckBoxes(); 
+                foreach(var checkbox in checkBoxes)
+                {
+                    Type type = typeof(CleanService);
+                    MethodInfo methodInfo = type.GetMethod(checkbox.methodName);
+                    if(methodInfo != null)
+                    {
+                        object instance = Activator.CreateInstance(type);
+                        if (checkbox.isChecked)
+                        {
+                            object[] parameters = new object[] { mails };
+                            mails = (List<Text>?)methodInfo.Invoke(instance, parameters);
+                        }
+                    }
+
+                }
+
+                convert.Convert(selectedFilePath, mails);
+
+                // Pass the results to the RunWorkerCompleted event
+                eArgs.Result = new
+                {
+
+                };
+
+            };
+            // Handle the completion of the work
+            backgroundWorker.RunWorkerCompleted += (sender, eArgs) =>
+            {
+                // Retrieve the results from the DoWork event
+                var result = (dynamic)eArgs.Result;
+
+                lbFeedbackMessage.Show();
+                // Hide the loading GIF
+                pbLoadingGif.Visible = false;
+                lbShowingStatus.Visible = false;
+
+
+            };
+
+            // Start the background worker
+            backgroundWorker.RunWorkerAsync();
+
+                 
         }
+
+        private void ConvertForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

@@ -87,14 +87,14 @@
             // 
             // checkBox4
             // 
-            checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(45, 258);
-            checkBox4.Margin = new Padding(4);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new Size(217, 29);
-            checkBox4.TabIndex = 7;
-            checkBox4.Text = "Remove Emailadresses";
-            checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(36, 206);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(182, 24);
+            this.checkBox4.TabIndex = 7;
+            this.checkBox4.Text = "Remove Emailadresses";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // checkBox5
             // 

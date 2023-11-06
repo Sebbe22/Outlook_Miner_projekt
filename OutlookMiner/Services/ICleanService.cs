@@ -27,8 +27,10 @@ namespace OutlookMiner.Services
             foreach(Text mail in mails)
             {
                 string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
+                if (mail.body != null){
 
-                mail.body = Regex.Replace(mail.body, pattern, string.Empty);
+                    mail.body = Regex.Replace(mail.body, pattern, string.Empty);
+                }
             }
             return mails;
         }
@@ -41,10 +43,15 @@ namespace OutlookMiner.Services
         public List<Text> RemoveEmailsFromEmailString(List<Text> emailString)
         {
             string pattern = @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+";
+        
 
             foreach(Text email in emailString)
             {
-                email.body = Regex.Replace(email.body, pattern, string.Empty);
+                if(email.body != null)
+                {
+                    email.body = Regex.Replace(email.body, pattern, string.Empty);
+                }
+               
             }
             return emailString;
         }

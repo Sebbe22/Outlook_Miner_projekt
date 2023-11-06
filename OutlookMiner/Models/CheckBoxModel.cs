@@ -11,10 +11,10 @@ namespace OutlookMiner.Models
         public string methodName { get; set; }
         public bool isChecked { get; set; }
 
-        public CheckBoxModel(string MethodName, bool IsChecked) 
+        public CheckBoxModel(string _methodName, bool _isChecked)
         {
-            methodName = MethodName;
-            isChecked = IsChecked;
+            methodName = _methodName;
+            isChecked = _isChecked;
         }
     }
 }
