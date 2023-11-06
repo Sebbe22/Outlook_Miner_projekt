@@ -36,8 +36,8 @@ namespace OutlookMiner.Services
         /// <summary>
         /// detects and removes emails from a string using regular expressions 
         /// </summary>
-        /// <param name="emailString"></param>
-        /// <returns></returns>
+        /// <param name="emailString"> list of mails to be cleaned </param>
+        /// <returns>returns the cleaned list where emails are removed.</returns>
         public List<Text> RemoveEmailsFromEmailString(List<Text> emailString)
         {
             // [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}

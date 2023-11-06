@@ -63,9 +63,7 @@ namespace OutlookMiner.Forms
                     case ("checkbox4", true):
                         mails = clean.RemoveEmailsFromEmailString(mails);
                         break;
-                        
                 }
-
             }
 
 
