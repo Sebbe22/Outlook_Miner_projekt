@@ -131,6 +131,7 @@
             this.button1.TabIndex = 11;
             this.button1.Text = "Next";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lbBack
             // 
@@ -142,6 +143,7 @@
             this.lbBack.TabIndex = 12;
             this.lbBack.Text = "Back";
             this.lbBack.UseVisualStyleBackColor = true;
+            this.lbBack.Click += new System.EventHandler(this.lbBack_Click);
             // 
             // CleanUpForm
             // 

@@ -99,6 +99,7 @@
             this.btNext.TabIndex = 13;
             this.btNext.Text = "Next";
             this.btNext.UseVisualStyleBackColor = false;
+            this.btNext.Click += new System.EventHandler(this.btNext_Click);
             // 
             // lbMailCount
             // 
