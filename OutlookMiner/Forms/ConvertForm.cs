@@ -49,11 +49,11 @@ namespace OutlookMiner.Forms
             IConvertService convert = new ConvertServicePDF();
 
 
-            Dictionary<CheckBox, Action> checkboxMethodMap = new Dictionary<CheckBox, Action>
-            {
-                { CleanUpForm.instance.checkBox2,  },
-                { CleanUpForm.instance.checkBox4,  },
-            };
+            //Dictionary<CheckBox, Action> checkboxMethodMap = new Dictionary<CheckBox, Action>
+            //{
+            //    { CleanUpForm.instance.checkBox2,  },
+            //    { CleanUpForm.instance.checkBox4,  },
+            //};
 
 
             //Dictionary<string, bool> checkboxes = new Dictionary<string, bool>();
@@ -74,14 +74,14 @@ namespace OutlookMiner.Forms
             //}
 
 
-            //if (CleanUpForm.instance.checkBox2.Checked)
-            //{
-            //    mails = clean.RemoveLinksFromEmailString(mails);
-            //}
-            //if (CleanUpForm.instance.checkBox4.Checked)
-            //{
-            //    mails = clean.RemoveEmailsFromEmailString(mails);
-            //}
+            if (CleanUpForm.instance.checkBox2.Checked)
+            {
+                mails = clean.RemoveLinksFromEmailString(mails);
+            }
+            if (CleanUpForm.instance.checkBox4.Checked)
+            {
+                mails = clean.RemoveEmailsFromEmailString(mails);
+            }
             string selectedFilePathInputFile = Form1.instance.lbFileChosen.Text;
             string selectedFilePath = _pathUtilityService.SavePath("pdf");
             convert.Convert(selectedFilePath, mails);            
