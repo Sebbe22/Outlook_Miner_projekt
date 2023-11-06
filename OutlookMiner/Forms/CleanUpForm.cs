@@ -16,13 +16,19 @@ namespace OutlookMiner.Forms
     {
         public static CleanUpForm instance;
         private List<Text> mails;
+        private ICheckBoxService _checkboxList;
 
+        public ICheckBoxService GetCheckBoxListModelInstance()
+        {
+            return _checkboxList;
+        }
 
         public CleanUpForm(List<Text> _mails)
         {
             InitializeComponent();
             instance = this;
             this.mails = _mails;
+            this._checkboxList = CheckBoxService.Instance;
         }
 
         private void lbBack_Click(object sender, EventArgs e)
@@ -45,15 +51,22 @@ namespace OutlookMiner.Forms
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             CleanUpForm.instance = this;
-            bool hello = CleanUpForm.instance.checkBox2.Checked;
+            string targetName = "RemoveLinksFromEmailString";
+
+            _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox2.Checked);
 
         }
 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
             CleanUpForm.instance = this;
-            bool removeMails = CleanUpForm.instance.checkBox4.Checked;
+            string targetName = "RemoveEmailsFromEmailString";
+
+            _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox2.Checked);
+
         }
+
+
 
     }
 }
