@@ -65,7 +65,10 @@ namespace OutlookMiner.Services
                             {
                                 email.recipients.Add(oMsg.Recipients[i].Name);
                             }
-                            email.body = email.body.ToLower();
+                            if (email.body != null)
+                            {
+                                email.body = email.body.ToLower();
+                            }
                             result.Add(email);
                         }
                     }
