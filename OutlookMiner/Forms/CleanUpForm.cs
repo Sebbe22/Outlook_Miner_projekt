@@ -66,7 +66,9 @@ namespace OutlookMiner.Forms
 
         }
 
+        private void lbHeader_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

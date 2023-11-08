@@ -17,10 +17,33 @@ namespace OutlookMiner.Services
     public interface IConvertService
     {
         void Convert(string saveFilePath, List<Text> mails);
+        void ConvertJson(string saveFilePath, string JsonFormat);
+
     }
 
     public class ConvertServicePDF : IConvertService
     {
+        public void ConvertJson(string saveFilePath, string JsonFormat)
+        {
+            ceTe.DynamicPDF.Document document = new ceTe.DynamicPDF.Document();
+
+            string labelText = "";
+        
+                labelText = labelText + $" \n \n {JsonFormat}";
+            
+
+            FormattedTextArea text = new FormattedTextArea(labelText, 0, 0, 504, 600, ceTe.DynamicPDF.FontFamily.Helvetica, 12, true);
+
+            while (text != null)
+            {
+                ceTe.DynamicPDF.Page page = new ceTe.DynamicPDF.Page();
+                document.Pages.Add(page);
+                page.Elements.Add(text);
+                text = text.GetOverflowFormattedTextArea();
+            }
+
+            document.Draw(saveFilePath);
+        }
         public void Convert(string saveFilePath, List<Text> mails)
         {
             ceTe.DynamicPDF.Document document = new ceTe.DynamicPDF.Document();
