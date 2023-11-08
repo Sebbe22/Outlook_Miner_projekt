@@ -27,7 +27,8 @@ namespace OutlookMiner.Services
             checkBoxes = new List<CheckBoxModel>
         {
             new CheckBoxModel("RemoveLinksFromEmailString", false),
-            new CheckBoxModel("RemoveEmailsFromEmailString", false)
+            new CheckBoxModel("RemoveEmailsFromEmailString", false),
+            new CheckBoxModel("RemoveSenderAndRecieverNameFromEmail", false)
         };
         }
 

@@ -42,7 +42,7 @@ namespace OutlookMiner
         private void chooseFile_Click(object sender, EventArgs e)
         {
             // Start showing the loading GIF
-            
+
             IEmailBasicInfoService emailBasicInfoService = new EmailBasicInfoService();
             string selectedPath = pathUtilityService.LoadPath();
             pbLoadingGif.Visible = true;

@@ -1,4 +1,5 @@
-﻿using OutlookMiner.Models;
+﻿using Org.BouncyCastle.Crypto.Tls;
+using OutlookMiner.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace OutlookMiner.Services
         List<Text> RemoveLinksFromEmailString(List <Text> mails);
 
         List<Text> RemoveEmailsFromEmailString(List<Text> emailString);
+
+        List<Text> RemoveSenderAndRecieverNameFromEmail(List<Text> emailString);
     }
 
     public class CleanService : ICleanService
@@ -26,7 +29,8 @@ namespace OutlookMiner.Services
         {
             foreach(Text mail in mails)
             {
-                string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
+                string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.
+                S\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
                 if (mail.body != null){
 
                     mail.body = Regex.Replace(mail.body, pattern, string.Empty);
@@ -56,9 +60,38 @@ namespace OutlookMiner.Services
             return emailString;
         }
 
-        public string RemoveSenderNameFromEmail(string senderName, string emailString)
+        /// <summary>
+        /// removes both recipipents and senders names from the email string.
+        /// </summary>
+        /// <param name="emailString"> the list of emails from which names will be removed </param>
+        /// <returns> returns a list of emails where names has been removed </returns>
+        public List<Text> RemoveSenderAndRecieverNameFromEmail(List<Text> emailString)
         {
-            return "";
+            // removes senders name
+            foreach (Text email in emailString)
+            {
+                string sirName = email.sender.Split(" ")[0];
+                string lastName = email.sender.Split(" ")[1];
+
+                email.body = email.body.Replace(sirName.ToLower(), "");
+                email.body = email.body.Replace(lastName.ToLower(), "");
+                email.body = email.body.Replace(email.sender.ToLower(), "");
+            }
+
+            // removes recievers name
+            foreach (Text email in emailString)
+            {
+                for (int i = 0; i < email.recipients.Count; i++)
+                {   
+                    string sirName = email.recipients[i].Split(" ")[0];
+                    string lastName = email.recipients[i].Split(" ")[1];
+
+                    email.body = email.body.Replace(sirName.ToLower(), "");
+                    email.body = email.body.Replace(lastName.ToLower(), "");
+                    email.body = email.body.Replace(email.recipients[i].ToLower(), "");
+                }
+            }
+            return emailString;
         }
     }
 

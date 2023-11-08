@@ -43,50 +43,52 @@
             // 
             // lbSaveLocation
             // 
-            this.lbSaveLocation.AutoSize = true;
-            this.lbSaveLocation.Location = new System.Drawing.Point(27, 180);
-            this.lbSaveLocation.Name = "lbSaveLocation";
-            this.lbSaveLocation.Size = new System.Drawing.Size(0, 20);
-            this.lbSaveLocation.TabIndex = 6;
+            lbSaveLocation.AutoSize = true;
+            lbSaveLocation.Location = new Point(34, 225);
+            lbSaveLocation.Margin = new Padding(4, 0, 4, 0);
+            lbSaveLocation.Name = "lbSaveLocation";
+            lbSaveLocation.Size = new Size(0, 25);
+            lbSaveLocation.TabIndex = 6;
             // 
             // lbHeader
             // 
-            this.lbHeader.AutoSize = true;
-            this.lbHeader.Font = new System.Drawing.Font("Arial Rounded MT Bold", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbHeader.Location = new System.Drawing.Point(17, 61);
-            this.lbHeader.Name = "lbHeader";
-            this.lbHeader.Size = new System.Drawing.Size(241, 27);
-            this.lbHeader.TabIndex = 10;
-            this.lbHeader.Text = "Step 1. Choose a file";
+            lbHeader.AutoSize = true;
+            lbHeader.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            lbHeader.Location = new Point(21, 76);
+            lbHeader.Margin = new Padding(4, 0, 4, 0);
+            lbHeader.Name = "lbHeader";
+            lbHeader.Size = new Size(295, 32);
+            lbHeader.TabIndex = 10;
+            lbHeader.Text = "Step 1. Choose a file";
             // 
             // lbFileChosen
             // 
-            this.lbFileChosen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbFileChosen.AutoSize = true;
-            this.lbFileChosen.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbFileChosen.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbFileChosen.Location = new System.Drawing.Point(118, 112);
-            this.lbFileChosen.MaximumSize = new System.Drawing.Size(250, 200);
-            this.lbFileChosen.MinimumSize = new System.Drawing.Size(250, 20);
-            this.lbFileChosen.Name = "lbFileChosen";
-            this.lbFileChosen.Size = new System.Drawing.Size(250, 20);
-            this.lbFileChosen.TabIndex = 11;
-            this.lbFileChosen.Text = "File Name";
+            lbFileChosen.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lbFileChosen.AutoSize = true;
+            lbFileChosen.BackColor = SystemColors.AppWorkspace;
+            lbFileChosen.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            lbFileChosen.Location = new Point(148, 140);
+            lbFileChosen.Margin = new Padding(4, 0, 4, 0);
+            lbFileChosen.MaximumSize = new Size(312, 250);
+            lbFileChosen.MinimumSize = new Size(312, 25);
+            lbFileChosen.Name = "lbFileChosen";
+            lbFileChosen.Size = new Size(312, 25);
+            lbFileChosen.TabIndex = 11;
+            lbFileChosen.Text = "File Name";
             // 
             // chooseFile
             // 
-            this.chooseFile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(1)))));
-            this.chooseFile.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chooseFile.ForeColor = System.Drawing.Color.Black;
-            this.chooseFile.Location = new System.Drawing.Point(192, 180);
-            this.chooseFile.Name = "chooseFile";
-            this.chooseFile.Size = new System.Drawing.Size(101, 29);
-            this.chooseFile.TabIndex = 12;
-            this.chooseFile.Text = "Choose file";
-            this.chooseFile.UseVisualStyleBackColor = true;
-            this.chooseFile.Click += new System.EventHandler(this.chooseFile_Click);
+            chooseFile.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 1);
+            chooseFile.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            chooseFile.ForeColor = Color.Black;
+            chooseFile.Location = new Point(240, 225);
+            chooseFile.Margin = new Padding(4, 4, 4, 4);
+            chooseFile.Name = "chooseFile";
+            chooseFile.Size = new Size(126, 36);
+            chooseFile.TabIndex = 12;
+            chooseFile.Text = "Choose file";
+            chooseFile.UseVisualStyleBackColor = true;
+            chooseFile.Click += chooseFile_Click;
             // 
             // btNext
             // 
@@ -120,22 +122,24 @@
             // 
             // pbLoadingGif
             // 
-            this.pbLoadingGif.Image = ((System.Drawing.Image)(resources.GetObject("pbLoadingGif.Image")));
-            this.pbLoadingGif.Location = new System.Drawing.Point(218, 264);
-            this.pbLoadingGif.Name = "pbLoadingGif";
-            this.pbLoadingGif.Size = new System.Drawing.Size(61, 137);
-            this.pbLoadingGif.TabIndex = 16;
-            this.pbLoadingGif.TabStop = false;
+            pbLoadingGif.Image = (Image)resources.GetObject("pbLoadingGif.Image");
+            pbLoadingGif.Location = new Point(272, 330);
+            pbLoadingGif.Margin = new Padding(4, 4, 4, 4);
+            pbLoadingGif.Name = "pbLoadingGif";
+            pbLoadingGif.Size = new Size(76, 171);
+            pbLoadingGif.TabIndex = 16;
+            pbLoadingGif.TabStop = false;
             // 
             // lbShowingStatus
             // 
-            this.lbShowingStatus.AutoSize = true;
-            this.lbShowingStatus.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbShowingStatus.Location = new System.Drawing.Point(183, 404);
-            this.lbShowingStatus.Name = "lbShowingStatus";
-            this.lbShowingStatus.Size = new System.Drawing.Size(128, 20);
-            this.lbShowingStatus.TabIndex = 17;
-            this.lbShowingStatus.Text = "Fetching Mails";
+            lbShowingStatus.AutoSize = true;
+            lbShowingStatus.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            lbShowingStatus.Location = new Point(229, 505);
+            lbShowingStatus.Margin = new Padding(4, 0, 4, 0);
+            lbShowingStatus.Name = "lbShowingStatus";
+            lbShowingStatus.Size = new Size(156, 24);
+            lbShowingStatus.TabIndex = 17;
+            lbShowingStatus.Text = "Fetching Mails";
             // 
             // button1
             // 
