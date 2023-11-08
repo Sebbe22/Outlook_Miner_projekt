@@ -61,11 +61,13 @@ namespace OutlookMiner.Services
                             Text email = new Text(oMsg.Body, currentThreadID);
                             email.sender = oMsg.Sender.Name.ToLower();
                             email.senderEmail = oMsg.SenderEmailAddress.ToLower();
-                            for (int i = 1; i < oMsg.Recipients.Count+1; i++)
+                            for (int i = 1; i < oMsg.Recipients.Count + 1; i++)
                             {
                                 email.recipients.Add(oMsg.Recipients[i].Name);
                             }
+                        
                             email.body.ToLower();
+                            
                             result.Add(email);
                         }
                     }

@@ -49,7 +49,7 @@
             this.lbHeader.Size = new System.Drawing.Size(387, 27);
             this.lbHeader.TabIndex = 1;
             this.lbHeader.Text = "Step 2. Choose Cleaning Methods";
-            this.lbHeader.Click += new System.EventHandler(this.lbHeader_Click);
+            
             // 
             // checkBox1
             // 
