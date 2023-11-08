@@ -67,5 +67,29 @@ namespace OutlookMiner.Services.Tests
             // assert
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        [TestMethod]
+        [DataRow("Hej sebastian dette er en lille test", "Hej  dette er en lille test")]
+        [DataRow("Hej sebastian gylstorff!", "Hej  !")]
+        [DataRow("ælkjsænfaioæsebastianmklæawjæ", "ælkjsænfaioæmklæawjæ")]
+        [DataRow("Hr.gylstorff det var en fornøjelse at møde dem", "Hr. det var en fornøjelse at møde dem")]
+        [DataRow(" seb astian ", " seb astian ")]
+        [DataRow(" 235sebastian29jkæ532 jk235 j ¤gylstorff!!#¤", " 23529jkæ532 jk235 j ¤!!#¤")]
+        public void RemoveSenderAndRecieverNameFromMailTest(string test, string expectedResult)
+        {
+            //arrange
+            List<Text> emailList = new List<Text> { new Text(test, "1") };
+            emailList[0].sender = "Sebastian Gylstorff";
+            //emailList[0].recipients[0] = "Rasmus Jensen";
+            ICleanService cleanService = new CleanService();
+            string actualResult = "";
+
+            //act
+            emailList = cleanService.RemoveSenderAndRecieverNameFromEmail(emailList);
+            actualResult = emailList[0].body;
+
+            //assert
+            Assert.AreEqual(actualResult, expectedResult);
+        }
     }
 }

@@ -61,6 +61,7 @@
             checkBox1.TabIndex = 4;
             checkBox1.Text = "Remove Names from body";
             checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // checkBox2
             // 
@@ -87,14 +88,14 @@
             // 
             // checkBox4
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(36, 206);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(182, 24);
-            this.checkBox4.TabIndex = 7;
-            this.checkBox4.Text = "Remove Emailadresses";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            checkBox4.AutoSize = true;
+            checkBox4.Location = new Point(45, 259);
+            checkBox4.Name = "checkBox4";
+            checkBox4.Size = new Size(217, 29);
+            checkBox4.TabIndex = 7;
+            checkBox4.Text = "Remove Emailadresses";
+            checkBox4.UseVisualStyleBackColor = true;
+            checkBox4.CheckedChanged += checkBox4_CheckedChanged;
             // 
             // checkBox5
             // 
