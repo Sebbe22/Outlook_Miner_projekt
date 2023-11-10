@@ -72,8 +72,6 @@ namespace OutlookMiner.Services
             {
                 email.body = email.body.ToLower();
                 
-
-                
                 string sirName = email.sender.Split(" ")[0];
                 string lastName = email.sender.Split(" ")[1];
 
