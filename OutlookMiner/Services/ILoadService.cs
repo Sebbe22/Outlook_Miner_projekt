@@ -59,15 +59,11 @@ namespace OutlookMiner.Services
                         {
                             string currentThreadID = oMsg.ConversationID;
                             Text email = new Text(oMsg.Body, currentThreadID);
-                            email.sender = oMsg.Sender.Name.ToLower();
-                            email.senderEmail = oMsg.SenderEmailAddress.ToLower();
+                            email.sender = oMsg.Sender.Name;
+                            email.senderEmail = oMsg.SenderEmailAddress;
                             for (int i = 1; i < oMsg.Recipients.Count+1; i++)
                             {
                                 email.recipients.Add(oMsg.Recipients[i].Name);
-                            }
-                            if (email.body != null)
-                            {
-                                email.body = email.body.ToLower();
                             }
                             result.Add(email);
                         }

@@ -70,6 +70,10 @@ namespace OutlookMiner.Services
             // removes senders name
             foreach (Text email in emailString)
             {
+                email.body = email.body.ToLower();
+                
+
+                
                 string sirName = email.sender.Split(" ")[0];
                 string lastName = email.sender.Split(" ")[1];
 
