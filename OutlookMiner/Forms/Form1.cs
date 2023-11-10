@@ -17,6 +17,7 @@ namespace OutlookMiner
         private IPathUtilityService pathUtilityService;
         private ILoadService loadService;
         private List<Text> mails;
+        private List<IndividualMailText> individualMails;
         public Form1(IPathUtilityService pathUtilityService, ILoadService loadService)
         {
 
@@ -37,17 +38,6 @@ namespace OutlookMiner
 
         }
 
-
-
-        private void lbMailCount_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbMailCount_Click_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void chooseFile_Click(object sender, EventArgs e)
         {
@@ -76,7 +66,8 @@ namespace OutlookMiner
                 {
                     SelectedPath = selectedPath,
                     ThreadCount = threadCount,
-                    MailCount = mailCount
+                    MailCount = mailCount,
+                    IndividualMailList = individualMails
                 };
             };
 
@@ -89,7 +80,7 @@ namespace OutlookMiner
                 // Update the UI with the results
                 lbFileChosen.Text = result.SelectedPath;
                 lbMailCount.Text = "Threads: " + result.ThreadCount + "\nIndividual messages: " + result.MailCount;
-
+                individualMails = result.IndividualMailList;
                 // Hide the loading GIF
                 pbLoadingGif.Visible = false;
                 lbShowingStatus.Visible = false;
@@ -101,6 +92,6 @@ namespace OutlookMiner
 
         }
 
-       
+      
     }
 }

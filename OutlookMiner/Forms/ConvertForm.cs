@@ -19,6 +19,7 @@ namespace OutlookMiner.Forms
        private IPathUtilityService _pathUtilityService;
         public static ConvertForm instance;
         private List<Text> mails;
+        string mailsJsonFormat;
        
         private ICheckBoxService _checkboxList;
 
@@ -41,7 +42,17 @@ namespace OutlookMiner.Forms
             lbShowingStatus.Hide();
             
         }
-
+        public ConvertForm(IPathUtilityService pathUtilityService, string jsonFormat)
+        {
+            InitializeComponent();
+            _pathUtilityService = pathUtilityService;
+            this.mailsJsonFormat = jsonFormat;
+            this._checkboxList = CheckBoxService.Instance;
+            instance = this;
+            lbFeedbackMessage.Hide();
+            pbLoadingGif.Hide();
+            lbShowingStatus.Hide();
+        }
         private void lbGoToStart_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -85,8 +96,15 @@ namespace OutlookMiner.Forms
                     }
 
                 }
-
-                convert.Convert(selectedFilePath, mails);
+                if(mails != null)
+                {
+                    convert.Convert(selectedFilePath, mails);
+                }
+                if(mails  == null)
+                {
+                    convert.ConvertJson(selectedFilePath, mailsJsonFormat);
+                }
+              
 
                 // Pass the results to the RunWorkerCompleted event
                 eArgs.Result = new

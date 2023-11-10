@@ -42,14 +42,14 @@
             // 
             // lbHeader
             // 
-            lbHeader.AutoSize = true;
-            lbHeader.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            lbHeader.Location = new Point(21, 76);
-            lbHeader.Margin = new Padding(4, 0, 4, 0);
-            lbHeader.Name = "lbHeader";
-            lbHeader.Size = new Size(476, 32);
-            lbHeader.TabIndex = 1;
-            lbHeader.Text = "Step 2. Choose Cleaning Methods";
+            this.lbHeader.AutoSize = true;
+            this.lbHeader.Font = new System.Drawing.Font("Arial Rounded MT Bold", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbHeader.Location = new System.Drawing.Point(17, 61);
+            this.lbHeader.Name = "lbHeader";
+            this.lbHeader.Size = new System.Drawing.Size(387, 27);
+            this.lbHeader.TabIndex = 1;
+            this.lbHeader.Text = "Step 2. Choose Cleaning Methods";
+            
             // 
             // checkBox1
             // 

@@ -74,10 +74,13 @@ namespace OutlookMiner.Services
                 
                 string sirName = email.sender.Split(" ")[0];
                 string lastName = email.sender.Split(" ")[1];
-
-                email.body = email.body.Replace(sirName.ToLower(), "");
-                email.body = email.body.Replace(lastName.ToLower(), "");
-                email.body = email.body.Replace(email.sender.ToLower(), "");
+                if(email.body != null)
+                {
+                    email.body = email.body.Replace(sirName.ToLower(), "");
+                    email.body = email.body.Replace(lastName.ToLower(), "");
+                    email.body = email.body.Replace(email.sender.ToLower(), "");
+                }
+               
             }
 
             // removes recievers name
@@ -87,10 +90,13 @@ namespace OutlookMiner.Services
                 {   
                     string sirName = email.recipients[i].Split(" ")[0];
                     string lastName = email.recipients[i].Split(" ")[1];
-
-                    email.body = email.body.Replace(sirName.ToLower(), "");
-                    email.body = email.body.Replace(lastName.ToLower(), "");
-                    email.body = email.body.Replace(email.recipients[i].ToLower(), "");
+                    if(email.body != null)
+                    {
+                        email.body = email.body.Replace(sirName.ToLower(), "");
+                        email.body = email.body.Replace(lastName.ToLower(), "");
+                        email.body = email.body.Replace(email.recipients[i].ToLower(), "");
+                    }
+                   
                 }
             }
             return emailString;
