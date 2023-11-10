@@ -100,8 +100,11 @@ namespace OutlookMiner.Forms
                 {
                     convert.Convert(selectedFilePath, mails);
                 }
-                
-                convert.ConvertJson(selectedFilePath, mailsJsonFormat);
+                if(mails  == null)
+                {
+                    convert.ConvertJson(selectedFilePath, mailsJsonFormat);
+                }
+              
 
                 // Pass the results to the RunWorkerCompleted event
                 eArgs.Result = new
