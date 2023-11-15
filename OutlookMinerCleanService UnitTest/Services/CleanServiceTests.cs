@@ -22,10 +22,10 @@ namespace OutlookMiner.Services.Tests
         [DataRow("test test test <https://www.youtube.com/watch?v=dQw4w9WgXcQ> test test test", "test test test  test test test")]
         [DataRow("test<www.test.dk>test", "testtest")]
         [DataRow("https://trello.com/b/sPuVZtVH/hovedprojektet-2023-2024", "")]
-        public void RemoveLinksFromEmailStringTest(string test, string expectedResult)
+        public void RemoveLinksFromEmailStringTest(string testValue, string expectedResult)
         {
             // arrange
-            List<Text> emailList = new List<Text>() { new Text(test, "") };
+            List<Text> emailList = new List<Text>() { new Text(testValue, "") };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
@@ -50,10 +50,10 @@ namespace OutlookMiner.Services.Tests
         [DataRow("er@mail dk", "er@mail dk")]
         [DataRow("keke@mail.dkdddakaldw", "")]
         [DataRow("seba124m@edu.zealand.dk", "")]
-        public void RemoveEmailsFromEmailStringTest(string test, string expectedResult)
+        public void RemoveEmailsFromEmailStringTest(string testValue, string expectedResult)
         {
             // arrange 
-            List<Text> emailList = new List<Text> { new Text(test, "1") };
+            List<Text> emailList = new List<Text> { new Text(testValue, "1") };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
@@ -69,18 +69,24 @@ namespace OutlookMiner.Services.Tests
         }
 
         [TestMethod]
-        [DataRow("Hej sebastian dette er en lille test", "Hej  dette er en lille test")]
-        [DataRow("Hej sebastian gylstorff!", "Hej  !")]
+        [DataRow("Hej sebastian dette er en lille test", "hej  dette er en lille test")]
+        [DataRow("Hej sebastian gylstorff!", "hej  !")]
         [DataRow("ælkjsænfaioæsebastianmklæawjæ", "ælkjsænfaioæmklæawjæ")]
-        [DataRow("Hr.gylstorff det var en fornøjelse at møde dem", "Hr. det var en fornøjelse at møde dem")]
+        [DataRow("Hr.gylstorff det var en fornøjelse at møde dem", "hr. det var en fornøjelse at møde dem")]
         [DataRow(" seb astian ", " seb astian ")]
         [DataRow(" 235sebastian29jkæ532 jk235 j ¤gylstorff!!#¤", " 23529jkæ532 jk235 j ¤!!#¤")]
-        public void RemoveSenderAndRecieverNameFromMailTest(string test, string expectedResult)
+        [DataRow(" Henrik Olsen Jensen", "   ")]
+        [DataRow("sebastian Gylstorff, HenrikOlsenJensen", " , ")]
+        [DataRow("gesgsegy4 Zealand awdagerg", "gesgsegy4  awdagerg")]
+        [DataRow("pls virk 测试 hehe", "pls virk  hehe")]
+        public void RemoveSenderAndRecieverNameFromMailTest(string testValue, string expectedResult)
         {
             //arrange
-            List<Text> emailList = new List<Text> { new Text(test, "1") };
+            List<Text> emailList = new List<Text> { new Text(testValue, "1") };
             emailList[0].sender = "Sebastian Gylstorff";
-            //emailList[0].recipients[0] = "Rasmus Jensen";
+            emailList[0].recipients.Add("Henrik Olsen Jensen");
+            emailList[0].recipients.Add("Zealand");
+            emailList[0].recipients.Add("测试");
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 

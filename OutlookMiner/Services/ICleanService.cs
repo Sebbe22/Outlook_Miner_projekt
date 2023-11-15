@@ -72,13 +72,14 @@ namespace OutlookMiner.Services
             {
                 email.body = email.body.ToLower();
                 
-                string sirName = email.sender.Split(" ")[0];
-                string lastName = email.sender.Split(" ")[1];
-                if(email.body != null)
+                string[] splitNameArray = email.sender.Split(" ");
+
+                if(email.body != null && email.sender.Length >= 1)
                 {
-                    email.body = email.body.Replace(sirName.ToLower(), "");
-                    email.body = email.body.Replace(lastName.ToLower(), "");
-                    email.body = email.body.Replace(email.sender.ToLower(), "");
+                    foreach(string name in splitNameArray)
+                    {
+                        email.body = email.body.Replace(name.ToLower(), "");
+                    }
                 }
                
             }
@@ -86,17 +87,18 @@ namespace OutlookMiner.Services
             // removes recievers name
             foreach (Text email in emailString)
             {
+                email.body = email.body.ToLower();
                 for (int i = 0; i < email.recipients.Count; i++)
-                {   
-                    string sirName = email.recipients[i].Split(" ")[0];
-                    string lastName = email.recipients[i].Split(" ")[1];
+                {
+                    string[] splitNameArray = email.recipients[i].Split(" ");
+
                     if(email.body != null)
                     {
-                        email.body = email.body.Replace(sirName.ToLower(), "");
-                        email.body = email.body.Replace(lastName.ToLower(), "");
-                        email.body = email.body.Replace(email.recipients[i].ToLower(), "");
+                        foreach (string name in splitNameArray)
+                        {
+                            email.body = email.body.Replace(name.ToLower(), "");
+                        }
                     }
-                   
                 }
             }
             return emailString;
