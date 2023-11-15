@@ -68,7 +68,7 @@
             this.lbFileChosen.AutoSize = true;
             this.lbFileChosen.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.lbFileChosen.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbFileChosen.Location = new System.Drawing.Point(148, 140);
+            this.lbFileChosen.Location = new System.Drawing.Point(68, 132);
             this.lbFileChosen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFileChosen.MaximumSize = new System.Drawing.Size(312, 250);
             this.lbFileChosen.MinimumSize = new System.Drawing.Size(312, 25);
@@ -82,7 +82,7 @@
             this.chooseFile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(1)))));
             this.chooseFile.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.chooseFile.ForeColor = System.Drawing.Color.Black;
-            this.chooseFile.Location = new System.Drawing.Point(240, 225);
+            this.chooseFile.Location = new System.Drawing.Point(148, 274);
             this.chooseFile.Margin = new System.Windows.Forms.Padding(4);
             this.chooseFile.Name = "chooseFile";
             this.chooseFile.Size = new System.Drawing.Size(126, 36);
@@ -123,7 +123,7 @@
             // pbLoadingGif
             // 
             this.pbLoadingGif.Image = ((System.Drawing.Image)(resources.GetObject("pbLoadingGif.Image")));
-            this.pbLoadingGif.Location = new System.Drawing.Point(272, 330);
+            this.pbLoadingGif.Location = new System.Drawing.Point(172, 308);
             this.pbLoadingGif.Margin = new System.Windows.Forms.Padding(4);
             this.pbLoadingGif.Name = "pbLoadingGif";
             this.pbLoadingGif.Size = new System.Drawing.Size(76, 171);
