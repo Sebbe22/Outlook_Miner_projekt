@@ -25,7 +25,7 @@ namespace OutlookMiner.Models
         public static List<MetaDataLanguageListModel> Languages = new List<MetaDataLanguageListModel>
         {
         new MetaDataLanguageListModel("EN", "From", "To", "Sent", "Subject"),
-            new MetaDataLanguageListModel("DA", "Fra", "Til", "Sendt", "Emne"),
+        new MetaDataLanguageListModel("DA", "Fra", "Til", "Sendt", "Emne"),
          
         };
        

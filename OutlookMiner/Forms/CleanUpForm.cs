@@ -74,5 +74,6 @@ namespace OutlookMiner.Forms
             _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox1.Checked);
         }
 
+  
     }
 }
