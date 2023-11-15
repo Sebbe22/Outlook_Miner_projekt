@@ -61,6 +61,7 @@ namespace OutlookMiner.Services
                             Text email = new Text(oMsg.Body, currentThreadID);
                             email.sender = oMsg.Sender.Name;
                             email.senderEmail = oMsg.SenderEmailAddress;
+                            email.recievedTime = oMsg.ReceivedTime; 
                             for (int i = 1; i < oMsg.Recipients.Count+1; i++)
                             {
                                 email.recipients.Add(oMsg.Recipients[i].Name);

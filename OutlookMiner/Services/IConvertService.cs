@@ -16,7 +16,7 @@ namespace OutlookMiner.Services
 {
     public interface IConvertService
     {
-        void Convert(string saveFilePath, List<Text> mails);
+        void Convert(string saveFilePath, List<IndividualMailText> mails);
         void ConvertJson(string saveFilePath, string JsonFormat);
 
     }
@@ -44,7 +44,7 @@ namespace OutlookMiner.Services
 
             document.Draw(saveFilePath);
         }
-        public void Convert(string saveFilePath, List<Text> mails)
+        public void Convert(string saveFilePath, List<IndividualMailText> mails)
         {
             ceTe.DynamicPDF.Document document = new ceTe.DynamicPDF.Document();
 

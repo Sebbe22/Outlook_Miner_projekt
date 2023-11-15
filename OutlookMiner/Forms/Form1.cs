@@ -32,7 +32,7 @@ namespace OutlookMiner
 
         private void btNext_Click(object sender, EventArgs e)
         {
-            var newForm = new CleanUpForm(mails);
+            var newForm = new CleanUpForm(individualMails);
             newForm.Show();
             this.Hide();
 
@@ -54,13 +54,11 @@ namespace OutlookMiner
             backgroundWorker.DoWork += (sender, eArgs) =>
             {
                 mails = loadService.LoadMail(selectedPath);
+                mails = emailBasicInfoService.RemoveDuplicateThreads(mails);
                 int threadCount = emailBasicInfoService.CountThreads(mails);
-                List<IndividualMailText> individualMails = emailBasicInfoService.SeparateThreadsIntoMails(mails);
+                individualMails = emailBasicInfoService.SeparateThreadsIntoMails(mails);
                 int mailCount = emailBasicInfoService.CountMessages(individualMails);
-                for (int i = 1; i <= 100000000; i++)
-                {
-                    Console.WriteLine("h");
-                }
+
                 // Pass the results to the RunWorkerCompleted event
                 eArgs.Result = new
                 {
@@ -79,7 +77,15 @@ namespace OutlookMiner
 
                 // Update the UI with the results
                 lbFileChosen.Text = result.SelectedPath;
-                lbMailCount.Text = "Threads: " + result.ThreadCount + "\nIndividual messages: " + result.MailCount;
+                if(result.MailCount> 0)
+                {
+                    lbMailCount.Text = "Threads: " + result.ThreadCount + "\nIndividual messages: " + result.MailCount;
+                }
+                else
+                {
+                    lbMailCount.Text = "No mails were found";
+                }
+               
                 individualMails = result.IndividualMailList;
                 // Hide the loading GIF
                 pbLoadingGif.Visible = false;

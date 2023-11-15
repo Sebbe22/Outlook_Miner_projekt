@@ -11,11 +11,11 @@ namespace OutlookMiner.Services
 {
     public interface ICleanService
     {
-        List<Text> RemoveLinksFromEmailString(List <Text> mails);
+        List<IndividualMailText> RemoveLinksFromEmailString(List <IndividualMailText> mails);
 
-        List<Text> RemoveEmailsFromEmailString(List<Text> emailString);
+        List<IndividualMailText> RemoveEmailsFromEmailString(List<IndividualMailText> emailString);
 
-        List<Text> RemoveSenderAndRecieverNameFromEmail(List<Text> emailString);
+        List<IndividualMailText> RemoveSenderAndRecieverNameFromEmail(List<IndividualMailText> emailString);
     }
 
     public class CleanService : ICleanService
@@ -25,7 +25,7 @@ namespace OutlookMiner.Services
         /// </summary>
         /// <param name="mails">the list of mails/strings from which links will be removed</param>
         /// <returns>returns the same list but with links removed</returns>
-        public List<Text> RemoveLinksFromEmailString(List<Text> mails)
+        public List<IndividualMailText> RemoveLinksFromEmailString(List<IndividualMailText> mails)
         {
             foreach(Text mail in mails)
             {
@@ -44,7 +44,7 @@ namespace OutlookMiner.Services
         /// </summary>
         /// <param name="emailString"> list of mails to be cleaned </param>
         /// <returns>returns the cleaned list where emails are removed.</returns>
-        public List<Text> RemoveEmailsFromEmailString(List<Text> emailString)
+        public List<IndividualMailText> RemoveEmailsFromEmailString(List<IndividualMailText> emailString)
         {
             string pattern = @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+";
         
@@ -65,7 +65,7 @@ namespace OutlookMiner.Services
         /// </summary>
         /// <param name="emailString"> the list of emails from which names will be removed </param>
         /// <returns> returns a list of emails where names has been removed </returns>
-        public List<Text> RemoveSenderAndRecieverNameFromEmail(List<Text> emailString)
+        public List<IndividualMailText> RemoveSenderAndRecieverNameFromEmail(List<IndividualMailText> emailString)
         {
             // removes senders name
             foreach (Text email in emailString)
