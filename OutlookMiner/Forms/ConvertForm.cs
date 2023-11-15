@@ -18,7 +18,7 @@ namespace OutlookMiner.Forms
     {
        private IPathUtilityService _pathUtilityService;
         public static ConvertForm instance;
-        private List<Text> mails;
+        private List<IndividualMailText> mails;
         string mailsJsonFormat;
        
         private ICheckBoxService _checkboxList;
@@ -29,7 +29,7 @@ namespace OutlookMiner.Forms
         }
 
 
-        public ConvertForm(IPathUtilityService pathUtilityService, List<Text> _mails)
+        public ConvertForm(IPathUtilityService pathUtilityService, List<IndividualMailText> _mails)
         {
             InitializeComponent();
             _pathUtilityService = pathUtilityService;
@@ -91,7 +91,7 @@ namespace OutlookMiner.Forms
                         if (checkbox.isChecked)
                         {
                             object[] parameters = new object[] { mails };
-                            mails = (List<Text>?)methodInfo.Invoke(instance, parameters);
+                            mails = (List<IndividualMailText>?)methodInfo.Invoke(instance, parameters);
                         }
                     }
 

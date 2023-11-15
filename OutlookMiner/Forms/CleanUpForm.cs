@@ -15,7 +15,7 @@ namespace OutlookMiner.Forms
     public partial class CleanUpForm : Form
     {
         public static CleanUpForm instance;
-        private List<Text> mails;
+        private List<IndividualMailText> mails;
         private ICheckBoxService _checkboxList;
 
         public ICheckBoxService GetCheckBoxListModelInstance()
@@ -23,7 +23,7 @@ namespace OutlookMiner.Forms
             return _checkboxList;
         }
 
-        public CleanUpForm(List<Text> _mails)
+        public CleanUpForm(List<IndividualMailText> _mails)
         {
             InitializeComponent();
             instance = this;
@@ -73,5 +73,6 @@ namespace OutlookMiner.Forms
 
             _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox1.Checked);
         }
+
     }
 }

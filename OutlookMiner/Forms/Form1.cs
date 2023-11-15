@@ -32,7 +32,7 @@ namespace OutlookMiner
 
         private void btNext_Click(object sender, EventArgs e)
         {
-            var newForm = new CleanUpForm(mails);
+            var newForm = new CleanUpForm(individualMails);
             newForm.Show();
             this.Hide();
 
@@ -56,7 +56,7 @@ namespace OutlookMiner
                 mails = loadService.LoadMail(selectedPath);
                 mails = emailBasicInfoService.RemoveDuplicateThreads(mails);
                 int threadCount = emailBasicInfoService.CountThreads(mails);
-                List<IndividualMailText> individualMails = emailBasicInfoService.SeparateThreadsIntoMails(mails);
+                individualMails = emailBasicInfoService.SeparateThreadsIntoMails(mails);
                 int mailCount = emailBasicInfoService.CountMessages(individualMails);
 
                 // Pass the results to the RunWorkerCompleted event
