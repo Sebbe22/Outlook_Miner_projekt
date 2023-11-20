@@ -25,11 +25,12 @@ namespace OutlookMiner.Services
         {
             // Initialize the list of checkboxes with data
             checkBoxes = new List<CheckBoxModel>
-        {
-            new CheckBoxModel("RemoveLinksFromEmailString", false),
-            new CheckBoxModel("RemoveEmailsFromEmailString", false),
-            new CheckBoxModel("RemoveSenderAndRecieverNameFromEmail", false)
-        };
+            {
+                new CheckBoxModel("RemoveLinksFromEmailString", false),
+                new CheckBoxModel("RemoveEmailsFromEmailString", false),
+                new CheckBoxModel("RemoveSenderAndRecieverNameFromEmail", false),
+                new CheckBoxModel("RemovePhoneNumbersFromEmail", false)
+            };
         }
 
         public static ICheckBoxService Instance

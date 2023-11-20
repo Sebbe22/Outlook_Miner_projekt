@@ -1,5 +1,6 @@
 ﻿using Org.BouncyCastle.Crypto.Tls;
 using OutlookMiner.Models;
+using PhoneNumbers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace OutlookMiner.Services
         List<IndividualMailText> RemoveEmailsFromEmailString(List<IndividualMailText> emailString);
 
         List<IndividualMailText> RemoveSenderAndRecieverNameFromEmail(List<IndividualMailText> emailString);
+
+        List<IndividualMailText> RemovePhoneNumbersFromEmail(List<IndividualMailText> emailString);
     }
 
     public class CleanService : ICleanService
@@ -71,17 +74,19 @@ namespace OutlookMiner.Services
             foreach (Text email in emailString)
             {
                 email.body = email.body.ToLower();
-                
-                string[] splitNameArray = email.sender.Split(" ");
 
-                if(email.body != null && email.sender.Length >= 1)
+                if (email.sender != null)
                 {
-                    foreach(string name in splitNameArray)
+                    string[] splitNameArray = email.sender.Split(" ");
+
+                    if (email.body != null && email.sender.Length >= 1)
                     {
-                        email.body = email.body.Replace(name.ToLower(), "");
+                        foreach (string name in splitNameArray)
+                        {
+                            email.body = email.body.Replace(name.ToLower(), "");
+                        }
                     }
                 }
-               
             }
 
             // removes recievers name
@@ -101,6 +106,29 @@ namespace OutlookMiner.Services
                     }
                 }
             }
+            return emailString;
+        }
+
+        public List<IndividualMailText> RemovePhoneNumbersFromEmail(List<IndividualMailText> emailString)
+        {
+            PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
+
+            foreach(var email in emailString)
+            {
+                foreach (var language in MetaDataLanguageListModel.Languages)
+                {
+                    var matches = phoneNumberUtil.FindNumbers(email.body, language.Language);
+
+                    if (matches != null && matches.Count() > 0)
+                    {
+                        foreach (var match in matches)
+                        {
+                            email.body = email.body.Replace(match.RawString, "");
+                        }
+                    }
+                }
+            };
+
             return emailString;
         }
     }
