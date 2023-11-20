@@ -11,11 +11,11 @@ namespace OutlookMiner.Models
         public IndividualMailText Message { get; set; }
         public List<string> Labels { get; set; }
 
-        public IndividualMailTextLabelingModel(IndividualMailText message)
+        public IndividualMailTextLabelingModel(IndividualMailText _message, List<string> _labels)
         {
-            Message = message;
-            Labels = new List<string>();
+            Message = _message;
+            Labels = _labels;
         }
-
+        
     }
 }

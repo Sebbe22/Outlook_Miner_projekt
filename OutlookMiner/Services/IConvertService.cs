@@ -16,8 +16,9 @@ namespace OutlookMiner.Services
 {
     public interface IConvertService
     {
-        void Convert(string saveFilePath, List<IndividualMailText> mails);
+        void ConvertIndividualText(string saveFilePath, List<IndividualMailText> mails);
         void ConvertJson(string saveFilePath, string JsonFormat);
+        void ConvertThreads( string saveFilePath, List<ThreadModel> mails);
 
     }
 
@@ -44,7 +45,7 @@ namespace OutlookMiner.Services
 
             document.Draw(saveFilePath);
         }
-        public void Convert(string saveFilePath, List<IndividualMailText> mails)
+        public void ConvertIndividualText(string saveFilePath, List<IndividualMailText> mails)
         {
             ceTe.DynamicPDF.Document document = new ceTe.DynamicPDF.Document();
 
@@ -86,6 +87,36 @@ namespace OutlookMiner.Services
                 }
                 return text.ToString();
             }
+        }
+
+        public void ConvertThreads(string saveFilePath, List<ThreadModel> mails)
+        {
+            ceTe.DynamicPDF.Document document = new ceTe.DynamicPDF.Document();
+
+            string labelText = "";
+
+            foreach (ThreadModel thread in mails)
+            {
+                labelText += $"\n\n{thread.ThreadID}\n\n";
+
+                foreach (var message in thread.Messages)
+                {
+                    labelText += $"Labels: {string.Join(", ", message.Labels)}\n";
+                    labelText += $"{message.Message.body}\n\n";
+                }
+            }
+
+            FormattedTextArea text = new FormattedTextArea(labelText, 0, 0, 504, 600, ceTe.DynamicPDF.FontFamily.Helvetica, 12, true);
+
+            while (text != null)
+            {
+                ceTe.DynamicPDF.Page page = new ceTe.DynamicPDF.Page();
+                document.Pages.Add(page);
+                page.Elements.Add(text);
+                text = text.GetOverflowFormattedTextArea();
+            }
+
+            document.Draw(saveFilePath);
         }
     }
 }

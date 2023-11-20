@@ -49,7 +49,9 @@ namespace OutlookMiner.Forms
 
         private void lbNextMail_Click(object sender, EventArgs e)
         {
-            LabeledMessages = labelingService.AddMessageWithLabels(LabeledMessages,mails[currentIndex], ChoosenLabels);
+            var copiedLabels = new List<string>(ChoosenLabels);
+            LabeledMessages.Add(labelingService.AddMessageWithLabels(mails[currentIndex], copiedLabels));
+            ChoosenLabels.Clear();
             currentIndex = Math.Min(mails.Count - 1, currentIndex + 1);
             DisplayText();
         }

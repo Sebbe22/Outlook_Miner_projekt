@@ -10,7 +10,7 @@ namespace OutlookMiner.Services
 {
     public interface IManualLabelService
     {
-        List<IndividualMailTextLabelingModel> AddMessageWithLabels(List<IndividualMailTextLabelingModel> messages, IndividualMailText message, List<string> labels);
+        IndividualMailTextLabelingModel AddMessageWithLabels( IndividualMailText message, List<string> labels);
         List<ThreadModel> CreateThreads(List<IndividualMailTextLabelingModel> messages);
         List<String> Labels { get; set; }
     }
@@ -55,13 +55,13 @@ namespace OutlookMiner.Services
             return groupedMessages;
         }
 
-        public List<IndividualMailTextLabelingModel> AddMessageWithLabels(List<IndividualMailTextLabelingModel> messages, IndividualMailText message, List<string> labels)
+        public IndividualMailTextLabelingModel AddMessageWithLabels(IndividualMailText message, List<string> labels)
         {
-            IndividualMailTextLabelingModel newMessage = new IndividualMailTextLabelingModel(message);
-            newMessage.Labels = labels;
-            messages.Add(newMessage);
+            IndividualMailTextLabelingModel newMessage = new IndividualMailTextLabelingModel(message, labels);
 
-            return messages;
+
+
+            return newMessage;
         }
     }
 }

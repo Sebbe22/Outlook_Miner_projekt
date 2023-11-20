@@ -30,7 +30,6 @@ namespace OutlookMiner.Forms
             return _checkboxList;
         }
 
-
         private ConvertForm(IPathUtilityService pathUtilityService)
         {
             InitializeComponent();
@@ -54,17 +53,7 @@ namespace OutlookMiner.Forms
             form.threads = _threads;
             return form;
         }
-        //public ConvertForm(IPathUtilityService pathUtilityService, string jsonFormat)
-        //{
-        //    InitializeComponent();
-        //    _pathUtilityService = pathUtilityService;
-        //    this.mailsJsonFormat = jsonFormat;
-        //    this._checkboxList = CheckBoxService.Instance;
-        //    instance = this;
-        //    lbFeedbackMessage.Hide();
-        //    pbLoadingGif.Hide();
-        //    lbShowingStatus.Hide();
-        //}
+
         private void lbGoToStart_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -110,12 +99,12 @@ namespace OutlookMiner.Forms
                 }
                 if(mails != null)
                 {
-                    convert.Convert(selectedFilePath, mails);
+                    convert.ConvertIndividualText(selectedFilePath, mails);
                 }
                 if (threads != null)
                 {
                     string mailsJsonFormat = JsonSerializer.Serialize(threads);
-                    convert.ConvertJson(selectedFilePath, mailsJsonFormat);
+                    convert.ConvertThreads(selectedFilePath, threads);
                 }
 
 
@@ -137,12 +126,10 @@ namespace OutlookMiner.Forms
                 pbLoadingGif.Visible = false;
                 lbShowingStatus.Visible = false;
 
-
             };
 
             // Start the background worker
             backgroundWorker.RunWorkerAsync();
-
                  
         }
 
@@ -150,7 +137,6 @@ namespace OutlookMiner.Forms
         {
 
         }
-
 
     }
 }
