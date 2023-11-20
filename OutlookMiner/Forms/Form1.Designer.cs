@@ -37,6 +37,7 @@
             this.lbMailCount = new System.Windows.Forms.Label();
             this.pbLoadingGif = new System.Windows.Forms.PictureBox();
             this.lbShowingStatus = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoadingGif)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,11 +142,22 @@
             this.lbShowingStatus.TabIndex = 17;
             this.lbShowingStatus.Text = "Fetching Mails";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(544, 388);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 566);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lbShowingStatus);
             this.Controls.Add(this.pbLoadingGif);
             this.Controls.Add(this.chooseFile);
@@ -172,5 +184,6 @@
         public Label lbMailCount;
         private PictureBox pbLoadingGif;
         private Label lbShowingStatus;
+        private Button button1;
     }
 }
