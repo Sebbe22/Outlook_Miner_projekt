@@ -98,6 +98,11 @@ namespace OutlookMiner
 
         }
 
-      
+        private void button1_Click(object sender, EventArgs e)
+        {
+            EditingForm newForm = new EditingForm(individualMails);
+            newForm.Show();
+            this.Hide();
+        }
     }
 }

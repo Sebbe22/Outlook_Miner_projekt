@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,7 +20,8 @@ namespace OutlookMiner.Forms
        private IPathUtilityService _pathUtilityService;
         public static ConvertForm instance;
         private List<IndividualMailText> mails;
-        string mailsJsonFormat;
+        private List<ThreadModel> threads;
+        //string mailsJsonFormat;
        
         private ICheckBoxService _checkboxList;
 
@@ -29,30 +31,40 @@ namespace OutlookMiner.Forms
         }
 
 
-        public ConvertForm(IPathUtilityService pathUtilityService, List<IndividualMailText> _mails)
+        private ConvertForm(IPathUtilityService pathUtilityService)
         {
             InitializeComponent();
             _pathUtilityService = pathUtilityService;
-            this.mails = _mails;
             this._checkboxList = CheckBoxService.Instance;
+            instance = this;
+            lbFeedbackMessage.Hide();
+            pbLoadingGif.Hide();
+            lbShowingStatus.Hide();
+        }
+        public static ConvertForm WithTextList(IPathUtilityService pathUtilityService, List<IndividualMailText> _mails)
+        {
+            var form = new ConvertForm(pathUtilityService);
+            form.mails = _mails;
+            return form;
+        }
 
-            instance = this;
-            lbFeedbackMessage.Hide();
-            pbLoadingGif.Hide();
-            lbShowingStatus.Hide();
-            
-        }
-        public ConvertForm(IPathUtilityService pathUtilityService, string jsonFormat)
+        public static ConvertForm WithThreadModelList(IPathUtilityService pathUtilityService, List<ThreadModel> _threads)
         {
-            InitializeComponent();
-            _pathUtilityService = pathUtilityService;
-            this.mailsJsonFormat = jsonFormat;
-            this._checkboxList = CheckBoxService.Instance;
-            instance = this;
-            lbFeedbackMessage.Hide();
-            pbLoadingGif.Hide();
-            lbShowingStatus.Hide();
+            var form = new ConvertForm(pathUtilityService);
+            form.threads = _threads;
+            return form;
         }
+        //public ConvertForm(IPathUtilityService pathUtilityService, string jsonFormat)
+        //{
+        //    InitializeComponent();
+        //    _pathUtilityService = pathUtilityService;
+        //    this.mailsJsonFormat = jsonFormat;
+        //    this._checkboxList = CheckBoxService.Instance;
+        //    instance = this;
+        //    lbFeedbackMessage.Hide();
+        //    pbLoadingGif.Hide();
+        //    lbShowingStatus.Hide();
+        //}
         private void lbGoToStart_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -100,11 +112,12 @@ namespace OutlookMiner.Forms
                 {
                     convert.Convert(selectedFilePath, mails);
                 }
-                if(mails  == null)
+                if (threads != null)
                 {
+                    string mailsJsonFormat = JsonSerializer.Serialize(threads);
                     convert.ConvertJson(selectedFilePath, mailsJsonFormat);
                 }
-              
+
 
                 // Pass the results to the RunWorkerCompleted event
                 eArgs.Result = new

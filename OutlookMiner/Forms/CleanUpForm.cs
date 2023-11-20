@@ -43,7 +43,7 @@ namespace OutlookMiner.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             IPathUtilityService pathUtilityService = new PathUtilityService();
-            ConvertForm convertForm = new ConvertForm(pathUtilityService, mails);
+            ConvertForm convertForm = ConvertForm.WithTextList(pathUtilityService, mails);
             convertForm.Show();
             this.Hide();
         }
