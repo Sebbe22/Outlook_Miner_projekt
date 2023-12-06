@@ -10,6 +10,7 @@ namespace OutlookMiner.Models
     {
 
         public int messageID { get; set; }
+        public List<RemovedContentModel> removedContent { get; set; }
 
         public IndividualMailText(string _body, string _threadID, int _messageID) : base(_body, _threadID)
         {

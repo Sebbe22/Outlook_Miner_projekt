@@ -5,11 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OutlookMiner.Forms
 {
@@ -17,19 +22,79 @@ namespace OutlookMiner.Forms
     {
         List<IndividualMailText> mails;
         IManualLabelService labelingService = ManualLabelService.GetInstance();
+        ICleanManualService cleanService = new CleanManualService();
         List<String> ChoosenLabels = new List<string>();
         List<IndividualMailTextLabelingModel> LabeledMessages = new List<IndividualMailTextLabelingModel>();
+        private ICheckBoxService _checkboxList;
 
         private int currentIndex = 0;
-
+        private bool commited = false;
+        public ICheckBoxService GetCheckBoxListModelInstance()
+        {
+            return _checkboxList;
+        }
 
         public EditingForm(List<IndividualMailText> _mails)
         {
             InitializeComponent();
-            mails = _mails;
-            DisplayText();
-            List<string> currentLabels = labelingService.Labels;
-            DDLabels.Items.AddRange(currentLabels.ToArray());
+
+            textBoxEditing.Visible = false;
+            btAddLabel.Visible = false;
+            DDLabels.Visible = false;
+
+            pbLoadingGif.Visible = true;
+            lbShowingStatus.Visible = true;
+
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += (sender, eArgs) =>
+            {
+                this._checkboxList = CheckBoxService.Instance;
+
+                mails = _mails;
+                DisplayText();
+                List<string> currentLabels = labelingService.Labels;
+                DDLabels.Items.AddRange(currentLabels.ToArray());
+
+                List<CheckBoxModel> checkBoxes = _checkboxList.GetCheckBoxes();
+                foreach (var checkbox in checkBoxes)
+                {
+                    Type type = typeof(CleanManualService);
+                    MethodInfo methodInfo = type.GetMethod(checkbox.methodName);
+                    if (methodInfo != null)
+                    {
+                        object instance = Activator.CreateInstance(type);
+                        if (checkbox.isChecked)
+                        {
+                            object[] parameters = new object[] { mails };
+                            mails = (List<IndividualMailText>?)methodInfo.Invoke(instance, parameters);
+                        }
+                    }
+
+                }
+                // Pass the results to the RunWorkerCompleted event
+                eArgs.Result = new
+                {
+
+                };
+
+            };
+            // Handle the completion of the work
+            backgroundWorker.RunWorkerCompleted += (sender, eArgs) =>
+            {
+                // Retrieve the results from the DoWork event
+                var result = (dynamic)eArgs.Result;
+
+                //Show the editing software
+                textBoxEditing.Visible = true;
+                btAddLabel.Visible = true;
+                DDLabels.Visible = true;
+                // Hide the loading GIF
+                pbLoadingGif.Visible = false;
+                lbShowingStatus.Visible = false;
+
+            };
+            // Start the background worker
+            backgroundWorker.RunWorkerAsync();
         }
 
         private void btBackMail_Click(object sender, EventArgs e)
@@ -42,9 +107,16 @@ namespace OutlookMiner.Forms
         {
             if (mails.Count > 0 && currentIndex >= 0 && currentIndex < mails.Count)
             {
-                textBoxEditing.Text = mails[currentIndex].body;
+               if(commited == false)
+                {
+                    ShowMatches(mails[currentIndex].body);
+                }
+                else
+                {
+                    textBoxEditing.Text = mails[currentIndex].body;
+                }
+                
             }
-
         }
 
         private void lbNextMail_Click(object sender, EventArgs e)
@@ -52,6 +124,7 @@ namespace OutlookMiner.Forms
             var copiedLabels = new List<string>(ChoosenLabels);
             LabeledMessages.Add(labelingService.AddMessageWithLabels(mails[currentIndex], copiedLabels));
             ChoosenLabels.Clear();
+            mails[currentIndex].body = textBoxEditing.Text; 
             currentIndex = Math.Min(mails.Count - 1, currentIndex + 1);
             DisplayText();
         }
@@ -64,7 +137,7 @@ namespace OutlookMiner.Forms
 
             if (!string.IsNullOrEmpty(selectedValue))
             {
-             
+
                 ChoosenLabels.Add(selectedValue);
             }
         }
@@ -72,11 +145,99 @@ namespace OutlookMiner.Forms
         private void btNext_Click(object sender, EventArgs e)
         {
             IPathUtilityService pathUtilityService = new PathUtilityService();
-            List <ThreadModel> MessagesSeperatedIntoThreads = labelingService.CreateThreads(LabeledMessages);
-            ConvertForm formWithThreadModelList = ConvertForm.WithThreadModelList(pathUtilityService,MessagesSeperatedIntoThreads);
+            List<ThreadModel> MessagesSeperatedIntoThreads = labelingService.CreateThreads(LabeledMessages);
+            ConvertForm formWithThreadModelList = ConvertForm.WithThreadModelList(pathUtilityService, MessagesSeperatedIntoThreads);
             formWithThreadModelList.Show();
             this.Hide();
 
         }
+       
+ 
+        private void ShowMatches(string mailBody)
+        {
+
+
+            if (textBoxEditing.InvokeRequired)
+            {
+                textBoxEditing.Invoke(new Action(() =>
+                {
+                    ShowMatches(mailBody); // Invoke this method on the UI thread
+                }));
+            }
+            else
+            {
+                //string mailbody = cleanService.CleanLinksManual(mailBody); 
+                textBoxEditing.Text = mailBody; // Set the entire text first
+                List<RemovedContentModel> position = cleanService.FindSubstrings(textBoxEditing.Text);
+
+                foreach(RemovedContentModel p in position)
+                {
+                    textBoxEditing.Select(p.OriginalStartIndex, p.OriginalEndIndex-p.OriginalStartIndex);
+                    textBoxEditing.SelectionBackColor = Color.Yellow;
+                }
+
+            }
+        }
+
+       
+
+        private void textBoxEditing_MouseUp(object sender, MouseEventArgs e)
+        {
+            RichTextBox richTextBox = (RichTextBox)sender;
+
+            int clickedIndex = richTextBox.GetCharIndexFromPosition(e.Location);
+
+            string text = richTextBox.Text;
+            List<RemovedContentModel> substrings = cleanService.FindSubstrings(text);
+
+            bool foundSubstring = false;
+
+            foreach (var substring in substrings)
+            {
+                if (clickedIndex >= substring.OriginalStartIndex && clickedIndex <= substring.OriginalEndIndex)
+                {
+                    richTextBox.Select(substring.OriginalStartIndex, substring.OriginalEndIndex - substring.OriginalStartIndex);
+                    if (richTextBox.SelectionBackColor == Color.Red)
+                    {
+                        richTextBox.SelectionBackColor = Color.Yellow;
+                    }
+                    else 
+                    {
+                        richTextBox.SelectionBackColor = Color.Red;
+                    }
+                    richTextBox.DeselectAll();
+                    foundSubstring = true;
+                    break; 
+                }
+            }
+
+            if (!foundSubstring)
+            {
+                richTextBox.DeselectAll();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        { 
+            List<RemovedContentModel> _deleteList = new List<RemovedContentModel>();
+            List<RemovedContentModel> substrings = cleanService.FindSubstrings(textBoxEditing.Text);
+            foreach(RemovedContentModel substring in substrings)
+            {
+                textBoxEditing.Select(substring.OriginalStartIndex, substring.OriginalEndIndex - substring.OriginalStartIndex);
+                if (textBoxEditing.SelectionBackColor == Color.Yellow)
+                {
+                    _deleteList.Add(new RemovedContentModel(substring.Content, substring.OriginalStartIndex, substring.OriginalEndIndex));
+                }
+                
+            }
+            mails[currentIndex].body = cleanService.DeleteStringsFromText(textBoxEditing.Text, _deleteList);
+            commited = true;
+            DisplayText();
+            textBoxEditing.ReadOnly = false;
+                
+        }
     }
+
 }
+
+

@@ -26,7 +26,7 @@ namespace OutlookMiner.Models
         {
         new MetaDataLanguageListModel("GB", "From", "To", "Sent", "Subject"),
         new MetaDataLanguageListModel("DK", "Fra", "Til", "Sendt", "Emne"),
-         
+         //Load fra Json
         };
        
     }

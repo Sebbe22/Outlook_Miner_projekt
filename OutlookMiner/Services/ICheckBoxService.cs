@@ -11,6 +11,7 @@ namespace OutlookMiner.Services
     public interface ICheckBoxService
     {
         List<CheckBoxModel> GetCheckBoxes();
+        List<CheckBoxModel> GetCheckBoxesManual();
         void UpdateCheckBox(string targetName, bool isChecked);
 
 
@@ -20,6 +21,7 @@ namespace OutlookMiner.Services
         private static CheckBoxService instance = null;
 
         private List<CheckBoxModel> checkBoxes;
+        private List<CheckBoxModel> checkBoxesManual;
 
         private CheckBoxService()
         {
@@ -29,7 +31,15 @@ namespace OutlookMiner.Services
                 new CheckBoxModel("RemoveLinksFromEmailString", false),
                 new CheckBoxModel("RemoveEmailsFromEmailString", false),
                 new CheckBoxModel("RemoveSenderAndRecieverNameFromEmail", false),
-                new CheckBoxModel("RemovePhoneNumbersFromEmail", false)
+                new CheckBoxModel("RemovePhoneNumbersFromEmail", false),
+                new CheckBoxModel("RemoveEverythingPastBestRegards", false),
+            };
+
+            checkBoxesManual = new List<CheckBoxModel>
+            {
+                new CheckBoxModel("RemoveLinksFromEmailString", false),
+                new CheckBoxModel("RemoveEmailsFromEmailString", false),
+                new CheckBoxModel("RemoveEverythingPastBestRegards", false),
             };
         }
 
@@ -48,6 +58,11 @@ namespace OutlookMiner.Services
         public List<CheckBoxModel> GetCheckBoxes()
         {
             return checkBoxes;
+        }
+
+        public List<CheckBoxModel> GetCheckBoxesManual()
+        {
+            return checkBoxesManual;
         }
 
         public void UpdateCheckBox(string targetName, bool isChecked)

@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Crypto.Tls;
+﻿using iTextSharp.xmp.impl;
+using Org.BouncyCastle.Crypto.Tls;
 using OutlookMiner.Models;
 using PhoneNumbers;
 using System;
@@ -12,17 +13,41 @@ namespace OutlookMiner.Services
 {
     public interface ICleanService
     {
-        List<IndividualMailText> RemoveLinksFromEmailString(List <IndividualMailText> mails);
+        List<IndividualMailText> RemoveLinksFromEmailString(List<IndividualMailText> mails);
 
         List<IndividualMailText> RemoveEmailsFromEmailString(List<IndividualMailText> emailString);
 
         List<IndividualMailText> RemoveSenderAndRecieverNameFromEmail(List<IndividualMailText> emailString);
 
         List<IndividualMailText> RemovePhoneNumbersFromEmail(List<IndividualMailText> emailString);
+
+        List<IndividualMailText> RemoveEverythingPastBestRegards(List<IndividualMailText> emailString);
+        //List<IndividualMailText> RemoveLinksFromEmailStringV2(List<IndividualMailText> mails);
     }
 
     public class CleanService : ICleanService
     {
+        //IChangeTrackerMailService changeTracker = new ChangeTrackerMailService(); 
+        //public List<IndividualMailText> RemoveLinksFromEmailStringV2(List<IndividualMailText> mails)
+        //{
+        //    var removedContentList = new List<RemovedContentModel>();
+
+        //    foreach (var mail in mails)
+        //    {
+        //        string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.\w\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
+        //        if (mail.body != null)
+        //        {
+        //            var matches = Regex.Matches(mail.body, pattern);
+
+        //            var tempRemovedContentList = new List<RemovedContentModel>(removedContentList); // Create a copy
+
+        //            (mail.removedContent, mail.body) = changeTracker.ProcessMatchesIntoRemovedContent(tempRemovedContentList, matches, mail.body);
+        //            removedContentList.Clear(); // Clear the original list after processing each mail
+        //        }
+        //    }
+
+        //    return (mails);
+        //}
         /// <summary>
         /// uses regular expressions to detect and remove links from a string
         /// </summary>
@@ -130,6 +155,22 @@ namespace OutlookMiner.Services
             };
 
             return emailString;
+        }
+
+        public List<IndividualMailText> RemoveEverythingPastBestRegards(List<IndividualMailText> mails)
+        {
+            foreach (Text mail in mails)
+            {
+                string pattern = @"^(.*?)\bBest Regards\b.*$";
+                if (mail.body != null)
+                {
+
+                    mail.body = Regex.Replace(mail.body, pattern, "$1", RegexOptions.Singleline | RegexOptions.Multiline);
+                    mail.body =  mail.body.Trim();
+                }
+            }
+            return mails;
+
         }
     }
 

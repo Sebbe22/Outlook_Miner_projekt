@@ -28,23 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxEditing = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditingForm));
             this.btBackMail = new System.Windows.Forms.Button();
             this.lbNextMail = new System.Windows.Forms.Button();
             this.DDLabels = new System.Windows.Forms.ComboBox();
             this.btAddLabel = new System.Windows.Forms.Button();
             this.btNext = new System.Windows.Forms.Button();
+            this.pbLoadingGif = new System.Windows.Forms.PictureBox();
+            this.lbShowingStatus = new System.Windows.Forms.Label();
+            this.textBoxEditing = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLoadingGif)).BeginInit();
             this.SuspendLayout();
-            // 
-            // textBoxEditing
-            // 
-            this.textBoxEditing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxEditing.Location = new System.Drawing.Point(24, 33);
-            this.textBoxEditing.Multiline = true;
-            this.textBoxEditing.Name = "textBoxEditing";
-            this.textBoxEditing.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxEditing.Size = new System.Drawing.Size(421, 369);
-            this.textBoxEditing.TabIndex = 0;
             // 
             // btBackMail
             // 
@@ -102,31 +97,80 @@
             this.btNext.UseVisualStyleBackColor = true;
             this.btNext.Click += new System.EventHandler(this.btNext_Click);
             // 
+            // pbLoadingGif
+            // 
+            this.pbLoadingGif.Image = ((System.Drawing.Image)(resources.GetObject("pbLoadingGif.Image")));
+            this.pbLoadingGif.Location = new System.Drawing.Point(400, 120);
+            this.pbLoadingGif.Margin = new System.Windows.Forms.Padding(4);
+            this.pbLoadingGif.Name = "pbLoadingGif";
+            this.pbLoadingGif.Size = new System.Drawing.Size(60, 171);
+            this.pbLoadingGif.TabIndex = 17;
+            this.pbLoadingGif.TabStop = false;
+            // 
+            // lbShowingStatus
+            // 
+            this.lbShowingStatus.AutoSize = true;
+            this.lbShowingStatus.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbShowingStatus.Location = new System.Drawing.Point(378, 308);
+            this.lbShowingStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbShowingStatus.Name = "lbShowingStatus";
+            this.lbShowingStatus.Size = new System.Drawing.Size(130, 20);
+            this.lbShowingStatus.TabIndex = 18;
+            this.lbShowingStatus.Text = "Cleaning Mails";
+            // 
+            // textBoxEditing
+            // 
+            this.textBoxEditing.Location = new System.Drawing.Point(23, 54);
+            this.textBoxEditing.Name = "textBoxEditing";
+            this.textBoxEditing.ReadOnly = true;
+            this.textBoxEditing.Size = new System.Drawing.Size(404, 369);
+            this.textBoxEditing.TabIndex = 19;
+            this.textBoxEditing.Text = "";
+            this.textBoxEditing.MouseUp += new System.Windows.Forms.MouseEventHandler(this.textBoxEditing_MouseUp);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.DarkOrange;
+            this.button1.Location = new System.Drawing.Point(449, 363);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Commit";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EditingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBoxEditing);
+            this.Controls.Add(this.lbShowingStatus);
+            this.Controls.Add(this.pbLoadingGif);
             this.Controls.Add(this.btNext);
             this.Controls.Add(this.btAddLabel);
             this.Controls.Add(this.DDLabels);
             this.Controls.Add(this.lbNextMail);
             this.Controls.Add(this.btBackMail);
-            this.Controls.Add(this.textBoxEditing);
             this.Name = "EditingForm";
             this.Text = "EditingForm";
+            ((System.ComponentModel.ISupportInitialize)(this.pbLoadingGif)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private TextBox textBoxEditing;
         private Button btBackMail;
         private Button lbNextMail;
         private ComboBox DDLabels;
         private Button btAddLabel;
         private Button btNext;
+        private PictureBox pbLoadingGif;
+        private Label lbShowingStatus;
+        private RichTextBox textBoxEditing;
+        private Button button1;
     }
 }

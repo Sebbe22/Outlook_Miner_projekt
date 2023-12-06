@@ -25,7 +25,7 @@ namespace OutlookMiner.Services.Tests
         public void RemoveLinksFromEmailStringTest(string testValue, string expectedResult)
         {
             // arrange
-            List<Text> emailList = new List<Text>() { new Text(testValue, "") };
+            List<IndividualMailText> emailList = new List<IndividualMailText>() { new IndividualMailText(testValue, "",1) };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
@@ -53,7 +53,7 @@ namespace OutlookMiner.Services.Tests
         public void RemoveEmailsFromEmailStringTest(string testValue, string expectedResult)
         {
             // arrange 
-            List<Text> emailList = new List<Text> { new Text(testValue, "1") };
+            List<IndividualMailText> emailList = new List<IndividualMailText> { new IndividualMailText(testValue,"", 1) };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
@@ -82,7 +82,7 @@ namespace OutlookMiner.Services.Tests
         public void RemoveSenderAndRecieverNameFromMailTest(string testValue, string expectedResult)
         {
             //arrange
-            List<Text> emailList = new List<Text> { new Text(testValue, "1") };
+            List<IndividualMailText> emailList = new List<IndividualMailText> { new IndividualMailText(testValue, "1",1) };
             emailList[0].sender = "Sebastian Gylstorff";
             emailList[0].recipients.Add("Henrik Olsen Jensen");
             emailList[0].recipients.Add("Zealand");
@@ -96,6 +96,30 @@ namespace OutlookMiner.Services.Tests
 
             //assert
             Assert.AreEqual(actualResult, expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("Hej sebastian dette er en lille testBest Regards", "Hej sebastian dette er en lille testBest Regards")]
+        [DataRow(@"Hej sebastian gylstorff!
+                Best Regards 
+                dlfkjdlflsdæfjkdlsfædlk", @"Hej sebastian gylstorff!")]
+
+        public void RemoveEverythingPastBestRegardsTest(string testValue, string expectedResult)
+        {
+            // arrange 
+            List<IndividualMailText> emailList = new List<IndividualMailText> { new IndividualMailText(testValue, "", 1) };
+            ICleanService cleanService = new CleanService();
+            string actualResult = "";
+
+            // act
+            emailList = cleanService.RemoveEverythingPastBestRegards(emailList);
+            foreach (var item in emailList)
+            {
+                actualResult = actualResult + item.body;
+            }
+
+            // assert
+            Assert.AreEqual(expectedResult, actualResult);
         }
     }
 }

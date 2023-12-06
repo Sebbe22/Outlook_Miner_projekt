@@ -59,8 +59,6 @@ namespace OutlookMiner.Services
         {
             IndividualMailTextLabelingModel newMessage = new IndividualMailTextLabelingModel(message, labels);
 
-
-
             return newMessage;
         }
     }
