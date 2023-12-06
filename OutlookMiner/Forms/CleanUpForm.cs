@@ -81,5 +81,26 @@ namespace OutlookMiner.Forms
 
             _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox3.Checked);
         }
+
+        private void lbHeader_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            CleanUpForm.instance = this;
+            string targetName = "RemovePasswordAndUserNameFromEmail";
+            _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox6.Checked);
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            CleanUpForm.instance = this;
+            foreach(CheckBoxModel checkBox in _checkboxList.GetCheckBoxes())
+            {
+                _checkboxList.UpdateCheckBox(checkBox.methodName, CleanUpForm.instance.checkBox8.Checked);
+            }
+        }
     }
 }

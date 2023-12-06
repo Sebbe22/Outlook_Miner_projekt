@@ -25,7 +25,7 @@ namespace OutlookMiner.Services.Tests
         public void RemoveLinksFromEmailStringTest(string testValue, string expectedResult)
         {
             // arrange
-            List<Text> emailList = new List<Text>() { new Text(testValue, "") };
+            List<IndividualMailText> emailList = new List<IndividualMailText>() { new IndividualMailText(testValue, "",1) };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
@@ -53,7 +53,7 @@ namespace OutlookMiner.Services.Tests
         public void RemoveEmailsFromEmailStringTest(string testValue, string expectedResult)
         {
             // arrange 
-            List<Text> emailList = new List<Text> { new Text(testValue, "1") };
+            List<IndividualMailText> emailList = new List<IndividualMailText> { new IndividualMailText(testValue, "1", 1) };
             ICleanService cleanService = new CleanService();
             string actualResult = "";
 
@@ -82,7 +82,7 @@ namespace OutlookMiner.Services.Tests
         public void RemoveSenderAndRecieverNameFromMailTest(string testValue, string expectedResult)
         {
             //arrange
-            List<Text> emailList = new List<Text> { new Text(testValue, "1") };
+            List<IndividualMailText> emailList = new List<IndividualMailText> { new IndividualMailText(testValue, "1", 1) };
             emailList[0].sender = "Sebastian Gylstorff";
             emailList[0].recipients.Add("Henrik Olsen Jensen");
             emailList[0].recipients.Add("Zealand");
@@ -95,7 +95,48 @@ namespace OutlookMiner.Services.Tests
             actualResult = emailList[0].body;
 
             //assert
-            Assert.AreEqual(actualResult, expectedResult);
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        [DataRow("Hej her har du password: hehe", "Hej her har du ")]
+        [DataRow("Hej her har du username: heheheh heh", "Hej her har du  heh")]
+        [DataRow("username skal ikke fjerne noget her samme gælder password her", "username skal ikke fjerne noget her samme gælder password her")]
+        [DataRow("ngælaesusername: test noiærghoæpassword: test", "ngælaesusername: test noiærghoæpassword: test")]
+        [DataRow("username: test1 password: test1 username: test2 password: test2", "   ")]
+        public void RemovePasswordAndUsernameFromEmail(string testValue, string expectedResult)
+        {
+            //arrange
+            List<IndividualMailText> emailList = new List<IndividualMailText> { new IndividualMailText(testValue, "1", 2) };
+            ICleanService cleanService = new CleanService();
+            string actualResult = "";
+
+            //act
+            actualResult = cleanService.RemovePasswordAndUserNameFromEmail(emailList)[0].body;
+
+            //assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        [DataRow("20105866", "")]
+        [DataRow("hej her har du mit nummer: 24981740", "hej her har du mit nummer: ")]
+        [DataRow("+45 49 20 10 58", "")]
+        [DataRow("hvad er  34+45 421852811", "hvad er  34+45 421852811")]
+        [DataRow("1122334", "1122334")]
+        [DataRow("jklæawjeælawj48291452fkæsejf", "jklæawjeælawj48291452fkæsejf")]
+        public void RemovePhoneNumbersFromEmailTest(string testValue, string expectedResult)
+        {
+            //arrange 
+            List<IndividualMailText> emailList = new List<IndividualMailText> { new IndividualMailText(testValue, "1", 2) };
+            ICleanService cleanService = new CleanService();
+            string actualResult = "";
+
+            //act
+            actualResult = cleanService.RemovePhoneNumbersFromEmail(emailList)[0].body;
+
+            //assert
+            Assert.AreEqual(expectedResult, actualResult);
         }
     }
 }

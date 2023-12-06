@@ -19,6 +19,8 @@ namespace OutlookMiner.Services
         List<IndividualMailText> RemoveSenderAndRecieverNameFromEmail(List<IndividualMailText> emailString);
 
         List<IndividualMailText> RemovePhoneNumbersFromEmail(List<IndividualMailText> emailString);
+
+        List<IndividualMailText> RemovePasswordAndUserNameFromEmail(List<IndividualMailText> emailString);
     }
 
     public class CleanService : ICleanService
@@ -128,6 +130,20 @@ namespace OutlookMiner.Services
                     }
                 }
             };
+
+            return emailString;
+        }
+
+        public List<IndividualMailText> RemovePasswordAndUserNameFromEmail(List<IndividualMailText> emailString)
+        {
+            foreach (var email in emailString)
+            {
+                if (email.body != null)
+                {
+                    string pattern = "(?i)(\\bPassword:\\s+|\\bUsername:\\s)[\"\\']?(\\w+)[\"\\']?";
+                    email.body = Regex.Replace(email.body, pattern, "");
+                }
+            }
 
             return emailString;
         }
