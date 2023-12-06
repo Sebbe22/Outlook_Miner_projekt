@@ -21,8 +21,7 @@ namespace OutlookMiner.Services
 
         List<IndividualMailText> RemovePhoneNumbersFromEmail(List<IndividualMailText> emailString);
 
-        List<IndividualMailText> RemoveEverythingPastBestRegards(List<IndividualMailText> emailString);
-        //List<IndividualMailText> RemoveLinksFromEmailStringV2(List<IndividualMailText> mails);
+        List<IndividualMailText> RemovePasswordAndUserNameFromEmail(List<IndividualMailText> emailString);
     }
 
     public class CleanService : ICleanService
@@ -157,20 +156,18 @@ namespace OutlookMiner.Services
             return emailString;
         }
 
-        public List<IndividualMailText> RemoveEverythingPastBestRegards(List<IndividualMailText> mails)
+        public List<IndividualMailText> RemovePasswordAndUserNameFromEmail(List<IndividualMailText> emailString)
         {
-            foreach (Text mail in mails)
+            foreach (var email in emailString)
             {
-                string pattern = @"^(.*?)\bBest Regards\b.*$";
-                if (mail.body != null)
+                if (email.body != null)
                 {
-
-                    mail.body = Regex.Replace(mail.body, pattern, "$1", RegexOptions.Singleline | RegexOptions.Multiline);
-                    mail.body =  mail.body.Trim();
+                    string pattern = "(?i)(\\bPassword:\\s+|\\bUsername:\\s)[\"\\']?(\\w+)[\"\\']?";
+                    email.body = Regex.Replace(email.body, pattern, "");
                 }
             }
-            return mails;
 
+            return emailString;
         }
     }
 

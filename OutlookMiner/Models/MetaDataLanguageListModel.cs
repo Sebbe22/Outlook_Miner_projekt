@@ -24,9 +24,19 @@ namespace OutlookMiner.Models
         }
         public static List<MetaDataLanguageListModel> Languages = new List<MetaDataLanguageListModel>
         {
-        new MetaDataLanguageListModel("GB", "From", "To", "Sent", "Subject"),
-        new MetaDataLanguageListModel("DK", "Fra", "Til", "Sendt", "Emne"),
-         //Load fra Json
+            new MetaDataLanguageListModel("GB", "From", "To", "Sent", "Subject"),
+            new MetaDataLanguageListModel("DK", "Fra", "Til", "Sendt", "Emne"),
+            new MetaDataLanguageListModel("ZA", "Van", "Om", "Gestuur", "Onderwerp"),
+            new MetaDataLanguageListModel("AL", "Nga", "te", "Dërguar", "Subjekti"),
+            new MetaDataLanguageListModel("FR", "Depuis", "Jusqu'à", "Envoyer", "Sujet"),
+            new MetaDataLanguageListModel("DE", "Aus", "Zu", "Gesendet", "Thema"),
+            new MetaDataLanguageListModel("ES", "De", "A", "Enviado", "Asunto"), 
+            new MetaDataLanguageListModel("SE", "Från", "Till", "Skickat", "Ämne"),
+            new MetaDataLanguageListModel("NO", "Fra", "Til", "Sendt", "Emne"),
+            new MetaDataLanguageListModel("PL", "Od", "Do", "Wysłano", "Temat"), 
+            new MetaDataLanguageListModel("FI", "Lähettäjä", "Vastaanottaja", "Lähetetty", "Aihe"),
+            new MetaDataLanguageListModel("RU", "От", "Кому", "Отправлено", "Тема")
+
         };
        
     }

@@ -28,48 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbHeader = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.CBRemovePhoneNumbers = new System.Windows.Forms.CheckBox();
-            this.CBRemoveAfterBestRegards = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.lbBack = new System.Windows.Forms.Button();
-            this.btContinueToLabeling = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lbHeader = new Label();
+            checkBox1 = new CheckBox();
+            checkBox2 = new CheckBox();
+            checkBox4 = new CheckBox();
+            checkBox5 = new CheckBox();
+            checkBox7 = new CheckBox();
+            button1 = new Button();
+            lbBack = new Button();
+            checkBox3 = new CheckBox();
+            checkBox6 = new CheckBox();
+            checkBox8 = new CheckBox();
+            SuspendLayout();
             // 
             // lbHeader
             // 
-            this.lbHeader.AutoSize = true;
-            this.lbHeader.Font = new System.Drawing.Font("Arial Rounded MT Bold", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbHeader.Location = new System.Drawing.Point(14, 49);
-            this.lbHeader.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbHeader.Name = "lbHeader";
-            this.lbHeader.Size = new System.Drawing.Size(387, 27);
-            this.lbHeader.TabIndex = 1;
-            this.lbHeader.Text = "Step 2. Choose Cleaning Methods";
+            lbHeader.AutoSize = true;
+            lbHeader.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            lbHeader.Location = new Point(18, 61);
+            lbHeader.Margin = new Padding(2, 0, 2, 0);
+            lbHeader.Name = "lbHeader";
+            lbHeader.Size = new Size(476, 32);
+            lbHeader.TabIndex = 1;
+            lbHeader.Text = "Step 2. Choose Cleaning Methods";
+            lbHeader.Click += lbHeader_Click;
             // 
             // checkBox1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(36, 116);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(209, 24);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Remove Names from body";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(45, 145);
+            checkBox1.Margin = new Padding(4);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(253, 29);
+            checkBox1.TabIndex = 4;
+            checkBox1.Text = "Remove Names from body";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // checkBox2
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(36, 146);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(118, 24);
-            this.checkBox2.TabIndex = 5;
-            this.checkBox2.Text = "Remove links";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(45, 182);
+            checkBox2.Margin = new Padding(4);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(142, 29);
+            checkBox2.TabIndex = 5;
+            checkBox2.Text = "Remove links";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
             // 
             // checkBox4
             // 
@@ -84,24 +90,25 @@
             // 
             // CBRemovePhoneNumbers
             // 
-            this.CBRemovePhoneNumbers.AutoSize = true;
-            this.CBRemovePhoneNumbers.Location = new System.Drawing.Point(36, 236);
-            this.CBRemovePhoneNumbers.Name = "CBRemovePhoneNumbers";
-            this.CBRemovePhoneNumbers.Size = new System.Drawing.Size(194, 24);
-            this.CBRemovePhoneNumbers.TabIndex = 8;
-            this.CBRemovePhoneNumbers.Text = "Remove Phone Numbers";
-            this.CBRemovePhoneNumbers.UseVisualStyleBackColor = true;
+            checkBox5.AutoSize = true;
+            checkBox5.Location = new Point(45, 295);
+            checkBox5.Margin = new Padding(4);
+            checkBox5.Name = "checkBox5";
+            checkBox5.Size = new Size(360, 29);
+            checkBox5.TabIndex = 8;
+            checkBox5.Text = "Devide mails into questions and answers";
+            checkBox5.UseVisualStyleBackColor = true;
             // 
             // CBRemoveAfterBestRegards
             // 
-            this.CBRemoveAfterBestRegards.AutoSize = true;
-            this.CBRemoveAfterBestRegards.Location = new System.Drawing.Point(36, 178);
-            this.CBRemoveAfterBestRegards.Name = "CBRemoveAfterBestRegards";
-            this.CBRemoveAfterBestRegards.Size = new System.Drawing.Size(292, 24);
-            this.CBRemoveAfterBestRegards.TabIndex = 10;
-            this.CBRemoveAfterBestRegards.Text = "Remove everything past \"Best Regards\"";
-            this.CBRemoveAfterBestRegards.UseVisualStyleBackColor = true;
-            this.CBRemoveAfterBestRegards.CheckedChanged += new System.EventHandler(this.CBRemoveAfterBestRegards_CheckedChanged);
+            checkBox7.AutoSize = true;
+            checkBox7.Location = new Point(45, 222);
+            checkBox7.Margin = new Padding(4);
+            checkBox7.Name = "checkBox7";
+            checkBox7.Size = new Size(202, 29);
+            checkBox7.TabIndex = 10;
+            checkBox7.Text = "Add thread identifier";
+            checkBox7.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -130,36 +137,58 @@
             // 
             // btContinueToLabeling
             // 
-            this.btContinueToLabeling.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btContinueToLabeling.ForeColor = System.Drawing.Color.DarkOrange;
-            this.btContinueToLabeling.Location = new System.Drawing.Point(242, 326);
-            this.btContinueToLabeling.Margin = new System.Windows.Forms.Padding(2);
-            this.btContinueToLabeling.Name = "btContinueToLabeling";
-            this.btContinueToLabeling.Size = new System.Drawing.Size(189, 31);
-            this.btContinueToLabeling.TabIndex = 13;
-            this.btContinueToLabeling.Text = "Continue to labeling";
-            this.btContinueToLabeling.UseVisualStyleBackColor = true;
-            this.btContinueToLabeling.Click += new System.EventHandler(this.btContinueToLabeling_Click);
+            checkBox3.AutoSize = true;
+            checkBox3.Location = new Point(42, 341);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(235, 29);
+            checkBox3.TabIndex = 13;
+            checkBox3.Text = "Remove Phone Numbers";
+            checkBox3.UseVisualStyleBackColor = true;
+            checkBox3.CheckedChanged += checkBox3_CheckedChanged;
+            // 
+            // checkBox6
+            // 
+            checkBox6.AutoSize = true;
+            checkBox6.Location = new Point(41, 387);
+            checkBox6.Name = "checkBox6";
+            checkBox6.Size = new Size(279, 29);
+            checkBox6.TabIndex = 14;
+            checkBox6.Text = "Remove Password & Usernames";
+            checkBox6.UseVisualStyleBackColor = true;
+            checkBox6.CheckedChanged += checkBox6_CheckedChanged;
+            // 
+            // checkBox8
+            // 
+            checkBox8.AutoSize = true;
+            checkBox8.Location = new Point(41, 431);
+            checkBox8.Name = "checkBox8";
+            checkBox8.Size = new Size(109, 29);
+            checkBox8.TabIndex = 15;
+            checkBox8.Text = "Select All";
+            checkBox8.UseVisualStyleBackColor = true;
+            checkBox8.CheckedChanged += checkBox8_CheckedChanged;
             // 
             // CleanUpForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 453);
-            this.Controls.Add(this.btContinueToLabeling);
-            this.Controls.Add(this.lbBack);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.CBRemoveAfterBestRegards);
-            this.Controls.Add(this.CBRemovePhoneNumbers);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.lbHeader);
-            this.Name = "CleanUpForm";
-            this.Text = "CleanUpForm";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(602, 566);
+            Controls.Add(checkBox8);
+            Controls.Add(checkBox6);
+            Controls.Add(checkBox3);
+            Controls.Add(lbBack);
+            Controls.Add(button1);
+            Controls.Add(checkBox7);
+            Controls.Add(checkBox5);
+            Controls.Add(checkBox4);
+            Controls.Add(checkBox2);
+            Controls.Add(checkBox1);
+            Controls.Add(lbHeader);
+            Margin = new Padding(4);
+            Name = "CleanUpForm";
+            Text = "CleanUpForm";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -172,6 +201,8 @@
         private Button button1;
         private Button lbBack;
         public CheckBox checkBox2;
-        private Button btContinueToLabeling;
+        private CheckBox checkBox3;
+        private CheckBox checkBox6;
+        private CheckBox checkBox8;
     }
 }
