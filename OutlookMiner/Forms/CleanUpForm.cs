@@ -74,14 +74,6 @@ namespace OutlookMiner.Forms
             _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox1.Checked);
         }
 
-        private void CBRemovePhoneNumbers_CheckedChanged(object sender, EventArgs e)
-        {
-            CleanUpForm.instance = this;
-            string targetName = "RemovePhoneNumbersFromEmail";
-
-            _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.CBRemovePhoneNumbers.Checked);
-        }
-
         private void CBRemoveAfterBestRegards_CheckedChanged(object sender, EventArgs e)
         {
             CleanUpForm.instance = this;
@@ -92,17 +84,6 @@ namespace OutlookMiner.Forms
         }
 
 
-        private void btContinueToLabeling_Click(object sender, EventArgs e)
-        {
-            EditingForm newForm = new EditingForm(mails);
-            newForm.Show();
-            this.Hide();
-        }
-
-        private void lbHeader_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
@@ -114,10 +95,27 @@ namespace OutlookMiner.Forms
         private void checkBox8_CheckedChanged(object sender, EventArgs e)
         {
             CleanUpForm.instance = this;
-            foreach(CheckBoxModel checkBox in _checkboxList.GetCheckBoxes())
+            foreach (CheckBoxModel checkBox in _checkboxList.GetCheckBoxes())
             {
                 _checkboxList.UpdateCheckBox(checkBox.methodName, CleanUpForm.instance.checkBox8.Checked);
             }
         }
+
+        private void btGoToEditor_Click(object sender, EventArgs e)
+        {
+            EditingForm newForm = new EditingForm(mails);
+            newForm.Show();
+            this.Hide();
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            CleanUpForm.instance = this;
+            string targetName = "RemovePhoneNumbersFromEmail";
+
+            _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox3.Checked);
+        }
+
+
     }
 }

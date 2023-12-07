@@ -18,6 +18,7 @@ namespace OutlookMiner.Services
         string RemoveEverythingPastBestRegards(string mailBody);
         List<IndividualMailText> RemoveLinksFromEmailString(List<IndividualMailText> mails);
         string DeleteStringsFromText(string text, List<RemovedContentModel> stringsToDelete);
+
     }
 
     public class CleanManualService : ICleanManualService
@@ -41,8 +42,7 @@ namespace OutlookMiner.Services
         {
             foreach (IndividualMailText mail in mails)
             {
-                string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.
-                S\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
+                string pattern = @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+";
                 mail.body = AddIndicatorsToMail(mail.body, pattern);
             }
 

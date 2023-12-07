@@ -26,32 +26,7 @@ namespace OutlookMiner.Services
 
     public class CleanService : ICleanService
     {
-        //IChangeTrackerMailService changeTracker = new ChangeTrackerMailService(); 
-        //public List<IndividualMailText> RemoveLinksFromEmailStringV2(List<IndividualMailText> mails)
-        //{
-        //    var removedContentList = new List<RemovedContentModel>();
 
-        //    foreach (var mail in mails)
-        //    {
-        //        string pattern = @"(<\w+:\/\/\S+>|www\.\w+\.\w+(?:\.\w+)?|\w+\.\w+\.\w\w+(?:\.\w+)?|\w+:\/\/\S+|<\w+\.\w+\.\w+(?:\.\w+)?>)";
-        //        if (mail.body != null)
-        //        {
-        //            var matches = Regex.Matches(mail.body, pattern);
-
-        //            var tempRemovedContentList = new List<RemovedContentModel>(removedContentList); // Create a copy
-
-        //            (mail.removedContent, mail.body) = changeTracker.ProcessMatchesIntoRemovedContent(tempRemovedContentList, matches, mail.body);
-        //            removedContentList.Clear(); // Clear the original list after processing each mail
-        //        }
-        //    }
-
-        //    return (mails);
-        //}
-        /// <summary>
-        /// uses regular expressions to detect and remove links from a string
-        /// </summary>
-        /// <param name="mails">the list of mails/strings from which links will be removed</param>
-        /// <returns>returns the same list but with links removed</returns>
         public List<IndividualMailText> RemoveLinksFromEmailString(List<IndividualMailText> mails)
         {
             foreach(Text mail in mails)
