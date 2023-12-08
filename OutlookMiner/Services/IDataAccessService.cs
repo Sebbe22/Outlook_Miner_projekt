@@ -15,7 +15,7 @@ namespace OutlookMiner.Services
 
         public void Insert<T>(string querry, T labelToAdd);
 
-        public void Delete(string querry, LabelModel labelToDelete);
+        public void Delete<T>(string querry, T labelToDelete);
     }
 
     public class DataAccessService : IDataAccessService
@@ -49,17 +49,13 @@ namespace OutlookMiner.Services
             }
         }
 
-        public void Delete(string querry, LabelModel labelToDelete)
+        public void Delete<T>(string querry, T itemToDelete)
         {
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
 
-                SqlCommand cmd = new SqlCommand(querry, connection);
-
-                cmd.Parameters.AddWithValue("@Id", labelToDelete.Id);
-
-                cmd.ExecuteNonQuery();
+                connection.Execute(querry);
             }
         }
     }

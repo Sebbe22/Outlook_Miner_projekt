@@ -122,6 +122,11 @@ namespace OutlookMiner.Forms
             _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox7.Checked);
         }
 
-        
+        private void btGoToEditor_Click(object sender, EventArgs e)
+        {
+            EditingForm newFrom = new EditingForm(mails);
+            newFrom.Show();
+            this.Hide();
+        }
     }
 }
