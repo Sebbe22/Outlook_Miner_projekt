@@ -15,12 +15,14 @@ using System.Windows.Forms;
 
 namespace OutlookMiner.Forms
 {
+    
     public partial class ConvertForm : Form
     {
        private IPathUtilityService _pathUtilityService;
         public static ConvertForm instance;
         private List<IndividualMailText> mails;
         private List<ThreadModel> threads;
+        private static bool cleaned = false;
         //string mailsJsonFormat;
        
         private ICheckBoxService _checkboxList;
@@ -40,7 +42,7 @@ namespace OutlookMiner.Forms
             pbLoadingGif.Hide();
             lbShowingStatus.Hide();
         }
-        public static ConvertForm WithTextList(IPathUtilityService pathUtilityService, List<IndividualMailText> _mails)
+        public  static ConvertForm WithTextList(IPathUtilityService pathUtilityService, List<IndividualMailText> _mails)
         {
             var form = new ConvertForm(pathUtilityService);
             form.mails = _mails;
@@ -51,6 +53,7 @@ namespace OutlookMiner.Forms
         {
             var form = new ConvertForm(pathUtilityService);
             form.threads = _threads;
+            cleaned = true;
             return form;
         }
 
@@ -81,22 +84,26 @@ namespace OutlookMiner.Forms
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += (sender, eArgs) =>
             {
-                List<CheckBoxModel> checkBoxes = _checkboxList.GetCheckBoxes(); 
-                foreach(var checkbox in checkBoxes)
+                if(cleaned = false)
                 {
-                    Type type = typeof(CleanService);
-                    MethodInfo methodInfo = type.GetMethod(checkbox.methodName);
-                    if(methodInfo != null)
+                    List<CheckBoxModel> checkBoxes = _checkboxList.GetCheckBoxes();
+                    foreach (var checkbox in checkBoxes)
                     {
-                        object instance = Activator.CreateInstance(type);
-                        if (checkbox.isChecked)
+                        Type type = typeof(CleanService);
+                        MethodInfo methodInfo = type.GetMethod(checkbox.methodName);
+                        if (methodInfo != null)
                         {
-                            object[] parameters = new object[] { mails };
-                            mails = (List<IndividualMailText>?)methodInfo.Invoke(instance, parameters);
+                            object instance = Activator.CreateInstance(type);
+                            if (checkbox.isChecked)
+                            {
+                                object[] parameters = new object[] { mails };
+                                mails = (List<IndividualMailText>?)methodInfo.Invoke(instance, parameters);
+                            }
                         }
-                    }
 
+                    }
                 }
+                
                 if(mails != null)
                 {
                     convert.ConvertIndividualText(selectedFilePath, mails);

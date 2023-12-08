@@ -171,6 +171,31 @@
             checkBox5.Text = "Remove everything past best regards";
             checkBox5.UseVisualStyleBackColor = true;
             // 
+            // btGoToEditor
+            // 
+            btGoToEditor.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btGoToEditor.ForeColor = Color.DarkOrange;
+            btGoToEditor.Location = new Point(241, 236);
+            btGoToEditor.Margin = new Padding(2);
+            btGoToEditor.Name = "btGoToEditor";
+            btGoToEditor.Size = new Size(134, 23);
+            btGoToEditor.TabIndex = 16;
+            btGoToEditor.Text = "Go to editor";
+            btGoToEditor.UseVisualStyleBackColor = true;
+            btGoToEditor.Click += btGoToEditor_Click;
+            // 
+            // checkBox5
+            // 
+            checkBox5.AutoSize = true;
+            checkBox5.Location = new Point(32, 196);
+            checkBox5.Margin = new Padding(2);
+            checkBox5.Name = "checkBox5";
+            checkBox5.Size = new Size(220, 19);
+            checkBox5.TabIndex = 17;
+            checkBox5.Text = "Remove everything past best regards";
+            checkBox5.UseVisualStyleBackColor = true;
+            checkBox5.CheckedChanged += checkBox5_CheckedChanged;
+            // 
             // CleanUpForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);

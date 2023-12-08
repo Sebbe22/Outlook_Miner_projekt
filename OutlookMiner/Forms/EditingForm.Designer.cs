@@ -45,10 +45,10 @@
             // 
             btBackMail.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             btBackMail.ForeColor = Color.DarkOrange;
-            btBackMail.Location = new Point(561, 512);
-            btBackMail.Margin = new Padding(4, 3, 4, 3);
+            btBackMail.Location = new Point(510, 485);
+            btBackMail.Margin = new Padding(3, 2, 3, 2);
             btBackMail.Name = "btBackMail";
-            btBackMail.Size = new Size(117, 37);
+            btBackMail.Size = new Size(82, 22);
             btBackMail.TabIndex = 9;
             btBackMail.Text = "Previous mail";
             btBackMail.UseVisualStyleBackColor = true;
@@ -58,8 +58,8 @@
             // 
             lbNextMail.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             lbNextMail.ForeColor = Color.DarkOrange;
-            lbNextMail.Location = new Point(710, 512);
-            lbNextMail.Margin = new Padding(4, 3, 4, 3);
+            lbNextMail.Location = new Point(620, 485);
+            lbNextMail.Margin = new Padding(3, 2, 3, 2);
             lbNextMail.Name = "lbNextMail";
             lbNextMail.Size = new Size(117, 37);
             lbNextMail.TabIndex = 10;
@@ -70,8 +70,8 @@
             // DDLabels
             // 
             DDLabels.FormattingEnabled = true;
-            DDLabels.Location = new Point(586, 97);
-            DDLabels.Margin = new Padding(4, 3, 4, 3);
+            DDLabels.Location = new Point(510, 58);
+            DDLabels.Margin = new Padding(3, 2, 3, 2);
             DDLabels.Name = "DDLabels";
             DDLabels.Size = new Size(188, 33);
             DDLabels.TabIndex = 11;
@@ -81,8 +81,8 @@
             // 
             btAddLabel.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             btAddLabel.ForeColor = Color.Black;
-            btAddLabel.Location = new Point(823, 97);
-            btAddLabel.Margin = new Padding(4, 3, 4, 3);
+            btAddLabel.Location = new Point(719, 57);
+            btAddLabel.Margin = new Padding(3, 2, 3, 2);
             btAddLabel.Name = "btAddLabel";
             btAddLabel.Size = new Size(117, 37);
             btAddLabel.TabIndex = 12;
@@ -94,8 +94,8 @@
             // 
             btNext.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             btNext.ForeColor = Color.Black;
-            btNext.Location = new Point(867, 512);
-            btNext.Margin = new Padding(4, 3, 4, 3);
+            btNext.Location = new Point(730, 485);
+            btNext.Margin = new Padding(3, 2, 3, 2);
             btNext.Name = "btNext";
             btNext.Size = new Size(117, 37);
             btNext.TabIndex = 13;
@@ -106,10 +106,10 @@
             // pbLoadingGif
             // 
             pbLoadingGif.Image = (Image)resources.GetObject("pbLoadingGif.Image");
-            pbLoadingGif.Location = new Point(500, 150);
-            pbLoadingGif.Margin = new Padding(6, 5, 6, 5);
+            pbLoadingGif.Location = new Point(417, 225);
+            pbLoadingGif.Margin = new Padding(4, 3, 4, 3);
             pbLoadingGif.Name = "pbLoadingGif";
-            pbLoadingGif.Size = new Size(74, 213);
+            pbLoadingGif.Size = new Size(59, 146);
             pbLoadingGif.TabIndex = 17;
             pbLoadingGif.TabStop = false;
             // 
@@ -117,8 +117,8 @@
             // 
             lbShowingStatus.AutoSize = true;
             lbShowingStatus.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            lbShowingStatus.Location = new Point(473, 385);
-            lbShowingStatus.Margin = new Padding(6, 0, 6, 0);
+            lbShowingStatus.Location = new Point(417, 413);
+            lbShowingStatus.Margin = new Padding(4, 0, 4, 0);
             lbShowingStatus.Name = "lbShowingStatus";
             lbShowingStatus.Size = new Size(158, 24);
             lbShowingStatus.TabIndex = 18;
@@ -126,11 +126,13 @@
             // 
             // textBoxEditing
             // 
-            textBoxEditing.Location = new Point(29, 67);
-            textBoxEditing.Margin = new Padding(4, 3, 4, 3);
+            textBoxEditing.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxEditing.Location = new Point(20, 40);
+            textBoxEditing.Margin = new Padding(3, 2, 3, 2);
             textBoxEditing.Name = "textBoxEditing";
             textBoxEditing.ReadOnly = true;
-            textBoxEditing.Size = new Size(504, 461);
+            textBoxEditing.ShortcutsEnabled = false;
+            textBoxEditing.Size = new Size(427, 453);
             textBoxEditing.TabIndex = 19;
             textBoxEditing.Text = "";
             textBoxEditing.MouseUp += textBoxEditing_MouseUp;
@@ -139,8 +141,8 @@
             // 
             button1.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             button1.ForeColor = Color.DarkOrange;
-            button1.Location = new Point(561, 453);
-            button1.Margin = new Padding(4, 3, 4, 3);
+            button1.Location = new Point(453, 376);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(117, 37);
             button1.TabIndex = 20;
@@ -152,7 +154,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1000, 563);
+            ClientSize = new Size(843, 518);
             Controls.Add(button1);
             Controls.Add(textBoxEditing);
             Controls.Add(lbShowingStatus);

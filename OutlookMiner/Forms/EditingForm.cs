@@ -37,7 +37,7 @@ namespace OutlookMiner.Forms
         public EditingForm(List<IndividualMailText> _mails)
         {
             InitializeComponent();
-
+            textBoxEditing.SelectionProtected = true;
             textBoxEditing.Visible = false;
             btAddLabel.Visible = false;
             DDLabels.Visible = false;
@@ -169,14 +169,16 @@ namespace OutlookMiner.Forms
             }
             else
             {
-                //string mailbody = cleanService.CleanLinksManual(mailBody); 
+
                 textBoxEditing.Text = mailBody; // Set the entire text first
                 List<RemovedContentModel> position = cleanService.FindSubstrings(textBoxEditing.Text);
 
                 foreach (RemovedContentModel p in position)
                 {
                     textBoxEditing.Select(p.OriginalStartIndex, p.OriginalEndIndex - p.OriginalStartIndex);
-                    textBoxEditing.SelectionBackColor = Color.Orange;
+                    textBoxEditing.SelectionBackColor = Color.DarkGray;
+                    textBoxEditing.SelectionColor = Color.White;
+
                 }
 
             }
@@ -186,37 +188,42 @@ namespace OutlookMiner.Forms
 
         private void textBoxEditing_MouseUp(object sender, MouseEventArgs e)
         {
-            RichTextBox richTextBox = (RichTextBox)sender;
-
-            int clickedIndex = richTextBox.GetCharIndexFromPosition(e.Location);
-
-            string text = richTextBox.Text;
-            List<RemovedContentModel> substrings = cleanService.FindSubstrings(text);
-
-            bool foundSubstring = false;
-
-            foreach (var substring in substrings)
+            if (commited == false)
             {
-                if (clickedIndex >= substring.OriginalStartIndex && clickedIndex <= substring.OriginalEndIndex)
+
+
+                RichTextBox richTextBox = (RichTextBox)sender;
+
+                int clickedIndex = richTextBox.GetCharIndexFromPosition(e.Location);
+
+                string text = richTextBox.Text;
+                List<RemovedContentModel> substrings = cleanService.FindSubstrings(text);
+
+                bool foundSubstring = false;
+
+                foreach (var substring in substrings)
                 {
-                    richTextBox.Select(substring.OriginalStartIndex, substring.OriginalEndIndex - substring.OriginalStartIndex);
-                    if (richTextBox.SelectionBackColor == Color.Purple)
+                    if (clickedIndex >= substring.OriginalStartIndex && clickedIndex <= substring.OriginalEndIndex)
                     {
-                        richTextBox.SelectionBackColor = Color.Orange;
+                        richTextBox.Select(substring.OriginalStartIndex, substring.OriginalEndIndex - substring.OriginalStartIndex);
+                        if (richTextBox.SelectionBackColor == Color.Gray)
+                        {
+                            richTextBox.SelectionBackColor = Color.DarkGray;
+                        }
+                        else
+                        {
+                            richTextBox.SelectionBackColor = Color.Gray;
+                        }
+                        richTextBox.DeselectAll();
+                        foundSubstring = true;
+                        break;
                     }
-                    else
-                    {
-                        richTextBox.SelectionBackColor = Color.Purple;
-                    }
-                    richTextBox.DeselectAll();
-                    foundSubstring = true;
-                    break;
                 }
-            }
 
-            if (!foundSubstring)
-            {
-                richTextBox.DeselectAll();
+                if (!foundSubstring)
+                {
+                    richTextBox.DeselectAll();
+                }
             }
         }
 
@@ -227,7 +234,7 @@ namespace OutlookMiner.Forms
             foreach (RemovedContentModel substring in substrings)
             {
                 textBoxEditing.Select(substring.OriginalStartIndex, substring.OriginalEndIndex - substring.OriginalStartIndex);
-                if (textBoxEditing.SelectionBackColor == Color.Orange)
+                if (textBoxEditing.SelectionBackColor == Color.DarkGray)
                 {
                     _deleteList.Add(new RemovedContentModel(substring.Content, substring.OriginalStartIndex, substring.OriginalEndIndex));
                 }
