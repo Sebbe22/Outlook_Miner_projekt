@@ -101,20 +101,8 @@ namespace OutlookMiner.Forms
             }
         }
 
-        private void btGoToEditor_Click(object sender, EventArgs e)
-        {
-            EditingForm newForm = new EditingForm(mails);
-            newForm.Show();
-            this.Hide();
-        }
 
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            CleanUpForm.instance = this;
-            string targetName = "RemovePhoneNumbersFromEmail";
 
-            _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox3.Checked);
-        }
 
         private void btGoToEditor_Click(object sender, EventArgs e)
         {
@@ -140,6 +128,14 @@ namespace OutlookMiner.Forms
 
         }
 
-       
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            CleanUpForm.instance = this;
+            string targetName = "CheckForSystems";
+
+            _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox7.Checked);
+        }
+
+        
     }
 }
