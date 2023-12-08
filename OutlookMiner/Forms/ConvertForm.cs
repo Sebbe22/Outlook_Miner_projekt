@@ -84,7 +84,7 @@ namespace OutlookMiner.Forms
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += (sender, eArgs) =>
             {
-                if(cleaned = false)
+                if(cleaned == false)
                 {
                     List<CheckBoxModel> checkBoxes = _checkboxList.GetCheckBoxes();
                     foreach (var checkbox in checkBoxes)

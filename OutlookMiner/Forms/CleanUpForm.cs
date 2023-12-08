@@ -92,7 +92,7 @@ namespace OutlookMiner.Forms
             _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox6.Checked);
         }
 
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        private void checkBox8_CheckedChanged_1(object sender, EventArgs e)
         {
             CleanUpForm.instance = this;
             foreach (CheckBoxModel checkBox in _checkboxList.GetCheckBoxes())
@@ -116,20 +116,6 @@ namespace OutlookMiner.Forms
             _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox3.Checked);
         }
 
-        private void btGoToEditor_Click(object sender, EventArgs e)
-        {
-            EditingForm newForm = new EditingForm(mails);
-            newForm.Show();
-            this.Hide();
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            CleanUpForm.instance = this;
-            string targetName = "RemovePhoneNumbersFromEmail";
-
-            _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox3.Checked);
-        }
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
@@ -139,7 +125,5 @@ namespace OutlookMiner.Forms
             _checkboxList.UpdateCheckBox(targetName, CleanUpForm.instance.checkBox5.Checked);
 
         }
-
-       
     }
 }

@@ -26,7 +26,11 @@ namespace OutlookMiner.Services
 
     public class CleanService : ICleanService
     {
-
+        /// <summary>
+        /// Detects and removes links from a list of mails using regex
+        /// </summary>
+        /// <param name="mails"> the list of mails where links is to be removed </param>
+        /// <returns> returns the list of mails with links removed </returns>
         public List<IndividualMailText> RemoveLinksFromEmailString(List<IndividualMailText> mails)
         {
             foreach(Text mail in mails)
@@ -38,6 +42,9 @@ namespace OutlookMiner.Services
                     mail.body = Regex.Replace(mail.body, pattern, string.Empty);
                 }
             }
+            IDataAccessService accessService = new DataAccessService();
+            LabelModel test = new LabelModel(1, "heh", "hehe");
+            accessService.Insert<LabelModel>("INSERT INTO Labels([Id], [Category], [LabelName]) values(@Id, @Category, @LabelName)", test);
 
             return mails;
         }

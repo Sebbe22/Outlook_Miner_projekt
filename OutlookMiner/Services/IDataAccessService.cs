@@ -1,7 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Dapper;
 using OutlookMiner.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,51 +11,45 @@ namespace OutlookMiner.Services
 {
     public interface IDataAccessService
     {
-        public List<LabelModel> Pull(string querry);
+        public IEnumerable<T> Get<T>(string querry);
 
-        public void Push(string querry, LabelModel labelToAdd);
+        public void Insert<T>(string querry, T labelToAdd);
+
+        public void Delete(string querry, LabelModel labelToDelete);
     }
 
     public class DataAccessService : IDataAccessService
     {
-        string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\sebas" +
+        private string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\sebas" +
             "\\Downloads\\Ellab---OutlookMiner (2)\\Ellab---OutlookMiner\\Ellab---OutlookMiner\\" +
             "OutlookMiner\\OutlookMinerDB.mdf\";Integrated Security=True;Connect Timeout=30";
 
-        public List<LabelModel> Pull(string querry)
+        /// <summary>
+        /// pulls data from the OutlookMinerDB database
+        /// </summary>
+        /// <param name="querry"> the sql querry to specify what you want to pull </param>
+        /// <returns> returns whatever you querried as a list of LabelModels </returns>
+        public IEnumerable<T> Get<T>(string querry)
         {
-            List<LabelModel> labelList = new List<LabelModel>();
-
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
 
-                SqlCommand cmd = new SqlCommand(querry, connection);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    LabelModel label = ReadList(reader);
-                    labelList.Add(label);
-                }
+                return connection.Query<T>(querry);
             }
-
-            return labelList;
         }
 
-        private LabelModel ReadList(SqlDataReader reader)
+        public void Insert<T>(string querry, T itemToAdd)
         {
-            LabelModel label = new LabelModel();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                connection.Open();
 
-            label.Id = reader.GetInt32(0);
-            label.Category = reader.GetString(1);
-            label.LabelName = reader.GetString(2);
-
-            return label;
+                connection.Execute(querry, itemToAdd);
+            }
         }
 
-        public void Push(string querry, LabelModel labelToAdd)
+        public void Delete(string querry, LabelModel labelToDelete)
         {
             using (SqlConnection connection = new SqlConnection(connString))
             {
@@ -62,16 +57,9 @@ namespace OutlookMiner.Services
 
                 SqlCommand cmd = new SqlCommand(querry, connection);
 
-                cmd.Parameters.AddWithValue("@Id", labelToAdd.Id);
-                cmd.Parameters.AddWithValue("@Category", labelToAdd.Category);
-                cmd.Parameters.AddWithValue("@LabelName", labelToAdd.LabelName);
+                cmd.Parameters.AddWithValue("@Id", labelToDelete.Id);
 
-                int row = cmd.ExecuteNonQuery();
-
-                if(row < 1)
-                {
-                    throw new ArgumentException("Cant create label");
-                }
+                cmd.ExecuteNonQuery();
             }
         }
     }
