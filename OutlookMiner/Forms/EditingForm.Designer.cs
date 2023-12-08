@@ -29,147 +29,134 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditingForm));
-            btBackMail = new Button();
-            lbNextMail = new Button();
-            DDLabels = new ComboBox();
-            btAddLabel = new Button();
-            btNext = new Button();
-            pbLoadingGif = new PictureBox();
-            lbShowingStatus = new Label();
-            textBoxEditing = new RichTextBox();
-            button1 = new Button();
-            ((System.ComponentModel.ISupportInitialize)pbLoadingGif).BeginInit();
-            SuspendLayout();
+            this.btBackMail = new System.Windows.Forms.Button();
+            this.lbNextMail = new System.Windows.Forms.Button();
+            this.DDLabels = new System.Windows.Forms.ComboBox();
+            this.btAddLabel = new System.Windows.Forms.Button();
+            this.btNext = new System.Windows.Forms.Button();
+            this.pbLoadingGif = new System.Windows.Forms.PictureBox();
+            this.lbShowingStatus = new System.Windows.Forms.Label();
+            this.textBoxEditing = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLoadingGif)).BeginInit();
+            this.SuspendLayout();
             // 
             // btBackMail
             // 
-            btBackMail.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btBackMail.ForeColor = Color.DarkOrange;
-            btBackMail.Location = new Point(510, 485);
-            btBackMail.Margin = new Padding(3, 2, 3, 2);
-            btBackMail.Name = "btBackMail";
-            btBackMail.Size = new Size(82, 22);
-            btBackMail.TabIndex = 9;
-            btBackMail.Text = "Previous mail";
-            btBackMail.UseVisualStyleBackColor = true;
-            btBackMail.Click += btBackMail_Click;
+            this.btBackMail.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btBackMail.ForeColor = System.Drawing.Color.DarkOrange;
+            this.btBackMail.Location = new System.Drawing.Point(583, 647);
+            this.btBackMail.Name = "btBackMail";
+            this.btBackMail.Size = new System.Drawing.Size(94, 29);
+            this.btBackMail.TabIndex = 9;
+            this.btBackMail.Text = "Previous mail";
+            this.btBackMail.UseVisualStyleBackColor = true;
             // 
             // lbNextMail
             // 
-            lbNextMail.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            lbNextMail.ForeColor = Color.DarkOrange;
-            lbNextMail.Location = new Point(620, 485);
-            lbNextMail.Margin = new Padding(3, 2, 3, 2);
-            lbNextMail.Name = "lbNextMail";
-            lbNextMail.Size = new Size(117, 37);
-            lbNextMail.TabIndex = 10;
-            lbNextMail.Text = "Next Mail";
-            lbNextMail.UseVisualStyleBackColor = true;
-            lbNextMail.Click += lbNextMail_Click;
+            this.lbNextMail.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbNextMail.ForeColor = System.Drawing.Color.DarkOrange;
+            this.lbNextMail.Location = new System.Drawing.Point(709, 647);
+            this.lbNextMail.Name = "lbNextMail";
+            this.lbNextMail.Size = new System.Drawing.Size(94, 29);
+            this.lbNextMail.TabIndex = 10;
+            this.lbNextMail.Text = "Next Mail";
+            this.lbNextMail.UseVisualStyleBackColor = true;
             // 
             // DDLabels
             // 
-            DDLabels.FormattingEnabled = true;
-            DDLabels.Location = new Point(510, 58);
-            DDLabels.Margin = new Padding(3, 2, 3, 2);
-            DDLabels.Name = "DDLabels";
-            DDLabels.Size = new Size(188, 33);
-            DDLabels.TabIndex = 11;
-            DDLabels.SelectedIndexChanged += DDLabels_SelectedIndexChanged;
+            this.DDLabels.FormattingEnabled = true;
+            this.DDLabels.Location = new System.Drawing.Point(583, 77);
+            this.DDLabels.Name = "DDLabels";
+            this.DDLabels.Size = new System.Drawing.Size(151, 28);
+            this.DDLabels.TabIndex = 11;
             // 
             // btAddLabel
             // 
-            btAddLabel.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btAddLabel.ForeColor = Color.Black;
-            btAddLabel.Location = new Point(719, 57);
-            btAddLabel.Margin = new Padding(3, 2, 3, 2);
-            btAddLabel.Name = "btAddLabel";
-            btAddLabel.Size = new Size(117, 37);
-            btAddLabel.TabIndex = 12;
-            btAddLabel.Text = "Add Label";
-            btAddLabel.UseVisualStyleBackColor = true;
-            btAddLabel.Click += btAddLabel_Click;
+            this.btAddLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btAddLabel.ForeColor = System.Drawing.Color.Black;
+            this.btAddLabel.Location = new System.Drawing.Point(822, 76);
+            this.btAddLabel.Name = "btAddLabel";
+            this.btAddLabel.Size = new System.Drawing.Size(94, 29);
+            this.btAddLabel.TabIndex = 12;
+            this.btAddLabel.Text = "Add Label";
+            this.btAddLabel.UseVisualStyleBackColor = true;
             // 
             // btNext
             // 
-            btNext.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btNext.ForeColor = Color.Black;
-            btNext.Location = new Point(730, 485);
-            btNext.Margin = new Padding(3, 2, 3, 2);
-            btNext.Name = "btNext";
-            btNext.Size = new Size(117, 37);
-            btNext.TabIndex = 13;
-            btNext.Text = "Next";
-            btNext.UseVisualStyleBackColor = true;
-            btNext.Click += btNext_Click;
+            this.btNext.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btNext.ForeColor = System.Drawing.Color.Black;
+            this.btNext.Location = new System.Drawing.Point(834, 647);
+            this.btNext.Name = "btNext";
+            this.btNext.Size = new System.Drawing.Size(94, 29);
+            this.btNext.TabIndex = 13;
+            this.btNext.Text = "Next";
+            this.btNext.UseVisualStyleBackColor = true;
+            this.btNext.Click += new System.EventHandler(this.btNext_Click);
             // 
             // pbLoadingGif
             // 
-            pbLoadingGif.Image = (Image)resources.GetObject("pbLoadingGif.Image");
-            pbLoadingGif.Location = new Point(417, 225);
-            pbLoadingGif.Margin = new Padding(4, 3, 4, 3);
-            pbLoadingGif.Name = "pbLoadingGif";
-            pbLoadingGif.Size = new Size(59, 146);
-            pbLoadingGif.TabIndex = 17;
-            pbLoadingGif.TabStop = false;
+            this.pbLoadingGif.Image = ((System.Drawing.Image)(resources.GetObject("pbLoadingGif.Image")));
+            this.pbLoadingGif.Location = new System.Drawing.Point(477, 300);
+            this.pbLoadingGif.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.pbLoadingGif.Name = "pbLoadingGif";
+            this.pbLoadingGif.Size = new System.Drawing.Size(67, 195);
+            this.pbLoadingGif.TabIndex = 17;
+            this.pbLoadingGif.TabStop = false;
             // 
             // lbShowingStatus
             // 
-            lbShowingStatus.AutoSize = true;
-            lbShowingStatus.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            lbShowingStatus.Location = new Point(417, 413);
-            lbShowingStatus.Margin = new Padding(4, 0, 4, 0);
-            lbShowingStatus.Name = "lbShowingStatus";
-            lbShowingStatus.Size = new Size(158, 24);
-            lbShowingStatus.TabIndex = 18;
-            lbShowingStatus.Text = "Cleaning Mails";
+            this.lbShowingStatus.AutoSize = true;
+            this.lbShowingStatus.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbShowingStatus.Location = new System.Drawing.Point(477, 551);
+            this.lbShowingStatus.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbShowingStatus.Name = "lbShowingStatus";
+            this.lbShowingStatus.Size = new System.Drawing.Size(130, 20);
+            this.lbShowingStatus.TabIndex = 18;
+            this.lbShowingStatus.Text = "Cleaning Mails";
             // 
             // textBoxEditing
             // 
-            textBoxEditing.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxEditing.Location = new Point(20, 40);
-            textBoxEditing.Margin = new Padding(3, 2, 3, 2);
-            textBoxEditing.Name = "textBoxEditing";
-            textBoxEditing.ReadOnly = true;
-            textBoxEditing.ShortcutsEnabled = false;
-            textBoxEditing.Size = new Size(427, 453);
-            textBoxEditing.TabIndex = 19;
-            textBoxEditing.Text = "";
-            textBoxEditing.MouseUp += textBoxEditing_MouseUp;
+            this.textBoxEditing.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxEditing.Location = new System.Drawing.Point(23, 53);
+            this.textBoxEditing.Name = "textBoxEditing";
+            this.textBoxEditing.ReadOnly = true;
+            this.textBoxEditing.ShortcutsEnabled = false;
+            this.textBoxEditing.Size = new System.Drawing.Size(487, 603);
+            this.textBoxEditing.TabIndex = 19;
+            this.textBoxEditing.Text = "";
             // 
             // button1
             // 
-            button1.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = Color.DarkOrange;
-            button1.Location = new Point(453, 376);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(117, 37);
-            button1.TabIndex = 20;
-            button1.Text = "Commit";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.DarkOrange;
+            this.button1.Location = new System.Drawing.Point(518, 501);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Commit";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // EditingForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(843, 518);
-            Controls.Add(button1);
-            Controls.Add(textBoxEditing);
-            Controls.Add(lbShowingStatus);
-            Controls.Add(pbLoadingGif);
-            Controls.Add(btNext);
-            Controls.Add(btAddLabel);
-            Controls.Add(DDLabels);
-            Controls.Add(lbNextMail);
-            Controls.Add(btBackMail);
-            Margin = new Padding(4, 3, 4, 3);
-            Name = "EditingForm";
-            Text = "EditingForm";
-            ((System.ComponentModel.ISupportInitialize)pbLoadingGif).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(963, 691);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBoxEditing);
+            this.Controls.Add(this.lbShowingStatus);
+            this.Controls.Add(this.pbLoadingGif);
+            this.Controls.Add(this.btNext);
+            this.Controls.Add(this.btAddLabel);
+            this.Controls.Add(this.DDLabels);
+            this.Controls.Add(this.lbNextMail);
+            this.Controls.Add(this.btBackMail);
+            this.Name = "EditingForm";
+            this.Text = "EditingForm";
+            ((System.ComponentModel.ISupportInitialize)(this.pbLoadingGif)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

@@ -22,6 +22,8 @@ namespace OutlookMiner.Forms
         public static ConvertForm instance;
         private List<IndividualMailText> mails;
         private List<ThreadModel> threads;
+        IManualLabelService labelingService = ManualLabelService.GetInstance();
+        private IAutomaticLabelingService _automaticLabelingService;
         private static bool cleaned = false;
         //string mailsJsonFormat;
        
@@ -36,6 +38,8 @@ namespace OutlookMiner.Forms
         {
             InitializeComponent();
             _pathUtilityService = pathUtilityService;
+            _automaticLabelingService = new AutomaticLabelingService();
+            
             this._checkboxList = CheckBoxService.Instance;
             instance = this;
             lbFeedbackMessage.Hide();
@@ -89,17 +93,29 @@ namespace OutlookMiner.Forms
                     List<CheckBoxModel> checkBoxes = _checkboxList.GetCheckBoxes();
                     foreach (var checkbox in checkBoxes)
                     {
-                        Type type = typeof(CleanService);
-                        MethodInfo methodInfo = type.GetMethod(checkbox.methodName);
-                        if (methodInfo != null)
+                        if(checkbox.methodName == "CheckForSystems")
                         {
-                            object instance = Activator.CreateInstance(type);
                             if (checkbox.isChecked)
                             {
-                                object[] parameters = new object[] { mails };
-                                mails = (List<IndividualMailText>?)methodInfo.Invoke(instance, parameters);
+                                threads = labelingService.CreateThreads(_automaticLabelingService.CheckForSystems(mails));
+                            }
+                            mails = null;
+                        }
+                        else
+                        {
+                            Type type = typeof(CleanService);
+                            MethodInfo methodInfo = type.GetMethod(checkbox.methodName);
+                            if (methodInfo != null)
+                            {
+                                object instance = Activator.CreateInstance(type);
+                                if (checkbox.isChecked)
+                                {
+                                    object[] parameters = new object[] { mails };
+                                    mails = (List<IndividualMailText>?)methodInfo.Invoke(instance, parameters);
+                                }
                             }
                         }
+                        
 
                     }
                 }

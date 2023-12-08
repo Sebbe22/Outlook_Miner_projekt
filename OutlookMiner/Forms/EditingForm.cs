@@ -23,10 +23,10 @@ namespace OutlookMiner.Forms
         List<IndividualMailText> mails;
         IManualLabelService labelingService = ManualLabelService.GetInstance();
         ICleanManualService cleanService = new CleanManualService();
-        List<string> ChoosenLabels = new List<string>();
+        List<String> ChoosenLabels = new List<string>();
         List<IndividualMailTextLabelingModel> LabeledMessages = new List<IndividualMailTextLabelingModel>();
         private ICheckBoxService _checkboxList;
-        
+
         private int currentIndex = 0;
         private bool commited = false;
         public ICheckBoxService GetCheckBoxListModelInstance()
@@ -247,10 +247,7 @@ namespace OutlookMiner.Forms
 
         }
 
-        private void DDLabels_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+    
     }
 
 }
