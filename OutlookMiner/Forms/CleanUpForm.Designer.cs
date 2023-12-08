@@ -32,34 +32,33 @@
             checkBox1 = new CheckBox();
             checkBox2 = new CheckBox();
             checkBox4 = new CheckBox();
-            checkBox5 = new CheckBox();
-            checkBox7 = new CheckBox();
             button1 = new Button();
             lbBack = new Button();
             checkBox3 = new CheckBox();
             checkBox6 = new CheckBox();
             checkBox8 = new CheckBox();
+            btGoToEditor = new Button();
+            checkBox5 = new CheckBox();
             SuspendLayout();
             // 
             // lbHeader
             // 
             lbHeader.AutoSize = true;
             lbHeader.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            lbHeader.Location = new Point(18, 61);
+            lbHeader.Location = new Point(12, 37);
             lbHeader.Margin = new Padding(2, 0, 2, 0);
             lbHeader.Name = "lbHeader";
-            lbHeader.Size = new Size(476, 32);
+            lbHeader.Size = new Size(316, 22);
             lbHeader.TabIndex = 1;
             lbHeader.Text = "Step 2. Choose Cleaning Methods";
-            lbHeader.Click += lbHeader_Click;
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(45, 145);
-            checkBox1.Margin = new Padding(4);
+            checkBox1.Location = new Point(32, 87);
+            checkBox1.Margin = new Padding(3, 2, 3, 2);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(253, 29);
+            checkBox1.Size = new Size(168, 19);
             checkBox1.TabIndex = 4;
             checkBox1.Text = "Remove Names from body";
             checkBox1.UseVisualStyleBackColor = true;
@@ -68,10 +67,10 @@
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(45, 182);
-            checkBox2.Margin = new Padding(4);
+            checkBox2.Location = new Point(32, 110);
+            checkBox2.Margin = new Padding(3, 2, 3, 2);
             checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(142, 29);
+            checkBox2.Size = new Size(96, 19);
             checkBox2.TabIndex = 5;
             checkBox2.Text = "Remove links";
             checkBox2.UseVisualStyleBackColor = true;
@@ -79,68 +78,48 @@
             // 
             // checkBox4
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(36, 207);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(182, 24);
-            this.checkBox4.TabIndex = 7;
-            this.checkBox4.Text = "Remove Emailadresses";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // CBRemovePhoneNumbers
-            // 
-            checkBox5.AutoSize = true;
-            checkBox5.Location = new Point(45, 295);
-            checkBox5.Margin = new Padding(4);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(360, 29);
-            checkBox5.TabIndex = 8;
-            checkBox5.Text = "Devide mails into questions and answers";
-            checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // CBRemoveAfterBestRegards
-            // 
-            checkBox7.AutoSize = true;
-            checkBox7.Location = new Point(45, 222);
-            checkBox7.Margin = new Padding(4);
-            checkBox7.Name = "checkBox7";
-            checkBox7.Size = new Size(202, 29);
-            checkBox7.TabIndex = 10;
-            checkBox7.Text = "Add thread identifier";
-            checkBox7.UseVisualStyleBackColor = true;
+            checkBox4.AutoSize = true;
+            checkBox4.Location = new Point(32, 131);
+            checkBox4.Margin = new Padding(2);
+            checkBox4.Name = "checkBox4";
+            checkBox4.Size = new Size(145, 19);
+            checkBox4.TabIndex = 7;
+            checkBox4.Text = "Remove Emailadresses";
+            checkBox4.UseVisualStyleBackColor = true;
+            checkBox4.CheckedChanged += checkBox4_CheckedChanged;
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.DarkOrange;
-            this.button1.Location = new System.Drawing.Point(349, 381);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 31);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Next";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.ForeColor = Color.DarkOrange;
+            button1.Location = new Point(317, 272);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Size = new Size(58, 27);
+            button1.TabIndex = 11;
+            button1.Text = "Next";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // lbBack
             // 
-            this.lbBack.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbBack.ForeColor = System.Drawing.Color.DarkOrange;
-            this.lbBack.Location = new System.Drawing.Point(242, 381);
-            this.lbBack.Margin = new System.Windows.Forms.Padding(2);
-            this.lbBack.Name = "lbBack";
-            this.lbBack.Size = new System.Drawing.Size(78, 28);
-            this.lbBack.TabIndex = 12;
-            this.lbBack.Text = "Back";
-            this.lbBack.UseVisualStyleBackColor = true;
+            lbBack.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            lbBack.ForeColor = Color.DarkOrange;
+            lbBack.Location = new Point(241, 272);
+            lbBack.Margin = new Padding(2);
+            lbBack.Name = "lbBack";
+            lbBack.Size = new Size(54, 27);
+            lbBack.TabIndex = 12;
+            lbBack.Text = "Back";
+            lbBack.UseVisualStyleBackColor = true;
             // 
-            // btContinueToLabeling
+            // checkBox3
             // 
             checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(42, 341);
+            checkBox3.Location = new Point(32, 152);
+            checkBox3.Margin = new Padding(2);
             checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(235, 29);
+            checkBox3.Size = new Size(158, 19);
             checkBox3.TabIndex = 13;
             checkBox3.Text = "Remove Phone Numbers";
             checkBox3.UseVisualStyleBackColor = true;
@@ -149,42 +128,69 @@
             // checkBox6
             // 
             checkBox6.AutoSize = true;
-            checkBox6.Location = new Point(41, 387);
+            checkBox6.Location = new Point(32, 173);
+            checkBox6.Margin = new Padding(2);
             checkBox6.Name = "checkBox6";
-            checkBox6.Size = new Size(279, 29);
+            checkBox6.Size = new Size(206, 19);
             checkBox6.TabIndex = 14;
-            checkBox6.Text = "Remove Password & Usernames";
+            checkBox6.Text = "Remove Password and Usernames";
             checkBox6.UseVisualStyleBackColor = true;
             checkBox6.CheckedChanged += checkBox6_CheckedChanged;
             // 
             // checkBox8
             // 
             checkBox8.AutoSize = true;
-            checkBox8.Location = new Point(41, 431);
+            checkBox8.Location = new Point(32, 219);
+            checkBox8.Margin = new Padding(2);
             checkBox8.Name = "checkBox8";
-            checkBox8.Size = new Size(109, 29);
+            checkBox8.Size = new Size(74, 19);
             checkBox8.TabIndex = 15;
             checkBox8.Text = "Select All";
             checkBox8.UseVisualStyleBackColor = true;
             checkBox8.CheckedChanged += checkBox8_CheckedChanged;
             // 
+            // btGoToEditor
+            // 
+            btGoToEditor.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btGoToEditor.ForeColor = Color.DarkOrange;
+            btGoToEditor.Location = new Point(241, 236);
+            btGoToEditor.Margin = new Padding(2);
+            btGoToEditor.Name = "btGoToEditor";
+            btGoToEditor.Size = new Size(134, 23);
+            btGoToEditor.TabIndex = 16;
+            btGoToEditor.Text = "Go to editor";
+            btGoToEditor.UseVisualStyleBackColor = true;
+            btGoToEditor.Click += btGoToEditor_Click;
+            // 
+            // checkBox5
+            // 
+            checkBox5.AutoSize = true;
+            checkBox5.Location = new Point(32, 196);
+            checkBox5.Margin = new Padding(2);
+            checkBox5.Name = "checkBox5";
+            checkBox5.Size = new Size(220, 19);
+            checkBox5.TabIndex = 17;
+            checkBox5.Text = "Remove everything past best regards";
+            checkBox5.UseVisualStyleBackColor = true;
+            checkBox5.CheckedChanged += checkBox5_CheckedChanged;
+            // 
             // CleanUpForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(602, 566);
+            ClientSize = new Size(422, 340);
+            Controls.Add(checkBox5);
+            Controls.Add(btGoToEditor);
             Controls.Add(checkBox8);
             Controls.Add(checkBox6);
             Controls.Add(checkBox3);
             Controls.Add(lbBack);
             Controls.Add(button1);
-            Controls.Add(checkBox7);
-            Controls.Add(checkBox5);
             Controls.Add(checkBox4);
             Controls.Add(checkBox2);
             Controls.Add(checkBox1);
             Controls.Add(lbHeader);
-            Margin = new Padding(4);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "CleanUpForm";
             Text = "CleanUpForm";
             ResumeLayout(false);
@@ -204,5 +210,7 @@
         private CheckBox checkBox3;
         private CheckBox checkBox6;
         private CheckBox checkBox8;
+        private Button btGoToEditor;
+        private CheckBox checkBox5;
     }
 }

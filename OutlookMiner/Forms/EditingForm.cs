@@ -37,7 +37,7 @@ namespace OutlookMiner.Forms
         public EditingForm(List<IndividualMailText> _mails)
         {
             InitializeComponent();
-
+            textBoxEditing.SelectionProtected = true;
             textBoxEditing.Visible = false;
             btAddLabel.Visible = false;
             DDLabels.Visible = false;
@@ -51,7 +51,7 @@ namespace OutlookMiner.Forms
                 this._checkboxList = CheckBoxService.Instance;
 
                 mails = _mails;
-                DisplayText();
+
                 List<string> currentLabels = labelingService.Labels;
                 DDLabels.Items.AddRange(currentLabels.ToArray());
 
@@ -71,6 +71,7 @@ namespace OutlookMiner.Forms
                     }
 
                 }
+
                 // Pass the results to the RunWorkerCompleted event
                 eArgs.Result = new
                 {
@@ -91,10 +92,11 @@ namespace OutlookMiner.Forms
                 // Hide the loading GIF
                 pbLoadingGif.Visible = false;
                 lbShowingStatus.Visible = false;
-
+                DisplayText();
             };
             // Start the background worker
             backgroundWorker.RunWorkerAsync();
+
         }
 
         private void btBackMail_Click(object sender, EventArgs e)
@@ -107,7 +109,7 @@ namespace OutlookMiner.Forms
         {
             if (mails.Count > 0 && currentIndex >= 0 && currentIndex < mails.Count)
             {
-               if(commited == false)
+                if (commited == false)
                 {
                     ShowMatches(mails[currentIndex].body);
                 }
@@ -115,7 +117,7 @@ namespace OutlookMiner.Forms
                 {
                     textBoxEditing.Text = mails[currentIndex].body;
                 }
-                
+
             }
         }
 
@@ -124,8 +126,9 @@ namespace OutlookMiner.Forms
             var copiedLabels = new List<string>(ChoosenLabels);
             LabeledMessages.Add(labelingService.AddMessageWithLabels(mails[currentIndex], copiedLabels));
             ChoosenLabels.Clear();
-            mails[currentIndex].body = textBoxEditing.Text; 
+            mails[currentIndex].body = textBoxEditing.Text;
             currentIndex = Math.Min(mails.Count - 1, currentIndex + 1);
+            commited = false;
             DisplayText();
         }
 
@@ -151,8 +154,8 @@ namespace OutlookMiner.Forms
             this.Hide();
 
         }
-       
- 
+
+
         private void ShowMatches(string mailBody)
         {
 
@@ -166,76 +169,84 @@ namespace OutlookMiner.Forms
             }
             else
             {
-                //string mailbody = cleanService.CleanLinksManual(mailBody); 
+
                 textBoxEditing.Text = mailBody; // Set the entire text first
                 List<RemovedContentModel> position = cleanService.FindSubstrings(textBoxEditing.Text);
 
-                foreach(RemovedContentModel p in position)
+                foreach (RemovedContentModel p in position)
                 {
-                    textBoxEditing.Select(p.OriginalStartIndex, p.OriginalEndIndex-p.OriginalStartIndex);
-                    textBoxEditing.SelectionBackColor = Color.Yellow;
+                    textBoxEditing.Select(p.OriginalStartIndex, p.OriginalEndIndex - p.OriginalStartIndex);
+                    textBoxEditing.SelectionBackColor = Color.DarkGray;
+                    textBoxEditing.SelectionColor = Color.White;
+
                 }
 
             }
         }
 
-       
+
 
         private void textBoxEditing_MouseUp(object sender, MouseEventArgs e)
         {
-            RichTextBox richTextBox = (RichTextBox)sender;
-
-            int clickedIndex = richTextBox.GetCharIndexFromPosition(e.Location);
-
-            string text = richTextBox.Text;
-            List<RemovedContentModel> substrings = cleanService.FindSubstrings(text);
-
-            bool foundSubstring = false;
-
-            foreach (var substring in substrings)
+            if (commited == false)
             {
-                if (clickedIndex >= substring.OriginalStartIndex && clickedIndex <= substring.OriginalEndIndex)
+
+
+                RichTextBox richTextBox = (RichTextBox)sender;
+
+                int clickedIndex = richTextBox.GetCharIndexFromPosition(e.Location);
+
+                string text = richTextBox.Text;
+                List<RemovedContentModel> substrings = cleanService.FindSubstrings(text);
+
+                bool foundSubstring = false;
+
+                foreach (var substring in substrings)
                 {
-                    richTextBox.Select(substring.OriginalStartIndex, substring.OriginalEndIndex - substring.OriginalStartIndex);
-                    if (richTextBox.SelectionBackColor == Color.Red)
+                    if (clickedIndex >= substring.OriginalStartIndex && clickedIndex <= substring.OriginalEndIndex)
                     {
-                        richTextBox.SelectionBackColor = Color.Yellow;
+                        richTextBox.Select(substring.OriginalStartIndex, substring.OriginalEndIndex - substring.OriginalStartIndex);
+                        if (richTextBox.SelectionBackColor == Color.Gray)
+                        {
+                            richTextBox.SelectionBackColor = Color.DarkGray;
+                        }
+                        else
+                        {
+                            richTextBox.SelectionBackColor = Color.Gray;
+                        }
+                        richTextBox.DeselectAll();
+                        foundSubstring = true;
+                        break;
                     }
-                    else 
-                    {
-                        richTextBox.SelectionBackColor = Color.Red;
-                    }
-                    richTextBox.DeselectAll();
-                    foundSubstring = true;
-                    break; 
                 }
-            }
 
-            if (!foundSubstring)
-            {
-                richTextBox.DeselectAll();
+                if (!foundSubstring)
+                {
+                    richTextBox.DeselectAll();
+                }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
-        { 
+        {
             List<RemovedContentModel> _deleteList = new List<RemovedContentModel>();
             List<RemovedContentModel> substrings = cleanService.FindSubstrings(textBoxEditing.Text);
-            foreach(RemovedContentModel substring in substrings)
+            foreach (RemovedContentModel substring in substrings)
             {
                 textBoxEditing.Select(substring.OriginalStartIndex, substring.OriginalEndIndex - substring.OriginalStartIndex);
-                if (textBoxEditing.SelectionBackColor == Color.Yellow)
+                if (textBoxEditing.SelectionBackColor == Color.DarkGray)
                 {
                     _deleteList.Add(new RemovedContentModel(substring.Content, substring.OriginalStartIndex, substring.OriginalEndIndex));
                 }
-                
+
             }
             mails[currentIndex].body = cleanService.DeleteStringsFromText(textBoxEditing.Text, _deleteList);
             commited = true;
             DisplayText();
             textBoxEditing.ReadOnly = false;
-                
+
         }
+
     }
 
 }
