@@ -38,6 +38,10 @@ namespace OutlookMiner.Services
                     mail.body = Regex.Replace(mail.body, pattern, string.Empty);
                 }
             }
+            IDataAccessService dataAccessService = new DataAccessService();
+            LabelModel test = new LabelModel(9, "det virker", "be happy");
+            dataAccessService.Push("INSERT INTO Labels values(@Id, @Category, @LabelName)", test);
+
             return mails;
         }
 

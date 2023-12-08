@@ -23,10 +23,10 @@ namespace OutlookMiner.Forms
         List<IndividualMailText> mails;
         IManualLabelService labelingService = ManualLabelService.GetInstance();
         ICleanManualService cleanService = new CleanManualService();
-        List<String> ChoosenLabels = new List<string>();
+        List<string> ChoosenLabels = new List<string>();
         List<IndividualMailTextLabelingModel> LabeledMessages = new List<IndividualMailTextLabelingModel>();
         private ICheckBoxService _checkboxList;
-
+        
         private int currentIndex = 0;
         private bool commited = false;
         public ICheckBoxService GetCheckBoxListModelInstance()
@@ -51,7 +51,7 @@ namespace OutlookMiner.Forms
                 this._checkboxList = CheckBoxService.Instance;
 
                 mails = _mails;
-                
+
                 List<string> currentLabels = labelingService.Labels;
                 DDLabels.Items.AddRange(currentLabels.ToArray());
 
@@ -71,7 +71,7 @@ namespace OutlookMiner.Forms
                     }
 
                 }
-                
+
                 // Pass the results to the RunWorkerCompleted event
                 eArgs.Result = new
                 {
@@ -96,7 +96,7 @@ namespace OutlookMiner.Forms
             };
             // Start the background worker
             backgroundWorker.RunWorkerAsync();
-            
+
         }
 
         private void btBackMail_Click(object sender, EventArgs e)
@@ -240,6 +240,10 @@ namespace OutlookMiner.Forms
 
         }
 
+        private void DDLabels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

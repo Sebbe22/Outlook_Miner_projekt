@@ -17,6 +17,7 @@ namespace OutlookMiner.Models
 
 
 
+
         public Text(string _body, string _threadID)
         {
             this.body = _body;

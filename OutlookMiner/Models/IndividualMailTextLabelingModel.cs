@@ -10,7 +10,7 @@ namespace OutlookMiner.Models
     {
         public IndividualMailText Message { get; set; }
         public List<string> Labels { get; set; }
-
+       
         public IndividualMailTextLabelingModel(IndividualMailText _message, List<string> _labels)
         {
             Message = _message;
