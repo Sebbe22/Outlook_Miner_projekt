@@ -52,7 +52,7 @@ namespace OutlookMiner.Services
             string labelText = "";
             foreach (Text txt in mails)
             {
-                labelText = labelText + $" \n \n {txt.body}";
+                labelText = labelText + $" \n {txt.body}";
             }
 
             FormattedTextArea text = new FormattedTextArea(labelText, 0, 0, 504, 600, ceTe.DynamicPDF.FontFamily.Helvetica, 12, true);
@@ -101,7 +101,8 @@ namespace OutlookMiner.Services
 
                 foreach (var message in thread.Messages)
                 {
-                    labelText += $"Labels: {string.Join(", ", message.Labels)}\n";
+                    labelText += $"Labels: {string.Join(", ", message.Labels)}\n\n";
+                    message.Message.body = string.Join("\n", message.Message.body.Split('\n').Where(line => !string.IsNullOrWhiteSpace(line)));
                     labelText += $"{message.Message.body}\n\n";
                 }
             }

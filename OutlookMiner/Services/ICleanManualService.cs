@@ -73,16 +73,16 @@ namespace OutlookMiner.Services
             {
                 string matchedValue = match.Value;
 
-                // Check if the match is already inside square brackets
+              
                 if (!matchedValue.StartsWith("[") || !matchedValue.EndsWith("]"))
                 {
-                    // If not, add square brackets around the match
+                   
                     matchedValue = "[" + matchedValue + "]";
                 }
 
                 return matchedValue;
             });
-            // Modify the regex pattern to exclude matches already within square brackets
+            
             string modifiedPattern = @"(?<!\[.+?)" + pattern + @"(?![^\[]*?\])";
 
             mailBody = Regex.Replace(mailBody, modifiedPattern, evaluator);
@@ -174,35 +174,46 @@ namespace OutlookMiner.Services
 
         public List<IndividualMailText> RemovePhoneNumbersFromEmail(List<IndividualMailText> emailString)
         {
-            PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
-
-            foreach (var email in emailString)
+            try
             {
-                foreach (var language in MetaDataLanguageListModel.Languages)
+                PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
+                DataAccessService dataAccessService = new DataAccessService();
+                var languages = dataAccessService.Get<MetaDataLanguageListModel>("SELECT LanguageCode AS language FROM Languages");
+                foreach (var email in emailString)
                 {
-                    var matches = phoneNumberUtil.FindNumbers(email.body, language.Language);
-
-                    if (matches != null && matches.Count() > 0)
+                    foreach (var language in languages)
                     {
-                        foreach (var match in matches)
+                        var matches = phoneNumberUtil.FindNumbers(email.body, language.Language);
+
+                        if (matches != null && matches.Count() > 0)
                         {
-                            string phoneNumber = match.RawString;
-
-                            // Regex pattern to match the phone number within square brackets
-                            string pattern = @"(?<!\[.+?)" + Regex.Escape(phoneNumber) + @"(?![^\[]*?\])";
-
-                            // Check if the phone number is already enclosed within square brackets
-                            if (Regex.IsMatch(email.body, pattern))
+                            foreach (var match in matches)
                             {
-                                // If not, enclose the phone number within square brackets
-                                email.body = Regex.Replace(email.body, Regex.Escape(phoneNumber), "[" + phoneNumber + "]");
+                                string phoneNumber = match.RawString;
+
+                         
+                                string pattern = @"(?<!\[.+?)" + Regex.Escape(phoneNumber) + @"(?![^\[]*?\])";
+
+                           
+                                if (Regex.IsMatch(email.body, pattern))
+                                {
+                                
+                                    email.body = Regex.Replace(email.body, Regex.Escape(phoneNumber), "[" + phoneNumber + "]");
+                                }
                             }
                         }
                     }
                 }
+                return emailString;
+            }
+            catch 
+            {
+                return emailString;
+
             }
 
-            return emailString;
+
+           
         }
     }
 }

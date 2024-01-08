@@ -9,60 +9,35 @@ namespace OutlookMiner.Services
 {
     public interface IAutomaticLabelingService
     {
-        void AddSystemKeyword(string system, string keyword);
         List<IndividualMailTextLabelingModel> CheckForSystems(List<IndividualMailText> mails);
-        void DeleteSystemKeyword(string system, string keyword);
     }
 
     public class AutomaticLabelingService : IAutomaticLabelingService
     {
 
-        private readonly Dictionary<string, List<string>> systemKeywords;
+        private readonly Dictionary<string, List<string>> systemKeywords  = new Dictionary<string, List<string>>();
+        ILabelService labelService;
 
         public AutomaticLabelingService()
         {
-            // Initialize the dictionary in the constructor
-            systemKeywords = new Dictionary<string, List<string>>();
-            //Needs to be deleted
-            AddSystemKeyword("EMS", "EMS");
-            AddSystemKeyword("Valsuite", "Valsuite");
+            labelService =  new LabelService();
+            List<LabelModel> labelModels = new List<LabelModel>(labelService.GetLabels());
+           
+            systemKeywords = labelModels
+            .GroupBy(l => l.LabelName)
+            .ToDictionary(
+            grp => grp.Key,
+            grp => grp.Select(x => x.SearchWord).ToList()
+            );
 
         }
-        public void AddSystemKeyword(string system, string keyword)
-        {
-            if (systemKeywords.ContainsKey(system))
-            {
-                // If the system already exists, add the keyword to its list
-                if (!systemKeywords[system].Contains(keyword))
-                {
-                    systemKeywords[system].Add(keyword);
-                }
-            }
-            else
-            {
-                // If the system doesn't exist, create a new entry with the keyword
-                systemKeywords[system] = new List<string> { keyword };
-            }
-        }
 
-        public void DeleteSystemKeyword(string system, string keyword)
-        {
-            if (systemKeywords.ContainsKey(system))
-            {
-                // Remove the keyword if it exists under the system
-                systemKeywords[system].Remove(keyword);
-
-                // If the system has no more keywords, remove the system entry
-                if (systemKeywords[system].Count == 0)
-                {
-                    systemKeywords.Remove(system);
-                }
-            }
-        }
 
         public List<IndividualMailTextLabelingModel> CheckForSystems(List<IndividualMailText> mails)
         {
             List<IndividualMailTextLabelingModel> labeledMails = new List<IndividualMailTextLabelingModel>();
+
+            Dictionary<string, List<string>> threadLabels = new Dictionary<string, List<string>>();
 
             foreach (IndividualMailText mail in mails)
             {
@@ -70,17 +45,42 @@ namespace OutlookMiner.Services
 
                 foreach (var system in systemKeywords)
                 {
-                    if (system.Value.Any(keyword => mail.body.Contains(keyword)))
+                    if (system.Value != null) // Check if the list of keywords is not null
                     {
-                        labels.Add(system.Key);
+                        foreach (var keyword in system.Value)
+                        {
+                            if (!string.IsNullOrEmpty(keyword) && mail.body.Contains(keyword))
+                            {
+                                labels.Add(system.Key);
+                            }
+                        }
                     }
                 }
 
+                if (!threadLabels.ContainsKey(mail.threadID))
+                {
+                    threadLabels[mail.threadID] = new List<string>();
+                }
+
+                threadLabels[mail.threadID].AddRange(labels);
+
+          
                 labeledMails.Add(new IndividualMailTextLabelingModel(mail, labels));
+            }
+
+        
+            foreach (var labeledMail in labeledMails)
+            {
+                if (threadLabels.ContainsKey(labeledMail.Message.threadID))
+                {
+                    List<string> threadLabelsWithoutDuplicates = threadLabels[labeledMail.Message.threadID].Distinct().ToList();
+                    labeledMail.Labels.AddRange(threadLabelsWithoutDuplicates.Except(labeledMail.Labels));
+                }
             }
 
             return labeledMails;
         }
+
 
     }
 

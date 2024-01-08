@@ -1,3 +1,4 @@
+using OutlookMiner.Forms;
 using OutlookMiner.Models;
 using OutlookMiner.Services;
 
@@ -17,7 +18,7 @@ namespace OutlookMiner
             IPathUtilityService pathUtilityService = new PathUtilityService();
             ILoadService loadService = new LoadService();
             List<Text> _mails = new List<Text>();
-            Application.Run(new Form1(pathUtilityService, loadService));
+            Application.Run(new StartUpForm());
             
         }
     }

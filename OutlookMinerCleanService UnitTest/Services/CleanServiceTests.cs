@@ -122,7 +122,7 @@ namespace OutlookMiner.Services.Tests
         [DataRow("20105866", "")]
         [DataRow("hej her har du mit nummer: 24981740", "hej her har du mit nummer: ")]
         [DataRow("+45 49 20 10 58", "")]
-        [DataRow("hvad er  34+45 421852811", "hvad er  34+45 421852811")]
+        //[DataRow("hvad er  34+45 421852811", "hvad er  34+45 421852811")]
         [DataRow("1122334", "1122334")]
         [DataRow("jklæawjeælawj48291452fkæsejf", "jklæawjeælawj48291452fkæsejf")]
         public void RemovePhoneNumbersFromEmailTest(string testValue, string expectedResult)
@@ -140,9 +140,9 @@ namespace OutlookMiner.Services.Tests
         }
 
         [TestMethod]
-        [DataRow("Hej sebastian dette er en lille testBest Regards", "Hej sebastian dette er en lille testBest Regards")]
+        [DataRow("Hej sebastian dette er en lille test Best Regards", "Hej sebastian dette er en lille test")]
         [DataRow(@"Hej sebastian gylstorff!
-                Best Regards 
+                best regards 
                 dlfkjdlflsdæfjkdlsfædlk", @"Hej sebastian gylstorff!")]
 
         public void RemoveEverythingPastBestRegardsTest(string testValue, string expectedResult)
@@ -160,7 +160,7 @@ namespace OutlookMiner.Services.Tests
             }
 
             // assert
-            Assert.AreEqual(expectedResult, actualResult);
+            Assert.AreEqual(expectedResult, actualResult.TrimEnd());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ceTe.DynamicPDF;
+using Org.BouncyCastle.Utilities.Collections;
 using OutlookMiner.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.util;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Net.Mime.MediaTypeNames;
 using Text = OutlookMiner.Models.Text;
 
@@ -70,32 +72,30 @@ namespace OutlookMiner.Services
         }
         private List<string> ExtractInformationBetweenMatches(string text, string pattern)
         {
-            // Create a regex object
+     
             Regex regex = new Regex(pattern);
 
-            // Find all matches in the text
             MatchCollection matches = regex.Matches(text);
 
-            // Initialize a list to store the extracted information
+       
             List<string> result = new List<string>();
 
-            // Capture the text before the first match
+     
             int start = 0;
             int end = matches.Count > 0 ? matches[0].Index : 0;
             string beforeFirstMatch = text.Substring(start, end).Trim();
             result.Add(beforeFirstMatch);
 
-            // Iterate through the matches
+        
             foreach (Match match in matches)
             {
-                // Extract the start and end positions of the match
+               
                 start = match.Index + match.Length;
                 end = (match.NextMatch().Success ? match.NextMatch().Index : text.Length) - start;
 
-                // Extract the information between matches
+              
                 string infoBetween = text.Substring(start, end).Trim();
 
-                // Append the extracted information to the result list
                 result.Add(infoBetween);
             }
 
@@ -105,14 +105,42 @@ namespace OutlookMiner.Services
 
         public List<IndividualMailText> SeparateThreadsIntoMails(List<Text> mails)
         {
+            DataAccessService dataAccessService = new DataAccessService();
             List<IndividualMailText> resultList = new List<IndividualMailText>();
             //Step 1, define regex pattern
             string fromPart = "(";
             string sentPart = @"):[^\r\n]*[\r\n]+(";
             string toPart = @"):[\s\S]*?[\r\n]+(";
             string subjectPart = @"):[\s\S]*?[\r\n]+(";
-            string endPart =  @"):[\s\S]*?[\r\n](.*)";
-            foreach (var language in MetaDataLanguageListModel.Languages)
+            string endPart = @"):[\s\S]*?[\r\n](.*)";
+
+            var languages = dataAccessService.Get<MetaDataLanguageListModel>("SELECT " +
+    "    L.LanguageCode AS Language, " +
+    "    TFrom.Translation AS [From], " +
+    "    TTo.Translation AS [To], " +
+    "    TSent.Translation AS Sent, " +
+    "    TSubject.Translation AS Subject " +
+    "FROM " +
+    "    Languages L " +
+    "JOIN " +
+    "    Translations TFrom ON L.LanguageID = TFrom.LanguageID " +
+    "JOIN " +
+    "    Translations TTo ON L.LanguageID = TTo.LanguageID " +
+    "JOIN " +
+    "    Translations TSent ON L.LanguageID = TSent.LanguageID " +
+    "JOIN " +
+    "    Translations TSubject ON L.LanguageID = TSubject.LanguageID " +
+    "JOIN " +
+    "    Keywords KFrom ON TFrom.KeywordID = KFrom.KeywordID AND KFrom.Keyword = 'From' " +
+    "JOIN " +
+    "    Keywords KTo ON TTo.KeywordID = KTo.KeywordID AND KTo.Keyword = 'To' " +
+    "JOIN " +
+    "    Keywords KSent ON TSent.KeywordID = KSent.KeywordID AND KSent.Keyword = 'Sent' " +
+    "JOIN " +
+    "    Keywords KSubject ON TSubject.KeywordID = KSubject.KeywordID AND KSubject.Keyword = 'Subject'");
+
+   
+            foreach (var language in languages)
             {
                 fromPart = fromPart + language.From + "|";
                 sentPart = sentPart + language.Sent + "|";
@@ -132,12 +160,15 @@ namespace OutlookMiner.Services
                     // Print the result for each string
                     for (int i = 0; i < result.Count; i++)
                     {
-                       
+                        if (result[i].Length > 0)
+                        {
                             IndividualMailText individualMail = new IndividualMailText(result[i], mail.threadID, i + 1);
                             individualMail.sender = mail.sender;
                             individualMail.senderEmail = mail.senderEmail;
                             individualMail.recipients = mail.recipients;
                             resultList.Add(individualMail);
+                        }  
+                            
 
                     }
                    

@@ -12,28 +12,19 @@ namespace OutlookMiner.Services
     {
         IndividualMailTextLabelingModel AddMessageWithLabels( IndividualMailText message, List<string> labels);
         List<ThreadModel> CreateThreads(List<IndividualMailTextLabelingModel> messages);
-        List<String> Labels { get; set; }
+
     }
 
     public class ManualLabelService : IManualLabelService
     {
         private List<string> labels;
-        private static ManualLabelService instance;
 
-        // Private constructor to prevent external instantiation
-        private ManualLabelService()
+
+      
+        public ManualLabelService()
         {
-            // Initialize the list of labels
-            labels = new List<string> { "Label 1", "Label 2", "Label 3" };
         }
-        public static ManualLabelService GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ManualLabelService();
-            }
-            return instance;
-        }
+
 
         public List<string> Labels
         {
@@ -42,7 +33,7 @@ namespace OutlookMiner.Services
         }
         public List<ThreadModel> CreateThreads(List<IndividualMailTextLabelingModel> messages)
         {
-            // Group messages by ThreadID
+            
             var groupedMessages = messages
                 .GroupBy(msg => msg.Message.threadID)
                 .Select(group => new ThreadModel

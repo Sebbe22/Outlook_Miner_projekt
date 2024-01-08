@@ -13,6 +13,7 @@ namespace OutlookMiner.Services
 {
     public interface ICleanService
     {
+        List<IndividualMailText> RemoveEverythingPastBestRegards(List<IndividualMailText> mails);
         List<IndividualMailText> RemoveLinksFromEmailString(List<IndividualMailText> mails);
 
         List<IndividualMailText> RemoveEmailsFromEmailString(List<IndividualMailText> emailString);
@@ -26,6 +27,16 @@ namespace OutlookMiner.Services
 
     public class CleanService : ICleanService
     {
+
+        public List<IndividualMailText> RemoveEverythingPastBestRegards(List<IndividualMailText> mails)
+        {
+            foreach (IndividualMailText mail in mails)
+            {
+                string pattern = @"(?i)Best regards[\s\S]*";
+                mail.body = Regex.Replace(mail.body, pattern, string.Empty);
+            }
+            return mails;
+        }
         /// <summary>
         /// Detects and removes links from a list of mails using regex
         /// </summary>
@@ -42,10 +53,7 @@ namespace OutlookMiner.Services
                     mail.body = Regex.Replace(mail.body, pattern, string.Empty);
                 }
             }
-            IDataAccessService accessService = new DataAccessService();
-            LabelModel test = new LabelModel(1, "heh", "hehe");
-            accessService.Insert<LabelModel>("INSERT INTO Labels([Id], [Category], [LabelName]) values(@Id, @Category, @LabelName)", test);
-
+           
             return mails;
         }
 
@@ -90,13 +98,17 @@ namespace OutlookMiner.Services
                     {
                         foreach (string name in splitNameArray)
                         {
-                            email.body = email.body.Replace(name.ToLower(), "");
+                            if(name.Count() > 0)
+                            {
+                                email.body = email.body.Replace(name.ToLower(), "");
+                            }
+                            
                         }
                     }
                 }
             }
 
-            // removes recievers name
+      
             foreach (Text email in emailString)
             {
                 email.body = email.body.ToLower();
@@ -108,7 +120,11 @@ namespace OutlookMiner.Services
                     {
                         foreach (string name in splitNameArray)
                         {
-                            email.body = email.body.Replace(name.ToLower(), "");
+                            if (name.Count() > 0)
+                            {
+                                email.body = email.body.Replace(name.ToLower(), "");
+                            }
+
                         }
                     }
                 }
@@ -118,11 +134,13 @@ namespace OutlookMiner.Services
 
         public List<IndividualMailText> RemovePhoneNumbersFromEmail(List<IndividualMailText> emailString)
         {
+            IDataAccessService dataAccessService = new DataAccessService();
             PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
 
             foreach(var email in emailString)
             {
-                foreach (var language in MetaDataLanguageListModel.Languages)
+                var languages = dataAccessService.Get<MetaDataLanguageListModel>("SELECT LanguageCode as Language FROM Languages");
+                foreach (var language in languages)
                 {
                     var matches = phoneNumberUtil.FindNumbers(email.body, language.Language);
 

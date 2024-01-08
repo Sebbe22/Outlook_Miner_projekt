@@ -22,19 +22,19 @@ namespace OutlookMiner.Services
             List<Text> result = new List<Text>();
             try
             {
-                // Create an instance of the Outlook Application.
+                //instance of the Outlook Application.
                 Outlook.Application oApp = new Outlook.Application();
 
-                // Get the MAPI namespace.
+                // Get MAPI namespace.
                 Outlook.NameSpace oNS = oApp.GetNamespace("MAPI");
 
-                // Log on to the default Outlook profile.
+                // Log on default Outlook profile.
                 oNS.Logon(Missing.Value, Missing.Value, false, true);
 
                 // Add the PST file to the current session.
                 oNS.AddStore(pstFilePath);
 
-                // Get the root folder of the PST file.
+                // Get root folder of the PST file.
                 Outlook.Store pstStore = null;
                 foreach (Outlook.Store store in oNS.Stores)
                 {
@@ -49,10 +49,10 @@ namespace OutlookMiner.Services
                 {
                     Outlook.MAPIFolder pstFolder = pstStore.GetRootFolder();
 
-                    // Get the Items collection in the PST folder.
+                    //Items collection in the PST folder.
                     Outlook.Items pstItems = pstFolder.Items;
 
-                    // Iterate through the email items 
+                  
                     foreach (object item in pstItems)
                     {
                         if (item is Outlook.MailItem oMsg)
@@ -70,15 +70,14 @@ namespace OutlookMiner.Services
                         }
                     }
 
-                    // Release objects.
+                 
                     Marshal.ReleaseComObject(pstItems);
                     Marshal.ReleaseComObject(pstFolder);
                 }
 
-                // Log off from Outlook.
+               
                 oNS.Logoff();
 
-                // Release objects.
                 Marshal.ReleaseComObject(pstStore);
                 Marshal.ReleaseComObject(oNS);
                 Marshal.ReleaseComObject(oApp);

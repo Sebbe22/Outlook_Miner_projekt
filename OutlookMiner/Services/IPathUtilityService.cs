@@ -31,13 +31,13 @@ namespace OutlookMiner.Services
 
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                saveFileDialog.InitialDirectory = "C:\\"; // Set the initial directory
+                saveFileDialog.InitialDirectory = "C:\\"; 
                 saveFileDialog.Filter = "Text Files (*." + fileExtension + ")|*." + fileExtension + "|All Files (*.*)|*.*"; // Set the file filter
-                saveFileDialog.DefaultExt = fileExtension; // Set the default file extension
+                saveFileDialog.DefaultExt = fileExtension; 
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    path = saveFileDialog.FileName; // Get the selected file path
+                    path = saveFileDialog.FileName; 
                 }
             }
             return path;
@@ -48,12 +48,12 @@ namespace OutlookMiner.Services
             string path = null;
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "C:\\"; // Set the initial directory
-                openFileDialog.Filter = "Outlook Files (*.pst)|*.pst"; // Set the file filter
+                openFileDialog.InitialDirectory = "C:\\"; 
+                openFileDialog.Filter = "Outlook Files (*.pst)|*.pst"; 
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    path = openFileDialog.FileName; // Get the selected file path
+                    path = openFileDialog.FileName; 
                 }
             }
             return path;
